@@ -41,7 +41,7 @@
   <!-- ░░ HERO ░░ -->
   <section id="hero">
     <!-- Hero background image — swap for video later by replacing with <video> -->
-    <img class="hero-video" src="hero-poster.jpg" alt="Aerial view of Brežice at dusk" />
+    <img class="hero-video" src="assets/images/hero-poster.jpg" alt="Aerial view of Brežice at dusk" />
 
     <!-- HUD decorative overlay -->
     <div class="hud-overlay">
@@ -226,86 +226,100 @@
       <div class="section-header reveal">
         <span class="section-label">Portfolio</span>
         <h2 class="section-title">Selected work</h2>
-        <p class="section-sub">Replace placeholder items with your own drone footage and imagery.</p>
+        <p class="section-sub">Aerial photography from above Slovenia.</p>
       </div>
 
-      <div class="portfolio-grid">
+      <!-- Category filter buttons -->
+      <div class="portfolio-filters reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="landscape">Landscape / Nature</button>
+        <button class="filter-btn" data-filter="urban">Urban / City</button>
+      </div>
 
-        <!-- Portfolio items — replace gradient backgrounds with real images/videos -->
-        <div class="portfolio-item reveal" data-type="video" data-src="assets/videos/clip1.mp4">
-          <div class="portfolio-thumb" style="background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 50%, #0d2137 100%);">
-            <div class="portfolio-placeholder-icon">▶</div>
-          </div>
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-inner">
-              <p class="portfolio-tag">Aerial Video</p>
-              <h3>Mountain Flyover — Triglav</h3>
-              <p>Replace with your footage</p>
-            </div>
-          </div>
-        </div>
+      <div class="portfolio-grid" id="portfolioGrid">
 
-        <div class="portfolio-item reveal" data-type="image" data-src="assets/images/img1.jpg">
-          <div class="portfolio-thumb" style="background: linear-gradient(135deg, #0d1f12 0%, #1a4a2a 50%, #0a2015 100%);">
+        <!-- LANDSCAPE / NATURE — replace src with your real images -->
+        <div class="portfolio-item reveal" data-category="landscape" data-src="assets/images/landscape1.jpg" data-title="Landscape 1" data-caption="Landscape / Nature">
+          <div class="portfolio-thumb">
+            <img src="assets/images/landscape1.jpg" alt="Landscape 1" onerror="this.style.display='none'" />
             <div class="portfolio-placeholder-icon">📸</div>
           </div>
           <div class="portfolio-overlay">
             <div class="portfolio-overlay-inner">
-              <p class="portfolio-tag">Aerial Photo</p>
-              <h3>Forest Canopy, Slovenia</h3>
-              <p>Replace with your image</p>
+              <p class="portfolio-tag">Landscape / Nature</p>
+              <h3>Landscape 1</h3>
+              <span class="portfolio-zoom">🔍 View</span>
             </div>
           </div>
         </div>
 
-        <div class="portfolio-item reveal" data-type="image" data-src="assets/images/img2.jpg">
-          <div class="portfolio-thumb" style="background: linear-gradient(135deg, #1a1208 0%, #3d2c10 50%, #1f1508 100%);">
+        <div class="portfolio-item reveal" data-category="landscape" data-src="assets/images/landscape2.jpg" data-title="Landscape 2" data-caption="Landscape / Nature">
+          <div class="portfolio-thumb">
+            <img src="assets/images/landscape2.jpg" alt="Landscape 2" onerror="this.style.display='none'" />
             <div class="portfolio-placeholder-icon">📸</div>
           </div>
           <div class="portfolio-overlay">
             <div class="portfolio-overlay-inner">
-              <p class="portfolio-tag">Real Estate</p>
-              <h3>Luxury Villa — Lake Bled</h3>
-              <p>Replace with your image</p>
+              <p class="portfolio-tag">Landscape / Nature</p>
+              <h3>Landscape 2</h3>
+              <span class="portfolio-zoom">🔍 View</span>
             </div>
           </div>
         </div>
 
-        <div class="portfolio-item reveal large" data-type="video" data-src="assets/videos/clip2.mp4">
-          <div class="portfolio-thumb" style="background: linear-gradient(135deg, #08101f 0%, #102040 40%, #0a1830 100%);">
-            <div class="portfolio-placeholder-icon">▶</div>
-          </div>
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-inner">
-              <p class="portfolio-tag">Promotional</p>
-              <h3>Urban Reveal — Ljubljana</h3>
-              <p>Replace with your footage</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-item reveal" data-type="image" data-src="assets/images/img3.jpg">
-          <div class="portfolio-thumb" style="background: linear-gradient(135deg, #0f0818 0%, #2a1040 50%, #180a2e 100%);">
+        <div class="portfolio-item reveal" data-category="landscape" data-src="assets/images/landscape3.jpg" data-title="Landscape 3" data-caption="Landscape / Nature">
+          <div class="portfolio-thumb">
+            <img src="assets/images/landscape3.jpg" alt="Landscape 3" onerror="this.style.display='none'" />
             <div class="portfolio-placeholder-icon">📸</div>
           </div>
           <div class="portfolio-overlay">
             <div class="portfolio-overlay-inner">
-              <p class="portfolio-tag">Landscape</p>
-              <h3>Sunset over the Alps</h3>
-              <p>Replace with your image</p>
+              <p class="portfolio-tag">Landscape / Nature</p>
+              <h3>Landscape 3</h3>
+              <span class="portfolio-zoom">🔍 View</span>
             </div>
           </div>
         </div>
 
-        <div class="portfolio-item reveal" data-type="video" data-src="assets/videos/clip3.mp4">
-          <div class="portfolio-thumb" style="background: linear-gradient(135deg, #101818 0%, #0a3030 50%, #081a1a 100%);">
-            <div class="portfolio-placeholder-icon">▶</div>
+        <!-- URBAN / CITY — replace src with your real images -->
+        <div class="portfolio-item reveal" data-category="urban" data-src="assets/images/urban1.jpg" data-title="Urban 1" data-caption="Urban / City">
+          <div class="portfolio-thumb">
+            <img src="assets/images/urban1.jpg" alt="Urban 1" onerror="this.style.display='none'" />
+            <div class="portfolio-placeholder-icon">🏙️</div>
           </div>
           <div class="portfolio-overlay">
             <div class="portfolio-overlay-inner">
-              <p class="portfolio-tag">Event</p>
-              <h3>Music Festival Aerial</h3>
-              <p>Replace with your footage</p>
+              <p class="portfolio-tag">Urban / City</p>
+              <h3>Urban 1</h3>
+              <span class="portfolio-zoom">🔍 View</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-item reveal" data-category="urban" data-src="assets/images/urban2.jpg" data-title="Urban 2" data-caption="Urban / City">
+          <div class="portfolio-thumb">
+            <img src="assets/images/urban2.jpg" alt="Urban 2" onerror="this.style.display='none'" />
+            <div class="portfolio-placeholder-icon">🏙️</div>
+          </div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-overlay-inner">
+              <p class="portfolio-tag">Urban / City</p>
+              <h3>Urban 2</h3>
+              <span class="portfolio-zoom">🔍 View</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-item reveal" data-category="urban" data-src="assets/images/urban3.jpg" data-title="Urban 3" data-caption="Urban / City">
+          <div class="portfolio-thumb">
+            <img src="assets/images/urban3.jpg" alt="Urban 3" onerror="this.style.display='none'" />
+            <div class="portfolio-placeholder-icon">🏙️</div>
+          </div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-overlay-inner">
+              <p class="portfolio-tag">Urban / City</p>
+              <h3>Urban 3</h3>
+              <span class="portfolio-zoom">🔍 View</span>
             </div>
           </div>
         </div>
@@ -317,12 +331,12 @@
   <!-- ░░ LIGHTBOX ░░ -->
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
     <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8249;</button>
+    <button class="lightbox-next" id="lightboxNext" aria-label="Next">&#8250;</button>
     <div class="lightbox-inner">
       <img id="lightboxImg" src="" alt="Portfolio image" />
-      <video id="lightboxVideo" controls>
-        <source src="" type="video/mp4" />
-      </video>
     </div>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
   </div>
 
   <!-- ░░ EQUIPMENT ░░ -->
