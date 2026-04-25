@@ -226,117 +226,78 @@
       <div class="section-header reveal">
         <span class="section-label">Portfolio</span>
         <h2 class="section-title">Selected work</h2>
-        <p class="section-sub">Aerial photography from above Slovenia.</p>
+        <p class="section-sub">Click a category to browse the gallery.</p>
       </div>
 
-      <!-- Category filter buttons -->
-      <div class="portfolio-filters reveal">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="landscape">Landscape / Nature</button>
-        <button class="filter-btn" data-filter="urban">Urban / City</button>
-      </div>
+      <!-- Two category folder cards -->
+      <div class="category-grid">
 
-      <div class="portfolio-grid" id="portfolioGrid">
-
-        <!-- LANDSCAPE / NATURE — replace src with your real images -->
-        <div class="portfolio-item reveal" data-category="landscape" data-src="assets/images/landscape1.jpg" data-title="Landscape 1" data-caption="Landscape / Nature">
-          <div class="portfolio-thumb">
-            <img src="assets/images/landscape1.jpg" alt="Landscape 1" onerror="this.style.display='none'" />
-            <div class="portfolio-placeholder-icon">📸</div>
-          </div>
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-inner">
-              <p class="portfolio-tag">Landscape / Nature</p>
-              <h3>Landscape 1</h3>
-              <span class="portfolio-zoom">🔍 View</span>
+        <!-- LANDSCAPE folder card -->
+        <div class="category-card reveal" data-category="landscape">
+          <div class="category-cover" style="background: linear-gradient(135deg, #0d1f12 0%, #1a4a2a 60%, #0a2015 100%);">
+            <img src="assets/images/landscape1.jpg" alt="Landscape preview" class="category-cover-img" />
+            <div class="category-folder-icon">
+              <svg viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 8C2 5.8 3.8 4 6 4h14l4 6h18c2.2 0 4 1.8 4 4v22c0 2.2-1.8 4-4 4H6c-2.2 0-4-1.8-4-4V8z" fill="rgba(0,200,255,0.15)" stroke="rgba(0,200,255,0.7)" stroke-width="1.5"/>
+              </svg>
             </div>
+            <div class="category-count">3 photos</div>
+          </div>
+          <div class="category-info">
+            <h3>Landscape / Nature</h3>
+            <p>Aerial views of forests, rivers &amp; mountains</p>
+            <span class="category-open">Open gallery →</span>
           </div>
         </div>
 
-        <div class="portfolio-item reveal" data-category="landscape" data-src="assets/images/landscape2.jpg" data-title="Landscape 2" data-caption="Landscape / Nature">
-          <div class="portfolio-thumb">
-            <img src="assets/images/landscape2.jpg" alt="Landscape 2" onerror="this.style.display='none'" />
-            <div class="portfolio-placeholder-icon">📸</div>
-          </div>
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-inner">
-              <p class="portfolio-tag">Landscape / Nature</p>
-              <h3>Landscape 2</h3>
-              <span class="portfolio-zoom">🔍 View</span>
+        <!-- URBAN folder card -->
+        <div class="category-card reveal" data-category="urban">
+          <div class="category-cover" style="background: linear-gradient(135deg, #08101f 0%, #102040 60%, #0a1830 100%);">
+            <img src="assets/images/urban1.jpg" alt="Urban preview" class="category-cover-img" />
+            <div class="category-folder-icon">
+              <svg viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 8C2 5.8 3.8 4 6 4h14l4 6h18c2.2 0 4 1.8 4 4v22c0 2.2-1.8 4-4 4H6c-2.2 0-4-1.8-4-4V8z" fill="rgba(0,200,255,0.15)" stroke="rgba(0,200,255,0.7)" stroke-width="1.5"/>
+              </svg>
             </div>
+            <div class="category-count">3 photos</div>
           </div>
-        </div>
-
-        <div class="portfolio-item reveal" data-category="landscape" data-src="assets/images/landscape3.jpg" data-title="Landscape 3" data-caption="Landscape / Nature">
-          <div class="portfolio-thumb">
-            <img src="assets/images/landscape3.jpg" alt="Landscape 3" onerror="this.style.display='none'" />
-            <div class="portfolio-placeholder-icon">📸</div>
-          </div>
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-inner">
-              <p class="portfolio-tag">Landscape / Nature</p>
-              <h3>Landscape 3</h3>
-              <span class="portfolio-zoom">🔍 View</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- URBAN / CITY — replace src with your real images -->
-        <div class="portfolio-item reveal" data-category="urban" data-src="assets/images/urban1.jpg" data-title="Urban 1" data-caption="Urban / City">
-          <div class="portfolio-thumb">
-            <img src="assets/images/urban1.jpg" alt="Urban 1" onerror="this.style.display='none'" />
-            <div class="portfolio-placeholder-icon">🏙️</div>
-          </div>
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-inner">
-              <p class="portfolio-tag">Urban / City</p>
-              <h3>Urban 1</h3>
-              <span class="portfolio-zoom">🔍 View</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-item reveal" data-category="urban" data-src="assets/images/urban2.jpg" data-title="Urban 2" data-caption="Urban / City">
-          <div class="portfolio-thumb">
-            <img src="assets/images/urban2.jpg" alt="Urban 2" onerror="this.style.display='none'" />
-            <div class="portfolio-placeholder-icon">🏙️</div>
-          </div>
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-inner">
-              <p class="portfolio-tag">Urban / City</p>
-              <h3>Urban 2</h3>
-              <span class="portfolio-zoom">🔍 View</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-item reveal" data-category="urban" data-src="assets/images/urban3.jpg" data-title="Urban 3" data-caption="Urban / City">
-          <div class="portfolio-thumb">
-            <img src="assets/images/urban3.jpg" alt="Urban 3" onerror="this.style.display='none'" />
-            <div class="portfolio-placeholder-icon">🏙️</div>
-          </div>
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-inner">
-              <p class="portfolio-tag">Urban / City</p>
-              <h3>Urban 3</h3>
-              <span class="portfolio-zoom">🔍 View</span>
-            </div>
+          <div class="category-info">
+            <h3>Urban / City</h3>
+            <p>Cities, roads &amp; architecture from above</p>
+            <span class="category-open">Open gallery →</span>
           </div>
         </div>
 
       </div>
+
+      <!-- Hidden image data for lightbox — add your real image paths here -->
+      <div id="galleryData" style="display:none">
+        <!-- Landscape images -->
+        <div data-category="landscape" data-src="assets/images/landscape1.jpg" data-title="Landscape 1"></div>
+        <div data-category="landscape" data-src="assets/images/landscape2.jpg" data-title="Landscape 2"></div>
+        <div data-category="landscape" data-src="assets/images/landscape3.jpg" data-title="Landscape 3"></div>
+        <!-- Urban images -->
+        <div data-category="urban" data-src="assets/images/urban1.jpg" data-title="Urban 1"></div>
+        <div data-category="urban" data-src="assets/images/urban2.jpg" data-title="Urban 2"></div>
+        <div data-category="urban" data-src="assets/images/urban3.jpg" data-title="Urban 3"></div>
+      </div>
+
     </div>
   </section>
 
-  <!-- ░░ LIGHTBOX ░░ -->
+  <!-- ░░ LIGHTBOX GALLERY ░░ -->
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <div class="lightbox-header">
+      <span class="lightbox-title" id="lightboxTitle"></span>
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    </div>
     <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8249;</button>
     <button class="lightbox-next" id="lightboxNext" aria-label="Next">&#8250;</button>
-    <div class="lightbox-inner">
-      <img id="lightboxImg" src="" alt="Portfolio image" />
+    <div class="lightbox-main">
+      <img id="lightboxImg" src="" alt="Gallery image" />
     </div>
     <div class="lightbox-caption" id="lightboxCaption"></div>
+    <div class="lightbox-thumbs" id="lightboxThumbs"></div>
   </div>
 
   <!-- ░░ EQUIPMENT ░░ -->
