@@ -96,54 +96,100 @@ const statsObserver = new IntersectionObserver((entries) => {
 
 if (statsSection) statsObserver.observe(statsSection);
 
-/* ── 6. Portfolio lightbox ───────────────────────────────────── */
+/* ── 6. Portfolio filter ─────────────────────────────────────── */
+const filterBtns = document.querySelectorAll('.filter-btn');
+const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Update active button
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter;
+
+    portfolioItems.forEach(item => {
+      const cat = item.dataset.category;
+      if (filter === 'all' || cat === filter) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+  });
+});
+
+/* ── 7. Lightbox with navigation ────────────────────────────── */
 const lightbox      = document.getElementById('lightbox');
 const lightboxClose = document.getElementById('lightboxClose');
 const lightboxImg   = document.getElementById('lightboxImg');
-const lightboxVideo = document.getElementById('lightboxVideo');
+const lightboxCaption = document.getElementById('lightboxCaption');
+const lightboxPrev  = document.getElementById('lightboxPrev');
+const lightboxNext  = document.getElementById('lightboxNext');
 
-function openLightbox(type, src) {
+let currentIndex = 0;
+let visibleItems = [];
+
+function getVisibleItems() {
+  return [...document.querySelectorAll('.portfolio-item:not(.hidden)')];
+}
+
+function openLightbox(index) {
+  visibleItems = getVisibleItems();
+  currentIndex = index;
+  const item = visibleItems[currentIndex];
+  if (!item) return;
+
+  lightboxImg.style.opacity = '0';
+  lightboxImg.src = item.dataset.src;
+  lightboxImg.alt = item.dataset.title || '';
+  lightboxCaption.textContent = (item.dataset.caption || '') + (item.dataset.title ? ' — ' + item.dataset.title : '');
+
+  lightboxImg.onload = () => { lightboxImg.style.opacity = '1'; };
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';
 
-  if (type === 'image') {
-    lightboxImg.src = src;
-    lightboxImg.classList.add('active');
-    lightboxVideo.classList.remove('active');
-    lightboxVideo.pause();
-  } else {
-    lightboxVideo.querySelector('source').src = src;
-    lightboxVideo.load();
-    lightboxVideo.classList.add('active');
-    lightboxImg.classList.remove('active');
-  }
+  // Show/hide arrows
+  lightboxPrev.style.opacity = currentIndex === 0 ? '0.2' : '1';
+  lightboxNext.style.opacity = currentIndex === visibleItems.length - 1 ? '0.2' : '1';
 }
 
 function closeLightbox() {
   lightbox.classList.remove('open');
   document.body.style.overflow = '';
-  lightboxVideo.pause();
   lightboxImg.src = '';
-  lightboxImg.classList.remove('active');
-  lightboxVideo.classList.remove('active');
+}
+
+function showPrev() {
+  if (currentIndex > 0) openLightbox(currentIndex - 1);
+}
+
+function showNext() {
+  if (currentIndex < visibleItems.length - 1) openLightbox(currentIndex + 1);
 }
 
 // Attach click to each portfolio item
-document.querySelectorAll('.portfolio-item').forEach(item => {
+document.querySelectorAll('.portfolio-item').forEach((item, idx) => {
   item.addEventListener('click', () => {
-    const type = item.dataset.type;
-    const src  = item.dataset.src;
-    // Only open lightbox if the src exists (placeholder check)
-    if (src && src !== '') openLightbox(type, src);
+    visibleItems = getVisibleItems();
+    const visibleIdx = visibleItems.indexOf(item);
+    if (item.dataset.src) openLightbox(visibleIdx);
   });
 });
 
 lightboxClose.addEventListener('click', closeLightbox);
+lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+
 lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) closeLightbox();
 });
+
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeLightbox();
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape')      closeLightbox();
+  if (e.key === 'ArrowLeft')   showPrev();
+  if (e.key === 'ArrowRight')  showNext();
 });
 
 /* ── 7. Contact form (mailto fallback) ──────────────────────── */
