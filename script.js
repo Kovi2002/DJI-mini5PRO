@@ -163,7 +163,7 @@ contactForm.addEventListener('submit', (e) => {
     `Name: ${name}\nEmail: ${email}\nProject: ${project}\n\n${message}`
   );
 
-  window.location.href = `mailto:your@email.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:Kovacic.luka34@gmail.com?subject=${subject}&body=${body}`;
 });
 
 /* ── 8. Back to top ─────────────────────────────────────────── */
