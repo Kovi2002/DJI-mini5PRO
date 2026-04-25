@@ -96,100 +96,102 @@ const statsObserver = new IntersectionObserver((entries) => {
 
 if (statsSection) statsObserver.observe(statsSection);
 
-/* ── 6. Portfolio filter ─────────────────────────────────────── */
-const filterBtns = document.querySelectorAll('.filter-btn');
-const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    // Update active button
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const filter = btn.dataset.filter;
-
-    portfolioItems.forEach(item => {
-      const cat = item.dataset.category;
-      if (filter === 'all' || cat === filter) {
-        item.classList.remove('hidden');
-      } else {
-        item.classList.add('hidden');
-      }
-    });
-  });
-});
-
-/* ── 7. Lightbox with navigation ────────────────────────────── */
-const lightbox      = document.getElementById('lightbox');
-const lightboxClose = document.getElementById('lightboxClose');
-const lightboxImg   = document.getElementById('lightboxImg');
+/* ── 6. Category folder cards → Gallery lightbox ────────────── */
+const lightbox        = document.getElementById('lightbox');
+const lightboxClose   = document.getElementById('lightboxClose');
+const lightboxImg     = document.getElementById('lightboxImg');
 const lightboxCaption = document.getElementById('lightboxCaption');
-const lightboxPrev  = document.getElementById('lightboxPrev');
-const lightboxNext  = document.getElementById('lightboxNext');
+const lightboxTitle   = document.getElementById('lightboxTitle');
+const lightboxPrev    = document.getElementById('lightboxPrev');
+const lightboxNext    = document.getElementById('lightboxNext');
+const lightboxThumbs  = document.getElementById('lightboxThumbs');
 
-let currentIndex = 0;
-let visibleItems = [];
+let galleryImages = []; // current category images
+let currentIndex  = 0;
 
-function getVisibleItems() {
-  return [...document.querySelectorAll('.portfolio-item:not(.hidden)')];
+// Build image list from hidden gallery data
+function getImages(category) {
+  return [...document.querySelectorAll('#galleryData [data-category="' + category + '"]')]
+    .map(el => ({ src: el.dataset.src, title: el.dataset.title }));
 }
 
-function openLightbox(index) {
-  visibleItems = getVisibleItems();
+function buildThumbs() {
+  lightboxThumbs.innerHTML = '';
+  galleryImages.forEach((img, i) => {
+    const t = document.createElement('div');
+    t.className = 'lightbox-thumb' + (i === currentIndex ? ' active' : '');
+    t.innerHTML = '<img src="' + img.src + '" alt="' + (img.title || '') + '" />';
+    t.addEventListener('click', (e) => { e.stopPropagation(); showImage(i); });
+    lightboxThumbs.appendChild(t);
+  });
+}
+
+function showImage(index) {
   currentIndex = index;
-  const item = visibleItems[currentIndex];
-  if (!item) return;
+  const img = galleryImages[currentIndex];
+  if (!img) return;
 
   lightboxImg.style.opacity = '0';
-  lightboxImg.src = item.dataset.src;
-  lightboxImg.alt = item.dataset.title || '';
-  lightboxCaption.textContent = (item.dataset.caption || '') + (item.dataset.title ? ' — ' + item.dataset.title : '');
-
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.title || '';
   lightboxImg.onload = () => { lightboxImg.style.opacity = '1'; };
+
+  lightboxCaption.textContent = (currentIndex + 1) + ' / ' + galleryImages.length + (img.title ? '  ·  ' + img.title : '');
+
+  // Update thumb strip
+  document.querySelectorAll('.lightbox-thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === currentIndex);
+  });
+
+  // Scroll active thumb into view
+  const activeThumb = lightboxThumbs.children[currentIndex];
+  if (activeThumb) activeThumb.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+
+  // Arrow states
+  lightboxPrev.disabled = currentIndex === 0;
+  lightboxNext.disabled = currentIndex === galleryImages.length - 1;
+}
+
+function openGallery(category, categoryLabel) {
+  galleryImages = getImages(category);
+  if (!galleryImages.length) return;
+
+  lightboxTitle.textContent = categoryLabel;
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';
 
-  // Show/hide arrows
-  lightboxPrev.style.opacity = currentIndex === 0 ? '0.2' : '1';
-  lightboxNext.style.opacity = currentIndex === visibleItems.length - 1 ? '0.2' : '1';
+  buildThumbs();
+  showImage(0);
 }
 
 function closeLightbox() {
   lightbox.classList.remove('open');
   document.body.style.overflow = '';
   lightboxImg.src = '';
+  lightboxThumbs.innerHTML = '';
 }
 
-function showPrev() {
-  if (currentIndex > 0) openLightbox(currentIndex - 1);
-}
+function showPrev() { if (currentIndex > 0) showImage(currentIndex - 1); }
+function showNext() { if (currentIndex < galleryImages.length - 1) showImage(currentIndex + 1); }
 
-function showNext() {
-  if (currentIndex < visibleItems.length - 1) openLightbox(currentIndex + 1);
-}
-
-// Attach click to each portfolio item
-document.querySelectorAll('.portfolio-item').forEach((item, idx) => {
-  item.addEventListener('click', () => {
-    visibleItems = getVisibleItems();
-    const visibleIdx = visibleItems.indexOf(item);
-    if (item.dataset.src) openLightbox(visibleIdx);
+// Category card clicks
+document.querySelectorAll('.category-card').forEach(card => {
+  const labels = { landscape: 'Landscape / Nature', urban: 'Urban / City' };
+  card.addEventListener('click', () => {
+    openGallery(card.dataset.category, labels[card.dataset.category] || card.dataset.category);
   });
 });
 
 lightboxClose.addEventListener('click', closeLightbox);
 lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
 lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
-
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) closeLightbox();
-});
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 
 document.addEventListener('keydown', (e) => {
   if (!lightbox.classList.contains('open')) return;
-  if (e.key === 'Escape')      closeLightbox();
-  if (e.key === 'ArrowLeft')   showPrev();
-  if (e.key === 'ArrowRight')  showNext();
+  if (e.key === 'Escape')     closeLightbox();
+  if (e.key === 'ArrowLeft')  showPrev();
+  if (e.key === 'ArrowRight') showNext();
 });
 
 /* ── 7. Contact form (mailto fallback) ──────────────────────── */
