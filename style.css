@@ -911,7 +911,7 @@ section { padding: 6rem 0; }
 }
 
 @media (max-width: 768px) {
-  section { padding: 4.5rem 0; }
+  section { padding: 3.5rem 0; }
 
   /* Nav */
   .nav-toggle { display: flex; }
@@ -930,47 +930,89 @@ section { padding: 6rem 0; }
   .nav-links a { font-size: 1rem; }
 
   /* Hero */
-  .hero-headline { font-size: clamp(2.4rem, 10vw, 4rem); }
-  .hud-corner { width: 28px; height: 28px; }
+  .hero-headline { font-size: clamp(2.2rem, 9vw, 3.5rem); }
+  .hero-sub { font-size: 0.9rem; padding: 0 0.5rem; }
+  .hud-corner { width: 22px; height: 22px; }
 
-  /* Stats */
+  /* Stats — 2x2 grid, larger numbers */
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-item { padding: 1.5rem 1rem; border-right: 1px solid var(--border); }
   .stat-item:nth-child(2) { border-right: none; }
+  .stat-item:nth-child(3) { border-top: 1px solid var(--border); }
+  .stat-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+  .stat-num { font-size: 2.8rem; }
+  .stat-item p { font-size: 0.72rem; }
 
-  /* About */
-  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .about-image-placeholder { aspect-ratio: 3/2; }
+  /* About — slika na vrhu, tekst spodaj */
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .about-image-placeholder {
+    aspect-ratio: 3/4 !important;
+    max-height: 420px;
+  }
+  .about-image-placeholder img {
+    object-position: center top !important;
+    height: 100% !important;
+    width: 100% !important;
+  }
+  .about-tag { bottom: 0.75rem; right: 0.75rem; }
 
-  /* Services */
-  .services-grid { grid-template-columns: 1fr; }
+  /* Services — 1 kolona */
+  .services-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .service-card { padding: 1.5rem; }
 
   /* Portfolio */
-  .category-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-  .category-cover { height: 200px; }
+  .category-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .category-cover { height: 220px; }
+  .category-info { padding: 1.25rem; }
 
   /* Equipment */
-  .equipment-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .equipment-feature { padding: 2rem; }
-  .drone-svg { max-width: 160px; }
+  .equipment-grid { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
+  .equipment-feature { padding: 1.5rem; }
+  .drone-svg { max-width: 220px; margin: 0 auto; }
+  .equipment-specs li { text-align: left; }
 
   /* Contact */
-  .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .contact-form { padding: 1.5rem; }
 }
 
 @media (max-width: 480px) {
-  #navbar { padding: 1rem; }
-  .hero-ctas { flex-direction: column; align-items: center; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .stat-item { border-right: 1px solid var(--border); }
-  .stat-item:nth-child(even) { border-right: none; }
+  #navbar { padding: 0.9rem 1rem; }
+  .nav-logo { font-size: 1.1rem; }
 
-  .portfolio-grid {
-    grid-template-columns: 1fr;
-    grid-auto-rows: 220px;
+  /* Hero */
+  .hero-headline { font-size: clamp(2rem, 11vw, 3rem); }
+  .hero-ctas { flex-direction: column; align-items: center; gap: 0.75rem; }
+  .btn { padding: 0.8rem 1.5rem; font-size: 0.8rem; }
+
+  /* Stats */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-num { font-size: 2.4rem; }
+
+  /* About image — pokaži celo telo */
+  .about-image-placeholder {
+    aspect-ratio: 2/3 !important;
+    max-height: 380px;
   }
-  .portfolio-item.large { grid-column: span 1; }
+
+  /* Services */
+  .service-card { padding: 1.25rem; }
+  .service-icon { width: 38px; height: 38px; }
+  .service-card h3 { font-size: 1.2rem; }
+
+  /* Portfolio */
+  .category-cover { height: 180px; }
+  .category-info h3 { font-size: 1.3rem; }
+
+  /* Equipment */
+  .equipment-info h3 { font-size: 2rem; }
+
+  /* Footer */
+  #footer { padding: 2rem 1rem 1.5rem; }
+  .back-to-top { bottom: 1rem; right: 1rem; }
 
   .hud-tl, .hud-tr { top: 4rem; }
+  .hud-corner { display: none; }
 }
 
 /* ── Parallax (hero content moves on scroll) ─────────────────── */
