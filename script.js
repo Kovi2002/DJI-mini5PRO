@@ -176,3 +176,55 @@ if (scanline) {
   let dir = 1, pos = 50;
   setInterval(() => { pos += dir * 0.05; if (pos > 55 || pos < 45) dir *= -1; scanline.style.top = pos + '%'; }, 30);
 }
+
+/* ── Booking form ────────────────────────────────────────────── */
+// Set minimum date to today
+const bDate = document.getElementById('bDate');
+if (bDate) {
+  const today = new Date().toISOString().split('T')[0];
+  bDate.min = today;
+}
+
+const bookingForm = document.getElementById('bookingForm');
+if (bookingForm) {
+  bookingForm.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const name  = document.getElementById('bName').value.trim();
+    const email = document.getElementById('bEmail').value.trim();
+    const date  = document.getElementById('bDate').value;
+    const type  = document.getElementById('bType').value;
+    const notes = document.getElementById('bNotes').value.trim();
+    const btn   = document.getElementById('bookingBtn');
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    // Format date nicely
+    const dateFormatted = new Date(date).toLocaleDateString('en-GB', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+
+    // Send to Formspree
+    try {
+      await fetch('https://formspree.io/f/mqewokoo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name, email,
+          subject: 'Booking Request — ' + type,
+          date: dateFormatted,
+          project_type: type,
+          notes: notes || 'None'
+        })
+      });
+    } catch(err) {
+      console.error('Booking error:', err);
+    }
+
+    // Show success
+    document.getElementById('bookingEmail').textContent = email;
+    bookingForm.style.display = 'none';
+    document.getElementById('bookingSuccess').style.display = 'block';
+  });
+}
