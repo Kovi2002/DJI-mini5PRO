@@ -3,9 +3,17 @@
    AltitudeLens — script.js
    ============================================================ */
 
+/* ── 0. Force scroll to top on page load ────────────────────── */
+if (window.location.hash) {
+  window.location.hash = '';
+}
+window.history.replaceState(null, '', window.location.pathname);
+window.scrollTo(0, 0);
+
 /* ── 1. Page Loader ─────────────────────────────────────────── */
 window.addEventListener('load', () => {
   const loader = document.getElementById('loader');
+  window.scrollTo(0, 0);
   setTimeout(() => loader.classList.add('hidden'), 600);
 });
 
