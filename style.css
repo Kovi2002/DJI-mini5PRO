@@ -1162,3 +1162,104 @@ input[type="date"]:focus {
   .booking-grid { grid-template-columns: 1fr; }
   .booking-wrap { padding: 1.5rem; }
 }
+
+/* ── Custom Cursor ───────────────────────────────────────────── */
+* { cursor: none !important; }
+
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed; pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, background 0.2s;
+  box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(0,200,255,0.5);
+  border-radius: 50%;
+  position: fixed; pointer-events: none; z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: all 0.12s ease;
+}
+.cursor-dot.clicked { transform: translate(-50%,-50%) scale(2); }
+.cursor-ring.clicked { transform: translate(-50%,-50%) scale(0.6); border-color: var(--accent); }
+.cursor-ring.hovering { transform: translate(-50%,-50%) scale(1.6); border-color: var(--accent); background: rgba(0,200,255,0.05); }
+
+/* Cursor trail */
+.cursor-trail {
+  position: fixed; pointer-events: none; z-index: 99997;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  transform: translate(-50%,-50%);
+  transition: opacity 0.3s ease;
+}
+
+/* ── Hero Canvas Particles ───────────────────────────────────── */
+#particleCanvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 1; pointer-events: none;
+}
+
+/* ── Typing cursor ───────────────────────────────────────────── */
+.typing-cursor {
+  display: inline-block;
+  width: 3px; height: 0.85em;
+  background: var(--accent);
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blink 0.8s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ── Enhanced hover on all cards ────────────────────────────── */
+.service-card, .category-card, .contact-card, .stat-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* ── Floating animation on equipment image ───────────────────── */
+.drone-photo-float {
+  animation: floatPhoto 5s ease-in-out infinite;
+}
+@keyframes floatPhoto {
+  0%,100% { transform: translateY(0) rotate(-1deg); }
+  50%      { transform: translateY(-14px) rotate(1deg); }
+}
+
+/* ── Scroll progress bar ─────────────────────────────────────── */
+#scrollProgress {
+  position: fixed; top: 0; left: 0; z-index: 9998;
+  height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
+  box-shadow: 0 0 8px var(--accent);
+  transition: width 0.1s linear;
+}
+
+/* ── Section entrance animations ────────────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1),
+              transform 0.8s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal.from-left  { transform: translateX(-40px); }
+.reveal.from-right { transform: translateX(40px); }
+.reveal.from-left.visible,
+.reveal.from-right.visible { transform: translateX(0); }
+
+/* ── Glow pulse on accent buttons ───────────────────────────── */
+.btn-primary {
+  animation: btnPulse 3s ease-in-out infinite;
+}
+@keyframes btnPulse {
+  0%,100% { box-shadow: 0 0 20px var(--glow); }
+  50%      { box-shadow: 0 0 35px rgba(0,200,255,0.5), 0 0 60px rgba(0,200,255,0.2); }
+}
+.btn-primary:hover { animation: none; }
+
+@media (max-width: 768px) {
+  * { cursor: auto !important; }
+  .cursor-dot, .cursor-ring, .cursor-trail { display: none; }
+}
