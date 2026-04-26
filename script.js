@@ -127,11 +127,9 @@ if (typingEl) {
           i++;
           setTimeout(type, 50);
         } else {
-          // Done — hide cursor after 2s
-          setTimeout(() => {
-            const cur = typingEl.querySelector('.typing-cursor');
-            if (cur) cur.style.display = 'none';
-          }, 2000);
+          // Hide cursor immediately when done
+          const cur = typingEl.querySelector('.typing-cursor');
+          if (cur) cur.remove();
         }
       }
     };
