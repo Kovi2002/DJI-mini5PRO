@@ -985,3 +985,38 @@ section { padding: 6rem 0; }
   html { scroll-behavior: auto; }
   .drone-svg { animation: none; }
 }
+
+/* ── AI Response Box ─────────────────────────────────────────── */
+.ai-response-box {
+  background: rgba(0,200,255,0.05);
+  border: 1px solid rgba(0,200,255,0.2);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  animation: fadeInUp 0.5s ease;
+}
+@keyframes fadeInUp {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.ai-header {
+  display: flex; align-items: center; gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+.ai-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.5; transform:scale(0.8); }
+}
+.ai-label {
+  font-size: 0.72rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent);
+  font-weight: 600;
+}
+#submitBtn:disabled {
+  opacity: 0.6; cursor: not-allowed;
+}
