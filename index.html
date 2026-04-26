@@ -34,6 +34,7 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#equipment">Equipment</a></li>
+      <li><a href="#booking">Book</a></li>
       <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
   </nav>
@@ -338,6 +339,117 @@
     </div>
   </section>
 
+  <!-- ░░ INSTAGRAM ░░ -->
+  <section id="instagram">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Instagram</span>
+        <h2 class="section-title">Follow the journey</h2>
+        <p class="section-sub">Behind the scenes, latest shots and drone flights.</p>
+      </div>
+      <div class="instagram-cta reveal glass">
+        <div class="ig-left">
+          <div class="ig-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="5"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="ig-info">
+            <span class="ig-handle">@KOVI_FLY</span>
+            <span class="ig-desc">Drone videography · Slovenia</span>
+          </div>
+        </div>
+        <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="btn btn-primary ig-btn">
+          Follow on Instagram
+        </a>
+      </div>
+
+      <!-- Instagram preview grid - replace with your actual screenshots -->
+      <div class="ig-grid reveal">
+        <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
+          <img src="TRAKTOR.png" alt="Instagram post" />
+          <div class="ig-overlay"><span>View on Instagram ↗</span></div>
+        </a>
+        <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
+          <img src="GOZD.png" alt="Instagram post" />
+          <div class="ig-overlay"><span>View on Instagram ↗</span></div>
+        </a>
+        <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
+          <img src="NJIVA.png" alt="Instagram post" />
+          <div class="ig-overlay"><span>View on Instagram ↗</span></div>
+        </a>
+        <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
+          <img src="Nakupovalni center.png" alt="Instagram post" />
+          <div class="ig-overlay"><span>View on Instagram ↗</span></div>
+        </a>
+        <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
+          <img src="Hisa.png" alt="Instagram post" />
+          <div class="ig-overlay"><span>View on Instagram ↗</span></div>
+        </a>
+        <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
+          <img src="hero-poster.jpg" alt="Instagram post" />
+          <div class="ig-overlay"><span>View on Instagram ↗</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ BOOKING ░░ -->
+  <section id="booking">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Book a shoot</span>
+        <h2 class="section-title">Reserve your date</h2>
+        <p class="section-sub">Select a date and project type — Luka will confirm availability within 24 hours.</p>
+      </div>
+
+      <div class="booking-wrap reveal glass">
+        <form id="bookingForm">
+          <div class="booking-grid">
+            <div class="form-group">
+              <label for="bName">Your name</label>
+              <input type="text" id="bName" name="name" placeholder="Ime in priimek" required />
+            </div>
+            <div class="form-group">
+              <label for="bEmail">Email</label>
+              <input type="email" id="bEmail" name="email" placeholder="your@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="bDate">Preferred date</label>
+              <input type="date" id="bDate" name="date" required min="" />
+            </div>
+            <div class="form-group">
+              <label for="bType">Project type</label>
+              <select id="bType" name="type" required>
+                <option value="">Select a service</option>
+                <option>Aerial Video</option>
+                <option>Aerial Photography</option>
+                <option>Real Estate</option>
+                <option>Event Coverage</option>
+                <option>Promotional Video</option>
+                <option>Landscape / Travel</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:1rem">
+            <label for="bNotes">Additional notes (optional)</label>
+            <textarea id="bNotes" name="notes" rows="3" placeholder="Location, special requirements..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="bookingBtn" style="margin-top:1.5rem">
+            Request Booking
+          </button>
+        </form>
+        <div id="bookingSuccess" style="display:none; text-align:center; padding:2rem 0;">
+          <div style="font-size:2.5rem;">🚁</div>
+          <h3 style="font-family:var(--font-display); font-size:1.8rem; margin:1rem 0 0.5rem; letter-spacing:0.05em;">Booking Request Sent!</h3>
+          <p style="color:var(--text-muted);">Luka will confirm your date within 24 hours at <span id="bookingEmail" style="color:var(--accent);"></span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ░░ CONTACT ░░ -->
   <section id="contact">
     <div class="container">
@@ -414,7 +526,7 @@
               </li>
               <li>
                 <span class="contact-icon">📷</span>
-                <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener">@yourhandle</a>
+                <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener">@KOVI_FLY</a>
               </li>
               <li>
                 <span class="contact-icon">▶</span>
@@ -443,7 +555,7 @@
     <div class="footer-inner">
       <a href="#hero" class="footer-logo">ALTITUDE<span>LENS</span></a>
       <div class="footer-socials">
-        <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener" aria-label="Instagram">
+        <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <rect x="2" y="2" width="20" height="20" rx="5"/>
             <circle cx="12" cy="12" r="5"/>
