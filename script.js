@@ -228,3 +228,188 @@ if (bookingForm) {
     document.getElementById('bookingSuccess').style.display = 'block';
   });
 }
+
+/* ── Custom cursor ───────────────────────────────────────────── */
+const cursorDot  = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+
+if (cursorDot && cursorRing && window.innerWidth > 768) {
+  let ringX = 0, ringY = 0, dotX = 0, dotY = 0;
+
+  window.addEventListener('mousemove', e => {
+    dotX = e.clientX; dotY = e.clientY;
+    cursorDot.style.left  = dotX + 'px';
+    cursorDot.style.top   = dotY + 'px';
+  });
+
+  // Smooth ring follow
+  (function animateRing() {
+    ringX += (dotX - ringX) * 0.12;
+    ringY += (dotY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top  = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  })();
+
+  // Click effect
+  window.addEventListener('mousedown', () => {
+    cursorDot.classList.add('clicked');
+    cursorRing.classList.add('clicked');
+  });
+  window.addEventListener('mouseup', () => {
+    cursorDot.classList.remove('clicked');
+    cursorRing.classList.remove('clicked');
+  });
+
+  // Hover effect on interactive elements
+  document.querySelectorAll('a, button, .service-card, .category-card, .ig-item').forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
+  });
+
+  // Cursor trail
+  const trails = [];
+  for (let i = 0; i < 8; i++) {
+    const t = document.createElement('div');
+    t.className = 'cursor-trail';
+    t.style.opacity = (1 - i * 0.12).toString();
+    t.style.width = t.style.height = (6 - i * 0.5) + 'px';
+    document.body.appendChild(t);
+    trails.push({ el: t, x: 0, y: 0 });
+  }
+
+  (function animateTrails() {
+    let px = dotX, py = dotY;
+    trails.forEach((trail, i) => {
+      trail.x += (px - trail.x) * (0.25 - i * 0.02);
+      trail.y += (py - trail.y) * (0.25 - i * 0.02);
+      trail.el.style.left = trail.x + 'px';
+      trail.el.style.top  = trail.y + 'px';
+      px = trail.x; py = trail.y;
+    });
+    requestAnimationFrame(animateTrails);
+  })();
+}
+
+/* ── Scroll progress bar ─────────────────────────────────────── */
+const progressBar = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total    = document.body.scrollHeight - window.innerHeight;
+  if (progressBar) progressBar.style.width = (scrolled / total * 100) + '%';
+}, { passive: true });
+
+/* ── Hero particle canvas ────────────────────────────────────── */
+const pCanvas = document.getElementById('particleCanvas');
+if (pCanvas) {
+  const ctx = pCanvas.getContext('2d');
+  let W = pCanvas.width  = window.innerWidth;
+  let H = pCanvas.height = pCanvas.parentElement.offsetHeight;
+
+  window.addEventListener('resize', () => {
+    W = pCanvas.width  = window.innerWidth;
+    H = pCanvas.height = pCanvas.parentElement.offsetHeight;
+  });
+
+  const pts = Array.from({ length: 80 }, () => ({
+    x: Math.random() * W, y: Math.random() * H,
+    vx: (Math.random() - 0.5) * 0.4,
+    vy: (Math.random() - 0.5) * 0.4,
+    r: Math.random() * 1.5 + 0.5,
+    a: Math.random()
+  }));
+
+  let mx = W/2, my = H/2;
+  pCanvas.parentElement.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  (function drawParticles() {
+    ctx.clearRect(0, 0, W, H);
+    pts.forEach(p => {
+      // Mouse attraction
+      const dx = mx - p.x, dy = my - p.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 180) { p.vx += dx/dist * 0.015; p.vy += dy/dist * 0.015; }
+
+      p.vx *= 0.98; p.vy *= 0.98;
+      p.x += p.vx; p.y += p.vy;
+      p.a += 0.008;
+
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+
+      const alpha = 0.3 + Math.sin(p.a) * 0.3;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(0,200,255,${alpha})`;
+      ctx.fill();
+    });
+
+    // Draw connecting lines
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i+1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 100) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = `rgba(0,200,255,${0.15 * (1 - d/100)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(drawParticles);
+  })();
+}
+
+/* ── Typing effect on hero ───────────────────────────────────── */
+const typingEl = document.getElementById('typingText');
+const typingCursor = document.getElementById('typingCursor');
+if (typingEl) {
+  const lines = [
+    'Cinematic drone footage
+from a new perspective',
+  ];
+  const fullText = lines[0];
+  let i = 0;
+
+  // Wait for loader to finish
+  setTimeout(() => {
+    const type = () => {
+      if (i < fullText.length) {
+        if (fullText[i] === '
+') {
+          typingEl.innerHTML += '<br />';
+        } else {
+          // Wrap accent line
+          if (i === fullText.indexOf('from')) {
+            typingEl.innerHTML += '<span class="headline-accent">';
+          }
+          typingEl.innerHTML += fullText[i];
+          if (i === fullText.length - 1) {
+            typingEl.innerHTML += '</span>';
+          }
+        }
+        i++;
+        setTimeout(type, i < 22 ? 60 : 45);
+      } else {
+        // Hide cursor after typing done, then show it blinking
+        setTimeout(() => {
+          if (typingCursor) typingCursor.style.display = 'none';
+        }, 2000);
+      }
+    };
+    type();
+  }, 900);
+}
+
+/* ── Directional reveal animations ──────────────────────────── */
+document.querySelectorAll('.about-image-wrap').forEach(el => el.classList.add('from-left'));
+document.querySelectorAll('.about-text').forEach(el => el.classList.add('from-right'));
+document.querySelectorAll('.stat-item').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.1) + 's';
+});
+document.querySelectorAll('.service-card').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.08) + 's';
+});
