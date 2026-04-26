@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="scrollProgress"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
   <!-- ░░ PAGE LOADER ░░ -->
   <div id="loader">
@@ -44,6 +47,9 @@
     <!-- Hero background image — swap for video later by replacing with <video> -->
     <img class="hero-video" src="hero-poster.jpg" alt="Aerial view of Brežice at dusk" />
 
+    <!-- Particle canvas -->
+    <canvas id="particleCanvas"></canvas>
+
     <!-- HUD decorative overlay -->
     <div class="hud-overlay">
       <div class="hud-corner hud-tl"></div>
@@ -58,8 +64,7 @@
     <div class="hero-content" id="heroContent">
       <p class="hero-eyebrow">DJI Mini 5 Pro · Aerial Cinematography</p>
       <h1 class="hero-headline">
-        Cinematic drone footage<br />
-        <span class="headline-accent">from a new perspective</span>
+        <span id="typingText"></span><span class="typing-cursor" id="typingCursor"></span>
       </h1>
       <p class="hero-sub">
         Aerial video &amp; photography crafted with the DJI Mini 5 Pro —<br class="br-desktop" />
@@ -297,7 +302,7 @@
         <div class="equipment-badge">Main Drone</div>
         <div class="equipment-grid">
           <div class="equipment-visual">
-            <img src="Dron.png" alt="DJI Mini 5 Pro" class="drone-svg" style="border-radius:12px;object-fit:cover;width:100%;max-width:320px;filter:drop-shadow(0 0 30px rgba(0,200,255,0.2));" />
+            <img src="Dron.png" alt="DJI Mini 5 Pro" class="drone-svg drone-photo-float" style="border-radius:12px;object-fit:cover;width:100%;max-width:320px;filter:drop-shadow(0 0 30px rgba(0,200,255,0.2));" />
           </div>
 
           <div class="equipment-info">
