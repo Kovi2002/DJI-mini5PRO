@@ -1165,6 +1165,8 @@ input[type="date"]:focus {
 
 /* ── Custom Cursor ───────────────────────────────────────────── */
 * { cursor: none !important; }
+input, textarea, select, button, a, label { cursor: auto !important; }
+button, [type="submit"] { cursor: pointer !important; }
 
 .cursor-dot {
   width: 8px; height: 8px;
@@ -1309,6 +1311,7 @@ body::after {
 .service-card::before, .category-card::before, 
 .contact-card::before, .equipment-feature::before,
 .booking-wrap::before, .instagram-cta::before {
+  pointer-events: none;
   content: '';
   position: absolute; inset: 0;
   border-radius: inherit;
