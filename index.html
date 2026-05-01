@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cinematic drone videography and aerial photography. DJI Mini 5 Pro. Drone videografija, Slovenija." />
-  <title>AltitudeLens — Cinematic Drone Videography</title>
-
-  <!-- Google Fonts: Bebas Neue (display) + DM Sans (body) -->
+  <meta name="description" content="Cinematični drone posnetki in aerialna fotografija. DJI Mini 5 Pro. Slovenija." />
+  <title>AltitudeLens — Cinematični Drone Posnetki</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -18,7 +15,7 @@
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- ░░ PAGE LOADER ░░ -->
+  <!-- ░░ LOADER ░░ -->
   <div id="loader">
     <div class="loader-inner">
       <div class="loader-ring"></div>
@@ -26,10 +23,10 @@
     </div>
   </div>
 
-  <!-- ░░ NAVIGATION ░░ -->
+  <!-- ░░ NAV ░░ -->
   <nav id="navbar">
     <a href="#hero" class="nav-logo">ALTITUDE<span>LENS</span></a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <button class="nav-toggle" id="navToggle" aria-label="Meni">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
@@ -44,20 +41,15 @@
 
   <!-- ░░ HERO ░░ -->
   <section id="hero">
-    <!-- Hero background image — swap for video later by replacing with <video> -->
-    <img class="hero-video" src="hero-poster.jpg" alt="Aerial view of Brežice at dusk" />
-
-    <!-- Particle canvas -->
+    <img class="hero-video" src="hero-poster.jpg" alt="Aerialni pogled na Brežice" />
     <canvas id="particleCanvas"></canvas>
 
-    <!-- HUD decorative overlay -->
     <div class="hud-overlay">
       <div class="hud-corner hud-tl"></div>
       <div class="hud-corner hud-tr"></div>
       <div class="hud-corner hud-bl"></div>
       <div class="hud-corner hud-br"></div>
       <div class="hud-scanline"></div>
-      <!-- HUD data readouts -->
       <div class="hud-data hud-data-tl">
         ALT: <span id="hudAlt">0124m</span><br>
         LAT: 45.9043°N
@@ -79,28 +71,27 @@
     <div class="hero-gradient"></div>
 
     <div class="hero-content" id="heroContent">
-      <p class="hero-eyebrow">DJI Mini 5 Pro · Aerialni posnetek</p>
+      <p class="hero-eyebrow">DJI Mini 5 Pro · Aerialni posnetki</p>
       <h1 class="hero-headline">
         <span id="typingText"></span>
       </h1>
       <p class="hero-sub">
         Aerialni video in fotografija z dronom DJI Mini 5 Pro —<br class="br-desktop" />
-        natančnost, jasnost in cinematično oko nad vsakim pokrajino.
+        natančnost, jasnost in cinematično oko nad vsako pokrajino.
       </p>
       <div class="hero-ctas">
         <a href="#portfolio" class="btn btn-primary">Oglej portfolio</a>
-        <a href="#contact" class="btn btn-ghost">Kontakt Me</a>
+        <a href="#contact" class="btn btn-ghost">Kontakt</a>
       </div>
     </div>
 
-    <!-- Scroll indicator -->
     <div class="scroll-indicator">
       <span>POMAKNI SE</span>
       <div class="scroll-line"></div>
     </div>
   </section>
 
-  <!-- ░░ STATS BAR ░░ -->
+  <!-- ░░ STATS ░░ -->
   <section id="stats">
     <div class="stats-grid">
       <div class="stat-item reveal">
@@ -163,9 +154,7 @@
         <span class="section-label">Storitve</span>
         <h2 class="section-title">Kaj ponujam</h2>
       </div>
-
       <div class="services-grid">
-
         <div class="service-card reveal glass">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -175,7 +164,6 @@
           <h3>Aerialni video</h3>
           <p>Gladek, stabiliziran 4K posnetek z dronom DJI Mini 5 Pro. Od širokih posnetkov do detajlnih nizko-višinskih prehodov.</p>
         </div>
-
         <div class="service-card reveal glass">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -187,7 +175,6 @@
           <h3>Aerialna fotografija</h3>
           <p>Visoko-ločljivostne fotografije iz višine. Idealno za publikacije, tiske in objave na socialnih omrežjih.</p>
         </div>
-
         <div class="service-card reveal glass">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -198,7 +185,6 @@
           <h3>Nepremičninski posnetki</h3>
           <p>Aerialni posnetki nepremičnin — dramatični pogledi od zgoraj, orbitalni posnetki in gladki preleti.</p>
         </div>
-
         <div class="service-card reveal glass">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -208,7 +194,6 @@
           <h3>Pokrivanje dogodkov</h3>
           <p>Poroke, festivali, korporativni dogodki — posneti iz perspektive, ki je nihče v množici ne vidi.</p>
         </div>
-
         <div class="service-card reveal glass">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -219,7 +204,6 @@
           <h3>Promocijski videi</h3>
           <p>Branded aerialna vsebina za podjetja, turistične organizacije in startupe. Cinematično pripovedovanje z neba.</p>
         </div>
-
         <div class="service-card reveal glass">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -230,7 +214,6 @@
           <h3>Pokrajina in potovanja</h3>
           <p>Narava, gore, obale, mesta — uredniška aerialna vsebina za potovalne blagovne znamke in osebne projekte.</p>
         </div>
-
       </div>
     </div>
   </section>
@@ -243,15 +226,10 @@
         <h2 class="section-title">Izbrana dela</h2>
         <p class="section-sub">Klikni kategorijo za ogled galerije.</p>
       </div>
-
-      <!-- Two category folder cards -->
       <div class="category-grid">
-
-        <!-- LANDSCAPE folder card -->
         <div class="category-card reveal" data-category="landscape">
           <div class="category-cover" style="background: linear-gradient(135deg, #0d1f12 0%, #1a4a2a 60%, #0a2015 100%);">
-            <img src="TRAKTOR.png" alt="Landscape preview" class="category-cover-img" />
-
+            <img src="TRAKTOR.png" alt="Pokrajina" class="category-cover-img" />
             <div class="category-count">3 fotografije</div>
           </div>
           <div class="category-info">
@@ -260,13 +238,10 @@
             <span class="category-open">Odpri galerijo →</span>
           </div>
         </div>
-
-        <!-- URBAN folder card -->
         <div class="category-card reveal" data-category="urban">
           <div class="category-cover" style="background: linear-gradient(135deg, #08101f 0%, #102040 60%, #0a1830 100%);">
-            <img src="Nakupovalni center.png" alt="Urban preview" class="category-cover-img" />
-
-            <div class="category-count">3 fotografije</div>
+            <img src="Nakupovalni center.png" alt="Urbano" class="category-cover-img" />
+            <div class="category-count">2 fotografiji</div>
           </div>
           <div class="category-info">
             <h3>Mestno / Urbano</h3>
@@ -274,34 +249,28 @@
             <span class="category-open">Odpri galerijo →</span>
           </div>
         </div>
-
       </div>
 
-      <!-- Hidden image data for lightbox — add your real image paths here -->
       <div id="galleryData" style="display:none">
-        <!-- Landscape images -->
-        <div data-category="landscape" data-src="TRAKTOR.png" data-title="Tractor from above"></div>
-        <div data-category="landscape" data-src="GOZD.png" data-title="Forest &amp; Hills, Slovenia"></div>
-        <div data-category="landscape" data-src="NJIVA.png" data-title="Fields of Brežice"></div>
-        <!-- Urban images -->
+        <div data-category="landscape" data-src="TRAKTOR.png" data-title="Traktor iz zraka"></div>
+        <div data-category="landscape" data-src="GOZD.png" data-title="Gozd in hribi, Slovenija"></div>
+        <div data-category="landscape" data-src="NJIVA.png" data-title="Njive, Brežice"></div>
         <div data-category="urban" data-src="Nakupovalni center.png" data-title="Supernova, Brežice"></div>
-        <div data-category="urban" data-src="Hisa.png" data-title="House at night, Brežice"></div>
-        <div data-category="urban" data-src="urban3.jpg" data-title="Urban 3"></div>
+        <div data-category="urban" data-src="Hisa.png" data-title="Hiša ponoči, Brežice"></div>
       </div>
-
     </div>
   </section>
 
-  <!-- ░░ LIGHTBOX GALLERY ░░ -->
+  <!-- ░░ LIGHTBOX ░░ -->
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
     <div class="lightbox-header">
       <span class="lightbox-title" id="lightboxTitle"></span>
-      <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+      <button class="lightbox-close" id="lightboxClose" aria-label="Zapri">&times;</button>
     </div>
-    <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8249;</button>
-    <button class="lightbox-next" id="lightboxNext" aria-label="Next">&#8250;</button>
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Prejšnja">&#8249;</button>
+    <button class="lightbox-next" id="lightboxNext" aria-label="Naslednja">&#8250;</button>
     <div class="lightbox-main">
-      <img id="lightboxImg" src="" alt="Gallery image" />
+      <img id="lightboxImg" src="" alt="Galerija" />
     </div>
     <div class="lightbox-caption" id="lightboxCaption"></div>
     <div class="lightbox-thumbs" id="lightboxThumbs"></div>
@@ -314,14 +283,12 @@
         <span class="section-label">Oprema</span>
         <h2 class="section-title">Zgrajeno za natančnost</h2>
       </div>
-
       <div class="equipment-feature reveal glass">
         <div class="equipment-badge">Glavni dron</div>
         <div class="equipment-grid">
           <div class="equipment-visual">
             <img src="Dron.png" alt="DJI Mini 5 Pro" class="drone-svg drone-photo-float" style="border-radius:12px;object-fit:cover;width:100%;max-width:320px;filter:drop-shadow(0 0 30px rgba(0,200,255,0.2));" />
           </div>
-
           <div class="equipment-info">
             <h3>DJI Mini 5 Pro</h3>
             <p class="equipment-sub">Kompaktno. Zmogljivo. Cinematično.</p>
@@ -387,31 +354,29 @@
           Sledi na Instagramu
         </a>
       </div>
-
-      <!-- Instagram preview grid - replace with your actual screenshots -->
       <div class="ig-grid reveal">
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
-          <img src="TRAKTOR.png" alt="Instagram post" />
+          <img src="TRAKTOR.png" alt="Instagram" />
           <div class="ig-overlay"><span>Oglej na Instagramu ↗</span></div>
         </a>
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
-          <img src="GOZD.png" alt="Instagram post" />
+          <img src="GOZD.png" alt="Instagram" />
           <div class="ig-overlay"><span>Oglej na Instagramu ↗</span></div>
         </a>
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
-          <img src="NJIVA.png" alt="Instagram post" />
+          <img src="NJIVA.png" alt="Instagram" />
           <div class="ig-overlay"><span>Oglej na Instagramu ↗</span></div>
         </a>
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
-          <img src="Nakupovalni center.png" alt="Instagram post" />
+          <img src="Nakupovalni center.png" alt="Instagram" />
           <div class="ig-overlay"><span>Oglej na Instagramu ↗</span></div>
         </a>
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
-          <img src="Hisa.png" alt="Instagram post" />
+          <img src="Hisa.png" alt="Instagram" />
           <div class="ig-overlay"><span>Oglej na Instagramu ↗</span></div>
         </a>
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
-          <img src="hero-poster.jpg" alt="Instagram post" />
+          <img src="hero-poster.jpg" alt="Instagram" />
           <div class="ig-overlay"><span>Oglej na Instagramu ↗</span></div>
         </a>
       </div>
@@ -422,11 +387,10 @@
   <section id="booking">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Rezervacija a shoot</span>
+        <span class="section-label">Rezervacija snemanja</span>
         <h2 class="section-title">Rezerviraj datum</h2>
         <p class="section-sub">Izberi datum in vrsto projekta — Luka bo potrdil razpoložljivost v 24 urah.</p>
       </div>
-
       <div class="booking-wrap reveal glass">
         <form id="bookingForm">
           <div class="booking-grid">
@@ -460,12 +424,12 @@
             <textarea id="bNotes" name="notes" rows="3" placeholder="Lokacija, posebne zahteve..."></textarea>
           </div>
           <button type="submit" class="btn btn-primary btn-full" id="bookingBtn" style="margin-top:1.5rem">
-            Request Rezervacijaing
+            Rezerviraj
           </button>
         </form>
         <div id="bookingSuccess" style="display:none; text-align:center; padding:2rem 0;">
           <div style="font-size:2.5rem;">🚁</div>
-          <h3 style="font-family:var(--font-display); font-size:1.8rem; margin:1rem 0 0.5rem; letter-spacing:0.05em;">Rezervacijaing Request Sent!</h3>
+          <h3 style="font-family:var(--font-display); font-size:1.8rem; margin:1rem 0 0.5rem; letter-spacing:0.05em;">Rezervacija poslana!</h3>
           <p style="color:var(--text-muted);">Luka bo potrdil tvoj datum v 24 urah na <span id="bookingEmail" style="color:var(--accent);"></span></p>
         </div>
       </div>
@@ -480,10 +444,7 @@
         <h2 class="section-title">Letimo skupaj</h2>
         <p class="section-sub">Imaš projekt v mislih? Vzpostavi kontakt — rad bi slišal, kaj načrtuješ.</p>
       </div>
-
       <div class="contact-grid">
-
-        <!-- Kontakt form — Formspree + AI agent -->
         <div class="contact-form reveal glass" id="contactFormWrap">
           <form id="contactForm">
             <div class="form-group">
@@ -511,10 +472,8 @@
               <label for="message">Sporočilo</label>
               <textarea id="message" name="message" rows="5" placeholder="Povej mi o svojem projektu..." required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-full" id="submitBtn">Send Sporočilo</button>
+            <button type="submit" class="btn btn-primary btn-full" id="submitBtn">Pošlji sporočilo</button>
           </form>
-
-          <!-- AI response box (hidden by default) -->
           <div id="aiResponse" style="display:none; margin-top:1.5rem;">
             <div class="ai-response-box">
               <div class="ai-header">
@@ -524,8 +483,6 @@
               <p id="aiText" style="font-size:0.9rem; color:var(--text-muted); line-height:1.7;"></p>
             </div>
           </div>
-
-          <!-- Success message (hidden by default) -->
           <div id="successMsg" style="display:none; margin-top:1rem; text-align:center;">
             <div style="font-size:2rem;">✅</div>
             <p style="color:var(--accent); font-weight:600; margin-top:0.5rem;">Sporočilo poslano!</p>
@@ -533,7 +490,6 @@
           </div>
         </div>
 
-        <!-- Kontakt info -->
         <div class="contact-info reveal">
           <div class="contact-card glass">
             <h3>Vzpostavi kontakt</h3>
@@ -550,21 +506,17 @@
                 <span class="contact-icon">📷</span>
                 <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener">@KOVI_FLY</a>
               </li>
-
             </ul>
           </div>
-
           <div class="contact-card glass">
             <h3>Odzivni čas</h3>
             <p>Običajno odgovorim v <strong>24 urah</strong>. Za nujne projekte me kontaktiraj direktno po e-pošti ali telefonu.</p>
           </div>
-
           <div class="contact-card glass">
             <h3>Lokacija</h3>
             <p>Baza v <strong>Ljubljani, Slovenija</strong>. Na voljo za snemanja po vsej Sloveniji in sosednjih državah.</p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -581,16 +533,15 @@
             <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
           </svg>
         </a>
-
       </div>
       <p class="footer-copy">© <span id="footerYear"></span> AltitudeLens. Vse pravice pridržane.</p>
     </div>
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+    <button class="back-to-top" id="backToTop" aria-label="Na vrh">↑</button>
   </footer>
 
-  <!-- WhatsApp floating button -->
-  <a href="https://wa.me/38651652747" target="_blank" rel="noopener" class="whatsapp-btn" aria-label="Kontakt on WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <!-- WhatsApp -->
+  <a href="https://wa.me/38651652747" target="_blank" rel="noopener" class="whatsapp-btn" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
       <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.557 4.17 1.535 5.943L.057 23.571a.75.75 0 00.943.943l5.628-1.478A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.7-.49-5.27-1.38l-.38-.22-3.34.876.892-3.255-.245-.398A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
     </svg>
