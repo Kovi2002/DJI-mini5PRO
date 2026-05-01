@@ -363,23 +363,46 @@ if (bookingForm) {
     const email = document.getElementById('bEmail').value.trim();
     const date  = document.getElementById('bDate').value;
     const type  = document.getElementById('bType').value;
-    const notes = document.getElementById('bNotes').value.trim();
+    const notes = document.getElementById('bNotes') ? document.getElementById('bNotes').value.trim() : '';
     const btn   = document.getElementById('bookingBtn');
+
+    // Validate
+    if (!name || !email || !date || !type) {
+      alert('Prosim izpolni vsa obvezna polja.');
+      return;
+    }
+
     if (btn) { btn.disabled = true; btn.textContent = 'Pošiljam...'; }
-    const dateFormatted = new Date(date).toLocaleDateString('en-GB', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+    const dateFormatted = new Date(date).toLocaleDateString('sl-SI', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
     try {
-      await fetch('https://formspree.io/f/mqewokoo', {
+      const res = await fetch('https://formspree.io/f/mqewokoo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name, email, subject: 'Booking — ' + type, date: dateFormatted, project_type: type, notes: notes || 'None' })
+        body: JSON.stringify({
+          name, email,
+          subject: 'Rezervacija — ' + type,
+          date: dateFormatted,
+          project_type: type,
+          notes: notes || 'Ni opomb'
+        })
       });
-    } catch(err) { console.error(err); }
+      console.log('Booking sent:', res.status);
+    } catch(err) {
+      console.error('Booking error:', err);
+    }
+
+    // Show success regardless
     const emailEl = document.getElementById('bookingEmail');
     if (emailEl) emailEl.textContent = email;
     bookingForm.style.display = 'none';
     const succ = document.getElementById('bookingSuccess');
     if (succ) succ.style.display = 'block';
+    if (btn) { btn.disabled = false; btn.textContent = 'Rezerviraj'; }
   });
+} else {
+  console.error('bookingForm not found!');
 }
 
 /* ── 13. HUD scanline ────────────────────────────────────────── */
