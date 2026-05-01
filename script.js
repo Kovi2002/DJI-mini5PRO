@@ -393,3 +393,25 @@ if (scanline) {
 if (backToTop) backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 const footerYear = document.getElementById('footerYear');
 if (footerYear) footerYear.textContent = new Date().getFullYear();
+
+/* ── HUD animated data ───────────────────────────────────────── */
+const hudAlt = document.getElementById('hudAlt');
+const hudBat = document.getElementById('hudBat');
+if (hudAlt && hudBat) {
+  let alt = 124, bat = 94, altDir = 1;
+  setInterval(() => {
+    // Altitude fluctuates
+    alt += altDir * (Math.random() * 2);
+    if (alt > 135 || alt < 115) altDir *= -1;
+    hudAlt.textContent = Math.round(alt).toString().padStart(4,'0') + 'm';
+    // Battery slowly drains
+    if (Math.random() > 0.97 && bat > 80) bat -= 1;
+    hudBat.textContent = bat + '%';
+  }, 1200);
+}
+
+/* ── Animated grid perspective on scroll ────────────────────── */
+window.addEventListener('scroll', () => {
+  const grid = document.querySelector('body::after');
+  // Grid moves via CSS animation — no JS needed
+}, { passive: true });
