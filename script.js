@@ -103,8 +103,8 @@ if (progressBar) {
 const typingEl     = document.getElementById('typingText');
 const typingCursor = document.getElementById('typingCursor');
 if (typingEl) {
-  const line1 = 'Cinematic drone footage';
-  const line2 = 'from a new perspective';
+  const line1 = 'Cinematični drone posnetki';
+  const line2 = 'iz nove perspektive';
   let i = 0;
   let phase = 1;
 
@@ -289,7 +289,7 @@ function closeLightbox() {
   if (lightboxThumbs) lightboxThumbs.innerHTML = '';
 }
 
-const catLabels = { landscape: 'Landscape / Nature', urban: 'Urban / City' };
+const catLabels = { landscape: 'Pokrajina / Narava', urban: 'Mestno / Urbano' };
 document.querySelectorAll('.category-card').forEach(card => {
   card.addEventListener('click', () => openGallery(card.dataset.category, catLabels[card.dataset.category] || card.dataset.category));
 });
