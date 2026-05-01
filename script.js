@@ -318,7 +318,7 @@ if (contactForm) {
     const aiText  = document.getElementById('aiText');
     const success = document.getElementById('successMsg');
 
-    if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+    if (btn) { btn.disabled = true; btn.textContent = 'Pošiljam...'; }
 
     try {
       await fetch('https://formspree.io/f/mqewokoo', {
@@ -329,11 +329,11 @@ if (contactForm) {
     } catch(err) { console.error(err); }
 
     const projectReplies = {
-      'Aerial Video': 'aerial video production', 'Aerial Photography': 'aerial photography',
-      'Real Estate': 'real estate aerial shots', 'Event Coverage': 'event coverage',
-      'Promotional Video': 'promotional video production', 'Landscape / Travel': 'landscape and travel content'
+      'Aerialni video': 'aerialni video', 'Aerialna fotografija': 'aerialna fotografija',
+      'Nepremičnine': 'nepremičninske posnetke', 'Pokrivanje dogodkov': 'pokrivanje dogodkov',
+      'Promocijski video': 'promocijski video', 'Pokrajina / Potovanja': 'pokrajino in potovanja'
     };
-    const reply = `Hi ${name}, thank you for reaching out about ${projectReplies[project] || 'your project'}! Your message has been received and Luka will personally get back to you within 24 hours.`;
+    const reply = `Živjo ${name}, hvala za tvoje sporočilo glede ${projectReplies[project] || 'tvojega projekta'}! Sporočilo je bilo prejeto in Luka ti bo osebno odgovoril v 24 urah.`;
 
     await new Promise(r => setTimeout(r, 600));
     if (aiBox) aiBox.style.display = 'block';
@@ -346,7 +346,7 @@ if (contactForm) {
       }, 18);
     }
     if (success) success.style.display = 'block';
-    if (btn) btn.textContent = 'Message sent ✓';
+    if (btn) btn.textContent = 'Sporočilo poslano ✓';
     contactForm.reset();
   });
 }
@@ -365,7 +365,7 @@ if (bookingForm) {
     const type  = document.getElementById('bType').value;
     const notes = document.getElementById('bNotes').value.trim();
     const btn   = document.getElementById('bookingBtn');
-    if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+    if (btn) { btn.disabled = true; btn.textContent = 'Pošiljam...'; }
     const dateFormatted = new Date(date).toLocaleDateString('en-GB', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
     try {
       await fetch('https://formspree.io/f/mqewokoo', {
