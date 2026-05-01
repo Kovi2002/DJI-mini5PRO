@@ -1488,3 +1488,47 @@ input[type=date]:focus {
   );
   pointer-events: none;
 }
+
+/* ── WhatsApp floating button ────────────────────────────────── */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  z-index: 999;
+  display: flex; align-items: center; gap: 0.6rem;
+  background: #25D366;
+  color: #fff;
+  padding: 0.75rem 1.25rem 0.75rem 0.9rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4), 0 2px 8px rgba(0,0,0,0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-decoration: none;
+  animation: waPulse 2.5s ease-in-out infinite;
+}
+.whatsapp-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(37,211,102,0.5), 0 4px 12px rgba(0,0,0,0.3);
+  animation: none;
+}
+.whatsapp-btn svg {
+  width: 26px; height: 26px; flex-shrink: 0;
+}
+.whatsapp-label {
+  font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+@keyframes waPulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4), 0 2px 8px rgba(0,0,0,0.3); }
+  50%      { box-shadow: 0 4px 30px rgba(37,211,102,0.7), 0 2px 8px rgba(0,0,0,0.3); }
+}
+
+/* Mobile — samo ikona brez teksta */
+@media (max-width: 480px) {
+  .whatsapp-btn {
+    bottom: 1.5rem; right: 1.5rem;
+    padding: 0.85rem;
+    border-radius: 50%;
+  }
+  .whatsapp-label { display: none; }
+  .whatsapp-btn svg { width: 28px; height: 28px; }
+}
