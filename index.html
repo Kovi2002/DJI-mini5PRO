@@ -181,14 +181,25 @@ body.menu-open .burger i:nth-child(1){transform:translateY(8px) rotate(45deg)}
 body.menu-open .burger i:nth-child(2){opacity:0}
 body.menu-open .burger i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 
-/* ============ HERO ============ */
-.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
-.hero-media{position:absolute;inset:-6% 0;z-index:1}
+/* ============ HERO (scroll-driven) ============ */
+/* .hero-stage je "obesa" — trikrat višja od okna, znotraj katere je hero pinned in video se scrubа na scroll */
+.hero-stage{position:relative;height:300vh}
+.hero{
+  position:sticky;top:0;
+  height:100svh;
+  display:flex;align-items:flex-end;overflow:hidden;
+}
+.hero-media{position:absolute;inset:0;z-index:1}
 .hero-media img,.hero-media video{
   width:100%;height:100%;object-fit:cover;
-  animation:kenburns 34s var(--ease) infinite alternate;
 }
+/* Slike ostanejo kot fallback (Ken Burns le če video ni podprt) */
+.hero-media img{animation:kenburns 34s var(--ease) infinite alternate}
+.hero-media.has-video img{display:none;animation:none}
 @keyframes kenburns{from{transform:scale(1) translateY(0)}to{transform:scale(1.14) translateY(-2.5%)}}
+/* Mobilna zanka video: teče avtomatsko, brez scruba */
+.hero-media video.js-loop{opacity:1}
+.hero-media video.js-scrub{opacity:1}
 .hero-shade{position:absolute;inset:0;z-index:2;pointer-events:none}
 .hero-shade::before{
   content:"";position:absolute;inset:0;
@@ -206,6 +217,24 @@ body.menu-open .burger i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 @keyframes drift{from{transform:translateX(0)}to{transform:translateX(9vw)}}
 
 .hero-content{position:relative;z-index:5;width:min(1240px,92vw);margin:0 auto;padding:0 0 9.5rem}
+/* Ko je scroll-scrub aktiven, se vsebina razkriva sinhrono s scrollom (GSAP prevzame). Privzeto skrij za GSAP animacijo. */
+.hero.scrub-active .hero-eyebrow,
+.hero.scrub-active .hero-sub,
+.hero.scrub-active .hero-ctas{opacity:0}
+.hero.scrub-active .hero-line span{transform:translateY(115%)}
+/* Namig za nadaljnji scroll — utripa nad HUD, izgine ko se začne scrub */
+.hero-hint{
+  position:absolute;left:50%;bottom:6.5rem;transform:translateX(-50%);
+  z-index:5;color:var(--haze);text-align:center;pointer-events:none;
+  transition:opacity .5s var(--ease);
+}
+.hero-hint span{display:block;margin-bottom:.5rem}
+.hero-hint i{
+  display:inline-block;width:1px;height:34px;background:var(--grad);
+  transform-origin:top;animation:hintPulse 2s var(--ease) infinite;
+}
+@keyframes hintPulse{0%,100%{transform:scaleY(.2);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+.hero.hint-hidden .hero-hint{opacity:0}
 .hero-eyebrow{display:flex;align-items:center;gap:.9rem;color:var(--amber);margin-bottom:1.6rem}
 .hero-eyebrow::before{content:"";width:44px;height:1px;background:var(--grad)}
 .hero h1{
@@ -596,18 +625,23 @@ h2 em{font-style:italic;color:var(--amber)}
   <span class="mono">@KOVI_FLY · Ljubljana, Slovenija</span>
 </div>
 
-<!-- ====== HERO ====== -->
+<!-- ====== HERO (scroll-driven vzlet) ====== -->
+<div class="hero-stage" id="heroStage">
 <section class="hero" id="hero" data-phase="VZLET">
-  <div class="hero-media">
+  <div class="hero-media has-video" id="heroMedia">
     <img src="hero-poster.jpg" alt="Cinematični aerialni posnetek iz drona nad Slovenijo" fetchpriority="high">
-    <!--
-      ▶ KO IMAŠ HERO VIDEO (hero.mp4, ~10–20s zanka, brez zvoka, H.264, < 8 MB):
-      1) naloži hero.mp4 v koren repozitorija
-      2) izbriši zgornji <img> in odkomentiraj spodnji <video>
-      <video autoplay muted loop playsinline poster="hero-poster.jpg" preload="metadata">
-        <source src="hero.mp4" type="video/mp4">
-      </video>
-    -->
+    <!-- Scroll-scrub video (desktop). Vsak frame je keyframe → gladek seek pri scrollu. -->
+    <video id="heroVideo" class="js-scrub"
+           muted playsinline preload="auto"
+           poster="hero-poster.jpg">
+      <source src="hero-scroll.mp4" type="video/mp4">
+    </video>
+    <!-- Mobilna zanka — manjša datoteka, avtoplay, brez scruba -->
+    <video id="heroVideoMobile" class="js-loop" style="display:none"
+           autoplay muted loop playsinline preload="auto"
+           poster="hero-poster.jpg">
+      <source src="hero-loop.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="hero-shade"></div>
   <div class="hero-cloud c1"></div>
@@ -626,6 +660,10 @@ h2 em{font-style:italic;color:var(--amber)}
     </div>
   </div>
 
+  <div class="hero-hint mono" id="heroHint" aria-hidden="true">
+    <span>DRSI ZA VZLET</span><i></i>
+  </div>
+
   <div class="hero-hud mono">
     <div class="wrap">
       <div class="hud-item hud-rec">REC <b>4K/60</b></div>
@@ -636,6 +674,7 @@ h2 em{font-style:italic;color:var(--amber)}
     </div>
   </div>
 </section>
+</div>
 
 <!-- ====== STATS ====== -->
 <div class="stats">
@@ -1178,19 +1217,90 @@ document.getElementById("year").textContent = new Date().getFullYear();
 if (hasGsap && window.ScrollTrigger && !reduceMotion) {
   gsap.registerPlugin(ScrollTrigger);
 
-  /* Hero: naslov iz maske, nato podnaslov in CTA */
-  var heroTl = gsap.timeline({ delay: 1.55 });
-  heroTl.from(".hero-line span", { yPercent: 115, duration: 1.2, stagger: 0.14, ease: "power4.out" })
-        .from(".hero-eyebrow", { opacity: 0, x: -24, duration: .8, ease: "power3.out" }, "-=.9")
-        .from(".hero-sub",    { opacity: 0, y: 22, duration: .8, ease: "power3.out" }, "-=.6")
-        .from(".hero-ctas",   { opacity: 0, y: 22, duration: .8, ease: "power3.out" }, "-=.55")
-        .from(".hero-hud",    { opacity: 0, y: 14, duration: .7, ease: "power3.out" }, "-=.5");
+  /* ===== HERO SCROLL-DRIVEN VZLET =====
+     Pinana hero sekcija za 300vh scrolla. V tem času:
+       0.00–0.55  → dron leti (video se scrubа, naslov skrit)
+       0.55–0.80  → dron predre krošnje, naslov se razkrije (mask-in)
+       0.80–1.00  → CTA in HUD se prižgejo, konča se stanje mirovanja
+     Na mobilnem: video se predvaja avtomatsko kot zanka, brez pina. */
+  var isTouch = window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 900;
+  var heroVideo = document.getElementById("heroVideo");
+  var heroVideoMobile = document.getElementById("heroVideoMobile");
+  var heroHint = document.getElementById("heroHint");
 
-  /* Parallax hero medij */
-  gsap.to(".hero-media", {
-    yPercent: 14, ease: "none",
-    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
-  });
+  if (isTouch) {
+    /* MOBILE: uporabi loop video, izklopi scrub video, hero-stage naj bo velik kot okno */
+    if (heroVideo) heroVideo.style.display = "none";
+    if (heroVideoMobile) heroVideoMobile.style.display = "block";
+    var stage = document.getElementById("heroStage");
+    if (stage) stage.style.height = "100svh";
+    /* Standardni uvodni animaciji (kot v1) */
+    var mTl = gsap.timeline({ delay: 1.2 });
+    mTl.from(".hero-line span", { yPercent: 115, duration: 1.1, stagger: 0.13, ease: "power4.out" })
+       .from(".hero-eyebrow", { opacity: 0, x: -20, duration: .7, ease: "power3.out" }, "-=.8")
+       .from(".hero-sub",    { opacity: 0, y: 20, duration: .7, ease: "power3.out" }, "-=.5")
+       .from(".hero-ctas",   { opacity: 0, y: 20, duration: .7, ease: "power3.out" }, "-=.5")
+       .from(".hero-hud",    { opacity: 0, y: 12, duration: .6, ease: "power3.out" }, "-=.45");
+    if (heroHint) heroHint.style.display = "none";
+  } else {
+    /* DESKTOP: SCROLL-SCRUB */
+    if (heroVideoMobile) heroVideoMobile.remove();
+    document.querySelector(".hero").classList.add("scrub-active");
+
+    /* Pripravi video za scrub: naloži, potem daj skozi ScrollTrigger.
+       Ker je video z all-keyframes, currentTime iskanje bo gladko. */
+    var vidReady = false;
+    function initScrub(){
+      if (vidReady) return;
+      vidReady = true;
+      var duration = heroVideo.duration || 15;
+
+      /* Master pin timeline */
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#heroStage",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.6,               /* rahla inertna zamuda za filmski občutek */
+          pin: ".hero",
+          pinSpacing: false,
+          anticipatePin: 1,
+          onUpdate: function(self){
+            /* Skrij namig po ~5% scrolla */
+            document.querySelector(".hero").classList.toggle("hint-hidden", self.progress > 0.04);
+            /* Scrub video sinhrono */
+            var t = self.progress * duration;
+            if (!isNaN(t) && isFinite(t)) {
+              try { heroVideo.currentTime = t; } catch(e){}
+            }
+          }
+        }
+      });
+
+      /* Naslov "Nebo je moj studio" — mask-in reveal med 55% in 72% (ko dron predre krošnje) */
+      tl.to(".hero-line span", {
+        yPercent: 0, ease: "power3.out", stagger: 0.12, duration: 0.4
+      }, 0.55);
+      tl.to(".hero-eyebrow", { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, 0.55);
+      tl.from(".hero-eyebrow", { x: -20, ease: "power2.out", duration: 0.3 }, 0.55);
+
+      /* Podnaslov + CTA + HUD zaključna faza (72–92%) */
+      tl.to(".hero-sub",  { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 0.72);
+      tl.from(".hero-sub",{ y: 20, ease: "power2.out", duration: 0.35 }, 0.72);
+      tl.to(".hero-ctas", { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 0.80);
+      tl.from(".hero-ctas",{y: 20, ease: "power2.out", duration: 0.35 }, 0.80);
+
+      /* Subtilen zoom na koncu — občutek "izstopa iz vzleta" */
+      tl.to(".hero-media video", { scale: 1.06, ease: "none", duration: 1 }, 0);
+    }
+
+    /* Počakaj, da video pozna svojo dolžino */
+    if (heroVideo.readyState >= 1) initScrub();
+    else heroVideo.addEventListener("loadedmetadata", initScrub, { once: true });
+
+    /* Failsafe: če se metadata ne naloži v 4s (npr. slaba mreža), vseeno zaženi */
+    setTimeout(function(){ if (!vidReady) initScrub(); }, 4000);
+  }
 
   /* Splošni razkritja (filmski rezi) */
   gsap.utils.toArray("[data-reveal]").forEach(function(el){
