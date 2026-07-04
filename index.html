@@ -3,135 +3,150 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cinematični drone posnetki in aerialna fotografija. DJI Mini 5 Pro. Slovenija." />
-  <title>AltitudeLens — Cinematični Drone Posnetki</title>
+  <title>AltitudeLens — Snemanje z dronom | Cinematični posnetki iz zraka, Slovenija</title>
+  <meta name="description" content="Profesionalno snemanje z dronom v Sloveniji. Cinematični 4K aerialni posnetki nepremičnin, dogodkov in pokrajin. DJI Mini 5 Pro. Baza: Ljubljana." />
+  <link rel="canonical" href="https://kovifly.si/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AltitudeLens — Cinematični posnetki z dronom" />
+  <meta property="og:description" content="Nebo je moj studio. 4K aerialni video in fotografija za nepremičnine, dogodke in blagovne znamke. Slovenija." />
+  <meta property="og:url" content="https://kovifly.si/" />
+  <meta property="og:image" content="https://kovifly.si/hero-poster.jpg" />
+  <meta property="og:locale" content="sl_SI" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- JSON-LD za Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "AltitudeLens",
+    "description": "Cinematično snemanje z dronom — aerialni video in fotografija po vsej Sloveniji.",
+    "url": "https://kovifly.si",
+    "telephone": "+38651652747",
+    "email": "Kovacic.luka34@gmail.com",
+    "image": "https://kovifly.si/hero-poster.jpg",
+    "address": { "@type": "PostalAddress", "addressLocality": "Ljubljana", "addressCountry": "SI" },
+    "areaServed": "Slovenija",
+    "sameAs": ["https://instagram.com/KOVI_FLY"]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="hero-poster.jpg" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="scrollProgress"></div>
-  <div class="cursor-dot" id="cursorDot"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
+  <div id="scrollProgress" aria-hidden="true"></div>
 
   <!-- ░░ LOADER ░░ -->
-  <div id="loader">
+  <div id="loader" aria-hidden="true">
     <div class="loader-inner">
-      <div class="loader-ring"></div>
       <span class="loader-text">ALTITUDE<span>LENS</span></span>
+      <div class="loader-horizon"></div>
+      <span class="loader-mono">PRIPRAVA NA VZLET …</span>
     </div>
   </div>
 
   <!-- ░░ NAV ░░ -->
   <nav id="navbar">
     <a href="#hero" class="nav-logo">ALTITUDE<span>LENS</span></a>
-    <button class="nav-toggle" id="navToggle" aria-label="Meni">
+    <button class="nav-toggle" id="navToggle" aria-label="Meni" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">O meni</a></li>
       <li><a href="#services">Storitve</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#process">Kako poteka</a></li>
       <li><a href="#equipment">Oprema</a></li>
-      <li><a href="#booking">Rezervacija</a></li>
-      <li><a href="#contact" class="nav-cta">Kontakt</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+      <li><a href="#booking" class="nav-cta">Rezerviraj snemanje</a></li>
     </ul>
   </nav>
 
   <!-- ░░ HERO ░░ -->
   <section id="hero">
-    <img class="hero-video" src="hero-poster.jpg" alt="Aerialni pogled na Brežice" />
-    <canvas id="particleCanvas"></canvas>
+    <div class="letterbox letterbox-top" aria-hidden="true"></div>
+    <div class="letterbox letterbox-bottom" aria-hidden="true"></div>
 
-    <div class="hud-overlay">
-      <div class="hud-corner hud-tl"></div>
-      <div class="hud-corner hud-tr"></div>
-      <div class="hud-corner hud-bl"></div>
-      <div class="hud-corner hud-br"></div>
-      <div class="hud-scanline"></div>
-      <div class="hud-data hud-data-tl">
-        ALT: <span id="hudAlt">0124m</span><br>
-        LAT: 45.9043°N
-      </div>
-      <div class="hud-data hud-data-tr">
-        DJI MINI 5 PRO<br>
-        REC ● 4K/60FPS
-      </div>
-      <div class="hud-data hud-data-bl">
-        Novo mesto, SI<br>
-        WIND: 3.2 m/s
-      </div>
-      <div class="hud-data hud-data-br">
-        BAT: <span id="hudBat">94%</span><br>
-        DIST: 0.8km
-      </div>
-    </div>
-
-    <div class="hero-gradient"></div>
+    <img class="hero-video" src="hero-poster.jpg" alt="Aerialni pogled iz drona — Slovenija" fetchpriority="high" />
+    <div class="hero-gradient" aria-hidden="true"></div>
 
     <div class="hero-content" id="heroContent">
-      <p class="hero-eyebrow">DJI Mini 5 Pro · Aerialni posnetki</p>
+      <p class="hero-eyebrow hero-line">DJI MINI 5 PRO · 4K/60 · LJUBLJANA, SLOVENIJA</p>
       <h1 class="hero-headline">
-        <span id="typingText"></span>
+        <span class="hero-line"><span>NEBO JE</span></span>
+        <span class="hero-line"><span>MOJ <em>STUDIO.</em></span></span>
       </h1>
-      <p class="hero-sub">
-        Aerialni video in fotografija z dronom DJI Mini 5 Pro —<br class="br-desktop" />
-        natančnost, jasnost in cinematično oko nad vsako pokrajino.
+      <p class="hero-sub hero-line">
+        Cinematični posnetki z dronom, ki tvojo nepremičnino, dogodek ali blagovno
+        znamko pokažejo iz perspektive, ki je nihče drug ne more.
       </p>
-      <div class="hero-ctas">
-        <a href="#portfolio" class="btn btn-primary">Oglej portfolio</a>
-        <a href="#contact" class="btn btn-ghost">Kontakt</a>
+      <div class="hero-ctas hero-line">
+        <a href="#booking" class="btn btn-primary">Rezerviraj snemanje</a>
+        <a href="#portfolio" class="btn btn-ghost">Oglej si dela</a>
       </div>
     </div>
 
-    <div class="scroll-indicator">
-      <span>POMAKNI SE</span>
-      <div class="scroll-line"></div>
+    <!-- Telemetrija — ena disciplinirana vrstica -->
+    <div class="telemetry" aria-hidden="true">
+      <span class="tel-item tel-rec"><span class="rec-dot"></span>REC 4K/60</span>
+      <span class="tel-item">ALT <span id="hudAlt">124 m</span></span>
+      <span class="tel-item tel-wide">GPS 46.05°N 14.51°E</span>
+      <span class="tel-item tel-wide">WIND 3.2 m/s</span>
+      <span class="tel-item">BAT <span id="hudBat">94%</span></span>
     </div>
   </section>
 
   <!-- ░░ STATS ░░ -->
   <section id="stats">
-    <div class="stats-grid">
-      <div class="stat-item reveal">
-        <span class="stat-num" data-target="48">0</span>+
-        <p>Zaključenih projektov</p>
-      </div>
-      <div class="stat-item reveal">
-        <span class="stat-num" data-target="120">0</span>+
-        <p>Ur letenja</p>
-      </div>
-      <div class="stat-item reveal">
-        <span class="stat-num" data-target="35">0</span>+
-        <p>Video snemanj</p>
-      </div>
-      <div class="stat-item reveal">
-        <span class="stat-num" data-target="6">0</span>
-        <p>Držav</p>
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <span class="stat-num" data-target="48">0</span><span class="stat-plus">+</span>
+          <p>zaključenih projektov</p>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-num" data-target="120">0</span><span class="stat-plus">+</span>
+          <p>ur letenja</p>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-num" data-target="35">0</span><span class="stat-plus">+</span>
+          <p>video snemanj</p>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-num" data-target="6">0</span><span class="stat-plus"></span>
+          <p>držav</p>
+        </div>
       </div>
     </div>
   </section>
+
+  <div class="horizon-divider" aria-hidden="true"></div>
 
   <!-- ░░ ABOUT ░░ -->
   <section id="about">
     <div class="container">
       <div class="about-grid">
         <div class="about-image-wrap reveal">
-          <div class="about-image-placeholder" style="padding:0;overflow:hidden;background:none;border:1px solid rgba(0,180,255,0.15);">
-            <img src="Luka_Slika.png" alt="Luka Kovačič" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;" />
-          </div>
-          <div class="about-tag">Ljubljana, SI</div>
+          <figure class="about-figure">
+            <img src="Luka_Slika.png" alt="Luka Kovačič — pilot drona in videograf" loading="lazy" decoding="async" />
+            <figcaption class="about-tag">LUKA · LJUBLJANA, SI</figcaption>
+          </figure>
         </div>
 
         <div class="about-text reveal">
           <span class="section-label">O meni</span>
           <h2 class="section-title">Aerialno pripovedovanje,<br />inženirsko natančno</h2>
           <p>
-            Sem magister robotike (UL FE), ki svet vidi skozi objektive in algoritme. 
+            Sem magister robotike (UL FE), ki svet vidi skozi objektive in algoritme.
             Svoj DJI Mini 5 Pro ne uporabljam le za snemanje, ampak za ustvarjanje preciznih digitalnih zgodb.
-            Od arhitekturnih detajlov do dinamičnih posnetkov nepremičnin – vsak prelet načrtujem z inženirsko metodo in 
-            zaključim s filmsko vizijo. Rezultat? Tehnično popolni posnetki, ki prodajajo.
+            Od arhitekturnih detajlov do dinamičnih posnetkov nepremičnin — vsak prelet načrtujem z inženirsko
+            metodo in zaključim s filmsko vizijo. Rezultat? Tehnično popolni posnetki, ki prodajajo.
           </p>
           <p>
             Moje glavno orodje je <strong>DJI Mini 5 Pro</strong>: kompakten, zmogljiv in ustvarjen za
@@ -139,10 +154,10 @@
             tehnično natančnost s filmskim pogledom.
           </p>
           <p>
-            Ne glede na to, ali potrebuješ promocijsko vsebino, aerialne posnetke nepremičnin ali pokrivanje dogodkov —
-            vsakemu letu pristopim metodično, z inženirskim pristopom.
+            Ne glede na to, ali potrebuješ promocijsko vsebino, aerialne posnetke nepremičnin ali pokrivanje
+            dogodkov — vsakemu letu pristopim metodično, z inženirskim pristopom.
           </p>
-          <a href="#contact" class="btn btn-primary" style="margin-top:1.5rem">Sodeluj z mano</a>
+          <a href="#contact" class="btn btn-primary">Sodeluj z mano</a>
         </div>
       </div>
     </div>
@@ -156,7 +171,7 @@
         <h2 class="section-title">Kaj ponujam</h2>
       </div>
       <div class="services-grid">
-        <div class="service-card reveal glass">
+        <article class="service-card reveal">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M15 10l4.553-2.069A1 1 0 0121 8.87V15.13a1 1 0 01-1.447.9L15 14M3 8h12a1 1 0 011 1v6a1 1 0 01-1 1H3a1 1 0 01-1-1V9a1 1 0 011-1z"/>
@@ -164,29 +179,26 @@
           </div>
           <h3>Aerialni video</h3>
           <p>Gladek, stabiliziran 4K posnetek z dronom DJI Mini 5 Pro. Od širokih posnetkov do detajlnih nizko-višinskih prehodov.</p>
-        </div>
-        <div class="service-card reveal glass">
+        </article>
+        <article class="service-card reveal">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="3" y="5" width="18" height="14" rx="2"/>
-              <circle cx="12" cy="12" r="3"/>
-              <circle cx="17.5" cy="7.5" r="0.5" fill="currentColor"/>
+              <rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><circle cx="17.5" cy="7.5" r="0.5" fill="currentColor"/>
             </svg>
           </div>
           <h3>Aerialna fotografija</h3>
           <p>Visoko-ločljivostne fotografije iz višine. Idealno za publikacije, tiske in objave na socialnih omrežjih.</p>
-        </div>
-        <div class="service-card reveal glass">
+        </article>
+        <article class="service-card reveal">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-              <polyline points="9 22 9 12 15 12 15 22"/>
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
             </svg>
           </div>
           <h3>Nepremičninski posnetki</h3>
           <p>Aerialni posnetki nepremičnin — dramatični pogledi od zgoraj, orbitalni posnetki in gladki preleti.</p>
-        </div>
-        <div class="service-card reveal glass">
+        </article>
+        <article class="service-card reveal">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -194,30 +206,30 @@
           </div>
           <h3>Pokrivanje dogodkov</h3>
           <p>Poroke, festivali, korporativni dogodki — posneti iz perspektive, ki je nihče v množici ne vidi.</p>
-        </div>
-        <div class="service-card reveal glass">
+        </article>
+        <article class="service-card reveal">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <polygon points="23 7 16 12 23 17 23 7"/>
-              <rect x="1" y="5" width="15" height="14" rx="2"/>
+              <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>
             </svg>
           </div>
           <h3>Promocijski videi</h3>
           <p>Branded aerialna vsebina za podjetja, turistične organizacije in startupe. Cinematično pripovedovanje z neba.</p>
-        </div>
-        <div class="service-card reveal glass">
+        </article>
+        <article class="service-card reveal">
           <div class="service-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+              <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
             </svg>
           </div>
           <h3>Pokrajina in potovanja</h3>
           <p>Narava, gore, obale, mesta — uredniška aerialna vsebina za potovalne blagovne znamke in osebne projekte.</p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
+
+  <div class="horizon-divider" aria-hidden="true"></div>
 
   <!-- ░░ PORTFOLIO ░░ -->
   <section id="portfolio">
@@ -228,28 +240,28 @@
         <p class="section-sub">Klikni kategorijo za ogled galerije.</p>
       </div>
       <div class="category-grid">
-        <div class="category-card reveal" data-category="landscape">
-          <div class="category-cover" style="background: linear-gradient(135deg, #0d1f12 0%, #1a4a2a 60%, #0a2015 100%);">
-            <img src="TRAKTOR.png" alt="Pokrajina" class="category-cover-img" />
-            <div class="category-count">3 fotografije</div>
+        <button type="button" class="category-card reveal" data-category="landscape">
+          <div class="category-cover">
+            <img src="TRAKTOR.png" alt="Aerialni posnetek pokrajine — traktor na polju" class="category-cover-img" loading="lazy" decoding="async" />
+            <span class="category-count">3 FOTOGRAFIJE</span>
           </div>
           <div class="category-info">
             <h3>Pokrajina / Narava</h3>
-            <p>Aerialni pogledi na gozdove, reke in gore</p>
+            <p>Aerialni pogledi na gozdove, reke in polja</p>
             <span class="category-open">Odpri galerijo →</span>
           </div>
-        </div>
-        <div class="category-card reveal" data-category="urban">
-          <div class="category-cover" style="background: linear-gradient(135deg, #08101f 0%, #102040 60%, #0a1830 100%);">
-            <img src="Nakupovalni center.png" alt="Urbano" class="category-cover-img" />
-            <div class="category-count">2 fotografiji</div>
+        </button>
+        <button type="button" class="category-card reveal" data-category="urban">
+          <div class="category-cover">
+            <img src="Nakupovalni center.png" alt="Aerialni posnetek urbanega okolja — nakupovalni center" class="category-cover-img" loading="lazy" decoding="async" />
+            <span class="category-count">2 FOTOGRAFIJI</span>
           </div>
           <div class="category-info">
             <h3>Mestno / Urbano</h3>
             <p>Mesta, ceste in arhitektura iz zraka</p>
             <span class="category-open">Odpri galerijo →</span>
           </div>
-        </div>
+        </button>
       </div>
 
       <div id="galleryData" style="display:none">
@@ -263,7 +275,7 @@
   </section>
 
   <!-- ░░ LIGHTBOX ░░ -->
-  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Galerija">
     <div class="lightbox-header">
       <span class="lightbox-title" id="lightboxTitle"></span>
       <button class="lightbox-close" id="lightboxClose" aria-label="Zapri">&times;</button>
@@ -277,6 +289,56 @@
     <div class="lightbox-thumbs" id="lightboxThumbs"></div>
   </div>
 
+  <!-- ░░ PROCESS — Kako poteka ░░ -->
+  <section id="process">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Kako poteka</span>
+        <h2 class="section-title">Od povpraševanja do posnetka</h2>
+        <p class="section-sub">Vsak projekt gre skozi isti preverjen postopek — brez presenečenj.</p>
+      </div>
+      <ol class="process-list">
+        <li class="process-step reveal">
+          <span class="process-num">01</span>
+          <div>
+            <h3>Povpraševanje</h3>
+            <p>Pošlješ lokacijo, želeni termin in cilj posnetkov. Odgovorim v 24 urah.</p>
+          </div>
+        </li>
+        <li class="process-step reveal">
+          <span class="process-num">02</span>
+          <div>
+            <h3>Načrt leta</h3>
+            <p>Preverim zračni prostor, vremensko napoved in svetlobo ter pripravim natančen plan kadrov.</p>
+          </div>
+        </li>
+        <li class="process-step reveal">
+          <span class="process-num">03</span>
+          <div>
+            <h3>Snemanje</h3>
+            <p>Na terenu posnamem 4K material s stabiliziranim gimbalom — po dogovorjenem planu, brez improvizacije.</p>
+          </div>
+        </li>
+        <li class="process-step reveal">
+          <span class="process-num">04</span>
+          <div>
+            <h3>Obdelava</h3>
+            <p>Barvna korekcija, montaža in izvoz v formatih za splet, oglase in družbena omrežja.</p>
+          </div>
+        </li>
+        <li class="process-step reveal">
+          <span class="process-num">05</span>
+          <div>
+            <h3>Oddaja</h3>
+            <p>Končne datoteke prejmeš prek povezave za prenos — običajno v 3 do 5 dneh po snemanju.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="horizon-divider" aria-hidden="true"></div>
+
   <!-- ░░ EQUIPMENT ░░ -->
   <section id="equipment">
     <div class="container">
@@ -284,11 +346,11 @@
         <span class="section-label">Oprema</span>
         <h2 class="section-title">Zgrajeno za natančnost</h2>
       </div>
-      <div class="equipment-feature reveal glass">
-        <div class="equipment-badge">Glavni dron</div>
+      <div class="equipment-feature reveal">
+        <span class="equipment-badge">GLAVNI DRON</span>
         <div class="equipment-grid">
           <div class="equipment-visual">
-            <img src="Dron.png" alt="DJI Mini 5 Pro" class="drone-svg drone-photo-float" style="border-radius:12px;object-fit:cover;width:100%;max-width:320px;filter:drop-shadow(0 0 30px rgba(0,200,255,0.2));" />
+            <img src="Dron.png" alt="DJI Mini 5 Pro" class="drone-photo" loading="lazy" decoding="async" />
           </div>
           <div class="equipment-info">
             <h3>DJI Mini 5 Pro</h3>
@@ -297,29 +359,29 @@
               <li>
                 <span class="spec-icon">◈</span>
                 <div>
-                  <strong>Kompaktno in lahko</strong>
-                  <p>Pod 249g — registracija ni potrebna v večini držav EU. Gre povsod.</p>
+                  <strong>Pod 249 g</strong>
+                  <p>Registracija v večini držav EU ni potrebna. Gre povsod.</p>
                 </div>
               </li>
               <li>
                 <span class="spec-icon">◈</span>
                 <div>
-                  <strong>Visoko-kakovostni aerialni posnetki</strong>
-                  <p>4K ločljivost z napredno obdelavo slike za ostre, detajlne kadre.</p>
+                  <strong>4K posnetki</strong>
+                  <p>Napredna obdelava slike za ostre, detajlne kadre v vseh pogojih.</p>
                 </div>
               </li>
               <li>
                 <span class="spec-icon">◈</span>
                 <div>
                   <strong>3-osna stabilizacija</strong>
-                  <p>Mehanski gimbal odpravlja vibracije za svilenkasto gladek video v vseh razmerah.</p>
+                  <p>Mehanski gimbal odpravlja vibracije za svilnato gladek video.</p>
                 </div>
               </li>
               <li>
                 <span class="spec-icon">◈</span>
                 <div>
-                  <strong>Cinematična zmogljivost na prostem</strong>
-                  <p>Podaljšan čas letenja, zaznavanje ovir in inteligentni načini letenja za kreativne posnetke.</p>
+                  <strong>Inteligentni načini letenja</strong>
+                  <p>Podaljšan čas letenja in zaznavanje ovir za kreativne, varne posnetke.</p>
                 </div>
               </li>
             </ul>
@@ -337,13 +399,11 @@
         <h2 class="section-title">Sledi poti</h2>
         <p class="section-sub">Za kulisami, najnovejši posnetki in drone leti.</p>
       </div>
-      <div class="instagram-cta reveal glass">
+      <div class="instagram-cta reveal">
         <div class="ig-left">
           <div class="ig-avatar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-              <rect x="2" y="2" width="20" height="20" rx="5"/>
-              <circle cx="12" cy="12" r="5"/>
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="30" height="30">
+              <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
             </svg>
           </div>
           <div class="ig-info">
@@ -351,38 +411,38 @@
             <span class="ig-desc">Drone videografija · Slovenija</span>
           </div>
         </div>
-        <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="btn btn-primary ig-btn">
-          Sledi na Instagramu
-        </a>
+        <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="btn btn-primary">Sledi na Instagramu</a>
       </div>
       <div class="ig-grid reveal">
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
-          <img src="TRAKTOR.png" alt="Instagram" />
+          <img src="TRAKTOR.png" alt="Instagram — AltitudeLens" loading="lazy" decoding="async" />
           <div class="ig-overlay"><span>Oglej na Instagramu ↗</span></div>
         </a>
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
-          <img src="GOZD.png" alt="Instagram" />
+          <img src="GOZD.png" alt="Instagram — AltitudeLens" loading="lazy" decoding="async" />
           <div class="ig-overlay"><span>Oglej na Instagramu ↗</span></div>
         </a>
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
-          <img src="NJIVA.png" alt="Instagram" />
+          <img src="NJIVA.png" alt="Instagram — AltitudeLens" loading="lazy" decoding="async" />
           <div class="ig-overlay"><span>Oglej na Instagramu ↗</span></div>
         </a>
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
-          <img src="Nakupovalni center.png" alt="Instagram" />
+          <img src="Nakupovalni center.png" alt="Instagram — AltitudeLens" loading="lazy" decoding="async" />
           <div class="ig-overlay"><span>Oglej na Instagramu ↗</span></div>
         </a>
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
-          <img src="Hisa.png" alt="Instagram" />
+          <img src="Hisa.png" alt="Instagram — AltitudeLens" loading="lazy" decoding="async" />
           <div class="ig-overlay"><span>Oglej na Instagramu ↗</span></div>
         </a>
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" class="ig-item">
-          <img src="hero-poster.jpg" alt="Instagram" />
+          <img src="hero-poster.jpg" alt="Instagram — AltitudeLens" loading="lazy" decoding="async" />
           <div class="ig-overlay"><span>Oglej na Instagramu ↗</span></div>
         </a>
       </div>
     </div>
   </section>
+
+  <div class="horizon-divider" aria-hidden="true"></div>
 
   <!-- ░░ BOOKING ░░ -->
   <section id="booking">
@@ -390,18 +450,18 @@
       <div class="section-header reveal">
         <span class="section-label">Rezervacija snemanja</span>
         <h2 class="section-title">Rezerviraj datum</h2>
-        <p class="section-sub">Izberi datum in vrsto projekta — Luka bo potrdil razpoložljivost v 24 urah.</p>
+        <p class="section-sub">Izberi datum in vrsto projekta — razpoložljivost potrdim v 24 urah.</p>
       </div>
-      <div class="booking-wrap reveal glass">
+      <div class="booking-wrap reveal">
         <form id="bookingForm">
           <div class="booking-grid">
             <div class="form-group">
               <label for="bName">Tvoje ime</label>
-              <input type="text" id="bName" name="name" placeholder="Ime in priimek" required />
+              <input type="text" id="bName" name="name" placeholder="Ime in priimek" required autocomplete="name" />
             </div>
             <div class="form-group">
               <label for="bEmail">E-pošta</label>
-              <input type="email" id="bEmail" name="email" placeholder="tvoj@email.com" required />
+              <input type="email" id="bEmail" name="email" placeholder="tvoj@email.com" required autocomplete="email" />
             </div>
             <div class="form-group">
               <label for="bDate">Želeni datum</label>
@@ -420,18 +480,16 @@
               </select>
             </div>
           </div>
-          <div class="form-group" style="margin-top:1rem">
+          <div class="form-group form-group-notes">
             <label for="bNotes">Dodatne opombe (neobvezno)</label>
-            <textarea id="bNotes" name="notes" rows="3" placeholder="Lokacija, posebne zahteve..."></textarea>
+            <textarea id="bNotes" name="notes" rows="3" placeholder="Lokacija, posebne zahteve …"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary btn-full" id="bookingBtn" style="margin-top:1.5rem">
-            Rezerviraj
-          </button>
+          <button type="submit" class="btn btn-primary btn-full" id="bookingBtn">Rezerviraj</button>
         </form>
-        <div id="bookingSuccess" style="display:none; text-align:center; padding:2rem 0;">
-          <div style="font-size:2.5rem;">🚁</div>
-          <h3 style="font-family:var(--font-display); font-size:1.8rem; margin:1rem 0 0.5rem; letter-spacing:0.05em;">Rezervacija poslana!</h3>
-          <p style="color:var(--text-muted);">Luka bo potrdil tvoj datum v 24 urah na <span id="bookingEmail" style="color:var(--accent);"></span></p>
+        <div id="bookingSuccess" class="form-success" style="display:none;">
+          <div class="success-emoji">🚁</div>
+          <h3>Rezervacija poslana!</h3>
+          <p>Tvoj datum potrdim v 24 urah na <span id="bookingEmail"></span></p>
         </div>
       </div>
     </div>
@@ -443,18 +501,18 @@
       <div class="section-header reveal">
         <span class="section-label">Kontakt</span>
         <h2 class="section-title">Letimo skupaj</h2>
-        <p class="section-sub">Imaš projekt v mislih? Vzpostavi kontakt — rad bi slišal, kaj načrtuješ.</p>
+        <p class="section-sub">Imaš projekt v mislih? Piši mi — rad slišim, kaj načrtuješ.</p>
       </div>
       <div class="contact-grid">
-        <div class="contact-form reveal glass" id="contactFormWrap">
+        <div class="contact-form reveal" id="contactFormWrap">
           <form id="contactForm">
             <div class="form-group">
               <label for="name">Ime</label>
-              <input type="text" id="name" name="name" placeholder="Tvoje ime" required />
+              <input type="text" id="name" name="name" placeholder="Tvoje ime" required autocomplete="name" />
             </div>
             <div class="form-group">
               <label for="email">E-pošta</label>
-              <input type="email" id="email" name="email" placeholder="tvoj@email.com" required />
+              <input type="email" id="email" name="email" placeholder="tvoj@email.com" required autocomplete="email" />
             </div>
             <div class="form-group">
               <label for="project">Vrsta projekta</label>
@@ -471,49 +529,40 @@
             </div>
             <div class="form-group">
               <label for="message">Sporočilo</label>
-              <textarea id="message" name="message" rows="5" placeholder="Povej mi o svojem projektu..." required></textarea>
+              <textarea id="message" name="message" rows="5" placeholder="Povej mi o svojem projektu …" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-full" id="submitBtn">Pošlji sporočilo</button>
           </form>
-          <div id="aiResponse" style="display:none; margin-top:1.5rem;">
+          <div id="aiResponse" style="display:none;">
             <div class="ai-response-box">
               <div class="ai-header">
                 <span class="ai-dot"></span>
                 <span class="ai-label">AltitudeLens AI · Avtomatski odgovor</span>
               </div>
-              <p id="aiText" style="font-size:0.9rem; color:var(--text-muted); line-height:1.7;"></p>
+              <p id="aiText"></p>
             </div>
           </div>
-          <div id="successMsg" style="display:none; margin-top:1rem; text-align:center;">
-            <div style="font-size:2rem;">✅</div>
-            <p style="color:var(--accent); font-weight:600; margin-top:0.5rem;">Sporočilo poslano!</p>
-            <p style="color:var(--text-muted); font-size:0.85rem;">Luka ti bo odgovoril v 24 urah.</p>
+          <div id="successMsg" class="form-success" style="display:none;">
+            <div class="success-emoji">✅</div>
+            <p class="success-title">Sporočilo poslano!</p>
+            <p>Odgovorim ti v 24 urah.</p>
           </div>
         </div>
 
         <div class="contact-info reveal">
-          <div class="contact-card glass">
+          <div class="contact-card">
             <h3>Vzpostavi kontakt</h3>
             <ul class="contact-links">
-              <li>
-                <span class="contact-icon">✉</span>
-                <a href="mailto:Kovacic.luka34@gmail.com">Kovacic.luka34@gmail.com</a>
-              </li>
-              <li>
-                <span class="contact-icon">📱</span>
-                <a href="tel:+38651652747">+386 51 652 747</a>
-              </li>
-              <li>
-                <span class="contact-icon">📷</span>
-                <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener">@KOVI_FLY</a>
-              </li>
+              <li><span class="contact-icon">✉</span><a href="mailto:Kovacic.luka34@gmail.com">Kovacic.luka34@gmail.com</a></li>
+              <li><span class="contact-icon">📱</span><a href="tel:+38651652747">+386 51 652 747</a></li>
+              <li><span class="contact-icon">📷</span><a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener">@KOVI_FLY</a></li>
             </ul>
           </div>
-          <div class="contact-card glass">
+          <div class="contact-card">
             <h3>Odzivni čas</h3>
-            <p>Običajno odgovorim v <strong>24 urah</strong>. Za nujne projekte me kontaktiraj direktno po e-pošti ali telefonu.</p>
+            <p>Običajno odgovorim v <strong>24 urah</strong>. Za nujne projekte me pokliči ali piši na WhatsApp.</p>
           </div>
-          <div class="contact-card glass">
+          <div class="contact-card">
             <h3>Lokacija</h3>
             <p>Baza v <strong>Ljubljani, Slovenija</strong>. Na voljo za snemanja po vsej Sloveniji in sosednjih državah.</p>
           </div>
@@ -529,13 +578,11 @@
       <div class="footer-socials">
         <a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="2" y="2" width="20" height="20" rx="5"/>
-            <circle cx="12" cy="12" r="5"/>
-            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
           </svg>
         </a>
       </div>
-      <p class="footer-copy">© <span id="footerYear"></span> AltitudeLens. Vse pravice pridržane.</p>
+      <p class="footer-copy">© <span id="footerYear"></span> AltitudeLens · kovifly.si · Vse pravice pridržane.</p>
     </div>
     <button class="back-to-top" id="backToTop" aria-label="Na vrh">↑</button>
   </footer>
