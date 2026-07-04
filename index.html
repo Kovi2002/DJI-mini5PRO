@@ -455,24 +455,6 @@ h2 em{font-style:italic;color:var(--amber)}
 .gear-list span{color:var(--haze);font-size:.92rem}
 @media(max-width:880px){.gear .wrap{grid-template-columns:1fr}}
 
-/* ============ TESTIMONIALS ============ */
-.quotes{background:rgba(8,15,28,.86);border-block:1px solid var(--line);overflow:hidden}
-.quote-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
-.quote{
-  position:relative;padding:2.2rem 1.9rem;border:1px solid var(--line);border-radius:8px;
-  background:linear-gradient(160deg,rgba(14,26,46,.9),rgba(10,19,34,.6));
-  backdrop-filter:blur(8px);
-  transition:transform .5s var(--ease),border-color .4s,box-shadow .5s;
-}
-.quote:hover{transform:translateY(-8px);border-color:rgba(255,179,92,.4);box-shadow:0 24px 60px rgba(0,0,0,.45)}
-.quote::before{
-  content:"“";position:absolute;top:.6rem;right:1.2rem;
-  font-family:var(--display);font-size:4.5rem;line-height:1;color:rgba(255,107,44,.22);
-}
-.quote p{font-family:var(--display);font-size:1.12rem;line-height:1.5;font-style:italic}
-.quote footer{margin-top:1.4rem;color:var(--haze);font-size:.85rem}
-.quote footer b{color:var(--amber);display:block;font-family:var(--body)}
-@media(max-width:880px){.quote-row{grid-template-columns:1fr}}
 
 /* ============ BOOKING ============ */
 .booking{overflow:hidden;background:rgba(4,7,13,.82)}
@@ -865,32 +847,6 @@ h2 em{font-style:italic;color:var(--amber)}
         <li data-reveal><span class="gear-ic">◈</span><div><b>3-osna stabilizacija</b><span>Mehanski gimbal odpravlja vibracije za svilnato gladek video.</span></div></li>
         <li data-reveal><span class="gear-ic">◈</span><div><b>Načrtovan vsak let</b><span>Pred vsakim snemanjem preverim zračni prostor, vreme in varnostne omejitve lokacije.</span></div></li>
       </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ====== TESTIMONIALS ======
-     ⚠ SPODNJA MNENJA SO ZAČASNA PRIMERA — pred objavo jih zamenjaj
-     s pravimi citati svojih strank (ali sekcijo izbriši). -->
-<section class="quotes sec" id="quotes" data-phase="SIGNAL">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow mono" data-reveal>Mnenja</p>
-      <h2 data-reveal>Kaj pravijo <em>naročniki</em></h2>
-    </div>
-    <div class="quote-row">
-      <blockquote class="quote" data-reveal>
-        <p>Posnetki so hišo prodali prej kot oglas. Pogled iz zraka je pokazal parcelo tako, kot je fotografija s tal nikoli ne bi.</p>
-        <footer><b>Ime Priimek</b>Nepremičninska agencija · Ljubljana</footer>
-      </blockquote>
-      <blockquote class="quote" data-reveal>
-        <p>Profesionalen dogovor, natančen plan leta in material, ki smo ga lahko uporabili brez dodatne obdelave.</p>
-        <footer><b>Ime Priimek</b>Turistična organizacija · Slovenija</footer>
-      </blockquote>
-      <blockquote class="quote" data-reveal>
-        <p>Naš promocijski video je z aerialnimi kadri dobil povsem novo dimenzijo. Zanesljivo, hitro in v roku.</p>
-        <footer><b>Ime Priimek</b>Podjetje · Slovenija</footer>
-      </blockquote>
     </div>
   </div>
 </section>
