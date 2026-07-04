@@ -181,30 +181,28 @@ body.menu-open .burger i:nth-child(1){transform:translateY(8px) rotate(45deg)}
 body.menu-open .burger i:nth-child(2){opacity:0}
 body.menu-open .burger i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 
-/* ============ HERO (scroll-driven) ============ */
-/* .hero-stage je "obesa": po zaključku hero doživetja tečeta strani naprej v naslednji sekciji.
-   175vh = 1× višina zaslona za hero + 0.75× dodatnega scrolla za scrub in razkritja. */
-.hero-stage{position:relative;height:175vh}
+/* ============ SKY — fiksno video ozadje čez CELO stran ============ */
+/* Video je prilepljen za vsem; scroll scrubа frame, vsebina teče čez.
+   Pri ~52% strani se sky-a (vzlet, 15s) prelije v sky-b (7s). */
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;background:var(--ink);overflow:hidden}
+.sky video,.sky img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#skyB{opacity:0}
+.sky-veil{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(4,7,13,.55) 0%,rgba(4,7,13,.22) 32%,rgba(4,7,13,.4) 100%);
+}
+/* vsa vsebina nad videom */
+section,.stats,.footer,.nav{position:relative;z-index:1}
+
+/* ============ HERO (prozoren, video za njim) ============ */
 .hero{
-  position:sticky;top:0;
-  height:100svh;
+  position:relative;min-height:100svh;
   display:flex;align-items:flex-end;overflow:hidden;
 }
-.hero-media{position:absolute;inset:0;z-index:1}
-.hero-media img,.hero-media video{
-  width:100%;height:100%;object-fit:cover;
-}
-/* Slike ostanejo kot fallback (Ken Burns le če video ni podprt) */
-.hero-media img{animation:kenburns 34s var(--ease) infinite alternate}
-.hero-media.has-video img{display:none;animation:none}
-@keyframes kenburns{from{transform:scale(1) translateY(0)}to{transform:scale(1.14) translateY(-2.5%)}}
-/* Mobilna zanka video: teče avtomatsko, brez scruba */
-.hero-media video.js-loop{opacity:1}
-.hero-media video.js-scrub{opacity:1}
 .hero-shade{position:absolute;inset:0;z-index:2;pointer-events:none}
 .hero-shade::before{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(4,7,13,.55) 0%,rgba(4,7,13,.15) 38%,rgba(4,7,13,.55) 72%,var(--ink) 100%);
+  background:linear-gradient(180deg,rgba(4,7,13,.55) 0%,rgba(4,7,13,.15) 38%,rgba(4,7,13,.45) 72%,rgba(4,7,13,.6) 100%);
 }
 .hero-shade::after{ /* sončni zahod na obzorju */
   content:"";position:absolute;inset:0;
@@ -218,11 +216,6 @@ body.menu-open .burger i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 @keyframes drift{from{transform:translateX(0)}to{transform:translateX(9vw)}}
 
 .hero-content{position:relative;z-index:5;width:min(1240px,92vw);margin:0 auto;padding:0 0 9.5rem}
-/* Ko je scroll-scrub aktiven, se vsebina razkriva sinhrono s scrollom (GSAP prevzame). Privzeto skrij za GSAP animacijo. */
-.hero.scrub-active .hero-eyebrow,
-.hero.scrub-active .hero-sub,
-.hero.scrub-active .hero-ctas{opacity:0}
-.hero.scrub-active .hero-line span{transform:translateY(115%)}
 /* Namig za nadaljnji scroll — utripa nad HUD, izgine ko se začne scrub */
 .hero-hint{
   position:absolute;left:50%;bottom:6.5rem;transform:translateX(-50%);
@@ -294,7 +287,7 @@ h2 em{font-style:italic;color:var(--amber)}
 .lead{color:var(--haze);max-width:38rem;margin-top:1.2rem;font-size:1.03rem}
 
 /* ============ STATS ============ */
-.stats{border-block:1px solid var(--line);background:var(--night)}
+.stats{border-block:1px solid var(--line);background:rgba(8,15,28,.78);backdrop-filter:blur(2px)}
 .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;padding:3.2rem 0}
 .stat b{
   font-family:var(--display);font-weight:500;font-size:clamp(2.4rem,5vw,3.8rem);
@@ -305,10 +298,7 @@ h2 em{font-style:italic;color:var(--amber)}
 @media(max-width:760px){.stats .wrap{grid-template-columns:repeat(2,1fr)}}
 
 /* ============ STORY (scrub) ============ */
-.story{background:var(--ink);overflow:hidden}
-.story-bg{position:absolute;inset:0;opacity:.22}
-.story-bg img{width:100%;height:120%;object-fit:cover}
-.story-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--ink),transparent 30%,transparent 70%,var(--ink))}
+.story{background:transparent;overflow:hidden}
 .story .wrap{position:relative;z-index:2}
 .story-line{
   font-family:var(--display);font-weight:500;
@@ -321,6 +311,7 @@ h2 em{font-style:italic;color:var(--amber)}
 @media(max-width:700px){.story-line:nth-child(even){margin-left:0;text-align:left}}
 
 /* ============ ABOUT ============ */
+.about{background:rgba(4,7,13,.55)}
 .about .wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(2.5rem,6vw,6rem);align-items:center}
 .about-figure{position:relative}
 .about-figure img{width:100%;border-radius:4px;filter:saturate(.92)}
@@ -337,7 +328,7 @@ h2 em{font-style:italic;color:var(--amber)}
 @media(max-width:880px){.about .wrap{grid-template-columns:1fr}}
 
 /* ============ SERVICES ============ */
-.services{background:var(--night);border-block:1px solid var(--line)}
+.services{background:rgba(8,15,28,.86);border-block:1px solid var(--line)}
 .svc-list{border-top:1px solid var(--line)}
 .svc{border-bottom:1px solid var(--line)}
 .svc-head{
@@ -373,6 +364,7 @@ h2 em{font-style:italic;color:var(--amber)}
 @media(max-width:760px){.svc-grid{grid-template-columns:1fr}}
 
 /* ============ PORTFOLIO ============ */
+#portfolio{background:rgba(4,7,13,.7)}
 .folio-grid{
   display:grid;grid-template-columns:repeat(6,1fr);gap:14px;
 }
@@ -427,7 +419,7 @@ h2 em{font-style:italic;color:var(--amber)}
 .lb-close:hover{color:var(--ember)}
 
 /* ============ PROCESS ============ */
-.process{background:var(--night);border-block:1px solid var(--line)}
+.process{background:rgba(8,15,28,.86);border-block:1px solid var(--line)}
 .steps{position:relative;display:grid;gap:0;border-top:1px solid var(--line)}
 .step{
   display:grid;grid-template-columns:110px 1fr 2fr;gap:1.6rem;align-items:baseline;
@@ -441,6 +433,7 @@ h2 em{font-style:italic;color:var(--amber)}
 @media(max-width:760px){.step{grid-template-columns:1fr;gap:.5rem}}
 
 /* ============ EQUIPMENT / TRUST ============ */
+.gear{background:rgba(4,7,13,.62)}
 .gear .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,5.5rem);align-items:center}
 .gear-figure{position:relative;padding:3rem 0}
 .gear-figure::before{
@@ -463,7 +456,7 @@ h2 em{font-style:italic;color:var(--amber)}
 @media(max-width:880px){.gear .wrap{grid-template-columns:1fr}}
 
 /* ============ TESTIMONIALS ============ */
-.quotes{background:var(--night);border-block:1px solid var(--line);overflow:hidden}
+.quotes{background:rgba(8,15,28,.86);border-block:1px solid var(--line);overflow:hidden}
 .quote-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
 .quote{
   position:relative;padding:2.2rem 1.9rem;border:1px solid var(--line);border-radius:8px;
@@ -482,7 +475,7 @@ h2 em{font-style:italic;color:var(--amber)}
 @media(max-width:880px){.quote-row{grid-template-columns:1fr}}
 
 /* ============ BOOKING ============ */
-.booking{overflow:hidden}
+.booking{overflow:hidden;background:rgba(4,7,13,.82)}
 .booking::before{
   content:"";position:absolute;inset:0;
   background:radial-gradient(60% 70% at 85% 15%,rgba(255,107,44,.1),transparent 60%),
@@ -528,7 +521,7 @@ h2 em{font-style:italic;color:var(--amber)}
 }
 
 /* ============ CONTACT / FOOTER ============ */
-.contact{background:var(--night);border-top:1px solid var(--line)}
+.contact{background:rgba(6,11,20,.92);border-top:1px solid var(--line)}
 .contact .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
 .contact h3{font-family:var(--mono);font-weight:500;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ember);margin-bottom:1.1rem}
 .contact ul{list-style:none;display:grid;gap:.6rem}
@@ -538,7 +531,7 @@ h2 em{font-style:italic;color:var(--amber)}
 .contact p b{color:var(--cloud)}
 @media(max-width:760px){.contact .wrap{grid-template-columns:1fr}}
 
-.footer{border-top:1px solid var(--line);overflow:hidden}
+.footer{border-top:1px solid var(--line);overflow:hidden;background:rgba(4,7,13,.95)}
 .footer-mark{
   font-family:var(--display);font-weight:600;text-align:center;
   font-size:clamp(3rem,12.5vw,11rem);line-height:1;letter-spacing:.08em;
@@ -626,24 +619,23 @@ h2 em{font-style:italic;color:var(--amber)}
   <span class="mono">@KOVI_FLY · Ljubljana, Slovenija</span>
 </div>
 
-<!-- ====== HERO (scroll-driven vzlet) ====== -->
-<div class="hero-stage" id="heroStage">
+<!-- ====== SKY — fiksni video za celo stranjo (scrub na scroll) ====== -->
+<div class="sky" aria-hidden="true">
+  <img src="hero-poster.jpg" alt="" fetchpriority="high">
+  <video id="skyA" muted playsinline preload="auto" poster="hero-poster.jpg">
+    <source src="hero-scroll.mp4" type="video/mp4">
+  </video>
+  <video id="skyB" muted playsinline preload="none">
+    <source src="sky-b.mp4" type="video/mp4">
+  </video>
+  <video id="skyLoop" style="display:none" autoplay muted loop playsinline preload="metadata" poster="hero-poster.jpg">
+    <source src="hero-loop.mp4" type="video/mp4">
+  </video>
+  <div class="sky-veil"></div>
+</div>
+
+<!-- ====== HERO ====== -->
 <section class="hero" id="hero" data-phase="VZLET">
-  <div class="hero-media has-video" id="heroMedia">
-    <img src="hero-poster.jpg" alt="Cinematični aerialni posnetek iz drona nad Slovenijo" fetchpriority="high">
-    <!-- Scroll-scrub video (desktop). Vsak frame je keyframe → gladek seek pri scrollu. -->
-    <video id="heroVideo" class="js-scrub"
-           muted playsinline preload="auto"
-           poster="hero-poster.jpg">
-      <source src="hero-scroll.mp4" type="video/mp4">
-    </video>
-    <!-- Mobilna zanka — manjša datoteka, avtoplay, brez scruba -->
-    <video id="heroVideoMobile" class="js-loop" style="display:none"
-           autoplay muted loop playsinline preload="auto"
-           poster="hero-poster.jpg">
-      <source src="hero-loop.mp4" type="video/mp4">
-    </video>
-  </div>
   <div class="hero-shade"></div>
   <div class="hero-cloud c1"></div>
   <div class="hero-cloud c2"></div>
@@ -675,7 +667,6 @@ h2 em{font-style:italic;color:var(--amber)}
     </div>
   </div>
 </section>
-</div>
 
 <!-- ====== STATS ====== -->
 <div class="stats">
@@ -690,7 +681,6 @@ h2 em{font-style:italic;color:var(--amber)}
 
 <!-- ====== STORY ====== -->
 <section class="story sec" id="story" data-phase="VZPON">
-  <div class="story-bg parallax" data-speed="-12"><img src="GOZD.png" alt="" loading="lazy"></div>
   <div class="wrap">
     <p class="story-line js-scrub">Vsak kader se začne sto metrov <em>nad tlemi.</em></p>
     <p class="story-line js-scrub">Perspektiva ni tehnika. <em>Je čustvo.</em></p>
@@ -1214,94 +1204,83 @@ if (bookingForm) {
 /* ---------- LETO V NOGI ---------- */
 document.getElementById("year").textContent = new Date().getFullYear();
 
+  /* ===== SKY ENGINE: video scrub čez CELO stran =====
+     Scroll napredek strani (0–1) vodi video:
+       0.00–0.52 → sky-a (vzlet, 15 s)
+       0.52–1.00 → sky-b (7 s), s crossfade prehodom pri 0.52
+     Vsebina teče čez video; besedilo se premika skupaj s scrollom (scrub reveali spodaj). */
+  var isTouch = window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 900;
+  var skyA = document.getElementById("skyA");
+  var skyB = document.getElementById("skyB");
+  var skyLoop = document.getElementById("skyLoop");
+  var heroHint = document.getElementById("heroHint");
+  var SPLIT = 0.52, FADE = 0.05;
+  var durA = 15.0, durB = 7.0;   /* varovalki; prepiše metadata */
+  var bLoaded = false;
+
+  if (reduceMotion) {
+    /* Zmanjšano gibanje: statični poster, brez scruba */
+    if (skyA) skyA.remove();
+    if (skyB) skyB.remove();
+    if (skyLoop) skyLoop.remove();
+  } else if (isTouch) {
+    /* MOBILE: scrub seek je požrešen do baterije — fiksna zanka namesto tega */
+    if (skyA) skyA.remove();
+    if (skyB) skyB.remove();
+    if (skyLoop) skyLoop.style.display = "block";
+  } else {
+    if (skyLoop) skyLoop.remove();
+    skyA.addEventListener("loadedmetadata", function(){ durA = skyA.duration || durA; }, { once: true });
+    skyB.addEventListener("loadedmetadata", function(){ durB = skyB.duration || durB; }, { once: true });
+
+    /* Cilji za rAF seek zanko */
+    var tA = 0, tB = 0, fB = 0;
+    function computeSky(){
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      var p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
+      /* Lazy-load drugega videa, ko se približaš prehodu */
+      if (!bLoaded && p > 0.25) { bLoaded = true; skyB.preload = "auto"; skyB.load(); }
+      if (p < SPLIT) { tA = (p / SPLIT) * durA; }
+      else { tB = ((p - SPLIT) / (1 - SPLIT)) * durB; }
+      /* crossfade okno okoli SPLIT */
+      fB = Math.min(Math.max((p - (SPLIT - FADE)) / (FADE * 2), 0), 1);
+      /* skrij namig po prvih 4% */
+      document.querySelector(".hero").classList.toggle("hint-hidden", p > 0.02);
+    }
+    window.addEventListener("scroll", computeSky, { passive: true });
+    computeSky();
+
+    (function seekLoop(){
+      if (skyA.readyState >= 2 && Math.abs(skyA.currentTime - tA) > 0.02) {
+        try { skyA.currentTime = tA; } catch(e){}
+      }
+      if (bLoaded && skyB.readyState >= 2 && Math.abs(skyB.currentTime - tB) > 0.02) {
+        try { skyB.currentTime = tB; } catch(e){}
+      }
+      skyB.style.opacity = fB;
+      requestAnimationFrame(seekLoop);
+    })();
+  }
+
+
 /* ---------- GSAP ANIMACIJE ---------- */
 if (hasGsap && window.ScrollTrigger && !reduceMotion) {
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ===== HERO SCROLL-DRIVEN VZLET =====
-     Pinana hero sekcija za 300vh scrolla. V tem času:
-       0.00–0.55  → dron leti (video se scrubа, naslov skrit)
-       0.55–0.80  → dron predre krošnje, naslov se razkrije (mask-in)
-       0.80–1.00  → CTA in HUD se prižgejo, konča se stanje mirovanja
-     Na mobilnem: video se predvaja avtomatsko kot zanka, brez pina. */
-  var isTouch = window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 900;
-  var heroVideo = document.getElementById("heroVideo");
-  var heroVideoMobile = document.getElementById("heroVideoMobile");
-  var heroHint = document.getElementById("heroHint");
+  /* ===== HERO: uvod ob nalaganju, nato parallax-izhod ob scrollu ===== */
+  var heroTl = gsap.timeline({ delay: 1.2 });
+  heroTl.from(".hero-line span", { yPercent: 115, duration: 1.1, stagger: 0.13, ease: "power4.out" })
+        .from(".hero-eyebrow", { opacity: 0, x: -20, duration: .7, ease: "power3.out" }, "-=.8")
+        .from(".hero-sub",    { opacity: 0, y: 20, duration: .7, ease: "power3.out" }, "-=.5")
+        .from(".hero-ctas",   { opacity: 0, y: 20, duration: .7, ease: "power3.out" }, "-=.5")
+        .from(".hero-hud",    { opacity: 0, y: 12, duration: .6, ease: "power3.out" }, "-=.45");
 
-  if (isTouch) {
-    /* MOBILE: uporabi loop video, izklopi scrub video, hero-stage naj bo velik kot okno */
-    if (heroVideo) heroVideo.style.display = "none";
-    if (heroVideoMobile) heroVideoMobile.style.display = "block";
-    var stage = document.getElementById("heroStage");
-    if (stage) stage.style.height = "100svh";
-    /* Standardni uvodni animaciji (kot v1) */
-    var mTl = gsap.timeline({ delay: 1.2 });
-    mTl.from(".hero-line span", { yPercent: 115, duration: 1.1, stagger: 0.13, ease: "power4.out" })
-       .from(".hero-eyebrow", { opacity: 0, x: -20, duration: .7, ease: "power3.out" }, "-=.8")
-       .from(".hero-sub",    { opacity: 0, y: 20, duration: .7, ease: "power3.out" }, "-=.5")
-       .from(".hero-ctas",   { opacity: 0, y: 20, duration: .7, ease: "power3.out" }, "-=.5")
-       .from(".hero-hud",    { opacity: 0, y: 12, duration: .6, ease: "power3.out" }, "-=.45");
-    if (heroHint) heroHint.style.display = "none";
-  } else {
-    /* DESKTOP: SCROLL-SCRUB */
-    if (heroVideoMobile) heroVideoMobile.remove();
-    document.querySelector(".hero").classList.add("scrub-active");
-
-    /* Pripravi video za scrub: naloži, potem daj skozi ScrollTrigger.
-       Ker je video z all-keyframes, currentTime iskanje bo gladko. */
-    var vidReady = false;
-    function initScrub(){
-      if (vidReady) return;
-      vidReady = true;
-      var duration = heroVideo.duration || 15;
-
-      /* Master pin timeline */
-      var tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#heroStage",
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.6,               /* rahla inertna zamuda za filmski občutek */
-          pin: ".hero",
-          pinSpacing: false,
-          anticipatePin: 1,
-          onUpdate: function(self){
-            /* Skrij namig po ~5% scrolla */
-            document.querySelector(".hero").classList.toggle("hint-hidden", self.progress > 0.04);
-            /* Scrub video sinhrono */
-            var t = self.progress * duration;
-            if (!isNaN(t) && isFinite(t)) {
-              try { heroVideo.currentTime = t; } catch(e){}
-            }
-          }
-        }
-      });
-
-      /* Naslov "Nebo je moj studio" — mask-in reveal med 30% in 45% (dron predre krošnje) */
-      tl.to(".hero-line span", {
-        yPercent: 0, ease: "power3.out", stagger: 0.10, duration: 0.35
-      }, 0.30);
-      tl.to(".hero-eyebrow", { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" }, 0.28);
-      tl.from(".hero-eyebrow", { x: -20, ease: "power2.out", duration: 0.25 }, 0.28);
-
-      /* Podnaslov + CTA zaključna faza (45–60%) */
-      tl.to(".hero-sub",  { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" }, 0.45);
-      tl.from(".hero-sub",{ y: 20, ease: "power2.out", duration: 0.28 }, 0.45);
-      tl.to(".hero-ctas", { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" }, 0.55);
-      tl.from(".hero-ctas",{y: 20, ease: "power2.out", duration: 0.28 }, 0.55);
-
-      /* Subtilen zoom na koncu — občutek "izstopa iz vzleta" */
-      tl.to(".hero-media video", { scale: 1.06, ease: "none", duration: 1 }, 0);
-    }
-
-    /* Počakaj, da video pozna svojo dolžino */
-    if (heroVideo.readyState >= 1) initScrub();
-    else heroVideo.addEventListener("loadedmetadata", initScrub, { once: true });
-
-    /* Failsafe: če se metadata ne naloži v 4s (npr. slaba mreža), vseeno zaženi */
-    setTimeout(function(){ if (!vidReady) initScrub(); }, 4000);
-  }
+  /* Ob scrollu hero besedilo odleti navzgor in zbledi — sinhrono z videom */
+  gsap.to(".hero-content", {
+    y: -110, opacity: 0, ease: "none",
+    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom 35%", scrub: 0.4 }
+  });
 
   /* ===== PREHOD IZ HERO V OSTALE SEKCIJE =====
      Ko se hero pin sprosti, Stats sekcija zdrsne rahlo od spodaj — občutek zveznega leta v ostalo vsebino. */
@@ -1312,17 +1291,17 @@ if (hasGsap && window.ScrollTrigger && !reduceMotion) {
     }
   });
   gsap.utils.toArray("[data-reveal]").forEach(function(el){
-    gsap.from(el, {
-      opacity: 0, y: 44, duration: 1, ease: "power3.out",
-      scrollTrigger: { trigger: el, start: "top 88%", once: true }
+    gsap.fromTo(el, { opacity: 0, y: 70 }, {
+      opacity: 1, y: 0, ease: "none",
+      scrollTrigger: { trigger: el, start: "top 96%", end: "top 60%", scrub: 0.4 }
     });
   });
 
-  /* Zgodba: vrstice se prižgejo ob drsenju (scrub) */
+  /* Zgodba: vrstice se prižgejo in dvigujejo ob drsenju (scrub) */
   gsap.utils.toArray(".js-scrub").forEach(function(line){
-    gsap.fromTo(line, { opacity: 0.12 }, {
-      opacity: 1, ease: "none",
-      scrollTrigger: { trigger: line, start: "top 85%", end: "top 45%", scrub: true }
+    gsap.fromTo(line, { opacity: 0.1, y: 50 }, {
+      opacity: 1, y: 0, ease: "none",
+      scrollTrigger: { trigger: line, start: "top 92%", end: "top 45%", scrub: true }
     });
   });
 
