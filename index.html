@@ -541,6 +541,14 @@ h2 em{font-style:italic;color:var(--amber)}
 .wa-float:hover{border-color:#25d366;transform:translateY(-3px)}
 .wa-float i{width:9px;height:9px;border-radius:50%;background:#25d366;box-shadow:0 0 10px #25d366}
 
+
+/* Portfolio hover-video predogledi (aktivni, ko so preview-*.mp4 v repu) */
+.folio-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s var(--ease);z-index:1}
+.folio-item.has-vid:hover .folio-vid{opacity:1}
+/* 3D model drona (aktiven, ko je dron.glb v repu) */
+model-viewer{width:100%;height:440px;--poster-color:transparent;background:transparent}
+.gear-3d-hint{display:block;text-align:center;margin-top:.6rem;color:var(--haze)}
+
 /* Reveal (privzeto vidno — GSAP le doda animacijo) */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -778,22 +786,27 @@ h2 em{font-style:italic;color:var(--amber)}
     <div class="folio-grid">
       <figure class="folio-item wide" data-cursor="view" data-reveal data-title="Traktor na polju" data-cat="Pokrajina / Kmetijstvo">
         <img src="TRAKTOR.png" alt="Aerialni posnetek — traktor na polju" loading="lazy">
+        <video class="folio-vid" muted loop playsinline preload="none" data-src="preview-traktor.mp4"></video>
         <figcaption class="folio-meta"><h3>Traktor na polju</h3><span class="mono">Pokrajina</span></figcaption>
       </figure>
       <figure class="folio-item slim" data-cursor="view" data-reveal data-title="Gozd" data-cat="Narava">
         <img src="GOZD.png" alt="Aerialni posnetek — gozd" loading="lazy">
+        <video class="folio-vid" muted loop playsinline preload="none" data-src="preview-gozd.mp4"></video>
         <figcaption class="folio-meta"><h3>Gozd</h3><span class="mono">Narava</span></figcaption>
       </figure>
       <figure class="folio-item slim" data-cursor="view" data-reveal data-title="Njiva" data-cat="Pokrajina">
         <img src="NJIVA.png" alt="Aerialni posnetek — njiva" loading="lazy">
+        <video class="folio-vid" muted loop playsinline preload="none" data-src="preview-njiva.mp4"></video>
         <figcaption class="folio-meta"><h3>Njiva</h3><span class="mono">Pokrajina</span></figcaption>
       </figure>
       <figure class="folio-item wide" data-cursor="view" data-reveal data-title="Nakupovalni center" data-cat="Urbano">
         <img src="Nakupovalni center.png" alt="Aerialni posnetek — nakupovalni center" loading="lazy">
+        <video class="folio-vid" muted loop playsinline preload="none" data-src="preview-center.mp4"></video>
         <figcaption class="folio-meta"><h3>Nakupovalni center</h3><span class="mono">Urbano</span></figcaption>
       </figure>
       <figure class="folio-item" data-cursor="view" data-reveal data-title="Hiša" data-cat="Nepremičnine">
         <img src="Hisa.png" alt="Aerialni posnetek — hiša" loading="lazy">
+        <video class="folio-vid" muted loop playsinline preload="none" data-src="preview-hisa.mp4"></video>
         <figcaption class="folio-meta"><h3>Hiša</h3><span class="mono">Nepremičnine</span></figcaption>
       </figure>
       <figure class="folio-item" data-cursor="view" data-reveal data-title="Zlata ura" data-cat="Showreel kader">
@@ -809,6 +822,7 @@ h2 em{font-style:italic;color:var(--amber)}
   <button class="lb-close mono" id="lbClose">Zapri ×</button>
   <button class="lb-btn lb-prev" id="lbPrev" aria-label="Prejšnja slika">‹</button>
   <img id="lbImg" src="" alt="">
+  <video id="lbVid" style="display:none;max-width:88vw;max-height:78vh;border-radius:4px" muted loop playsinline autoplay></video>
   <button class="lb-btn lb-next" id="lbNext" aria-label="Naslednja slika">›</button>
   <div class="lb-cap mono"><b id="lbTitle"></b><span id="lbCat"></span></div>
 </div>
@@ -835,7 +849,14 @@ h2 em{font-style:italic;color:var(--amber)}
 <section class="gear sec" id="gear" data-phase="OPREMA">
   <div class="wrap">
     <div class="gear-figure" data-reveal>
-      <img src="Dron.png" alt="DJI Mini 5 Pro" loading="lazy">
+      <img src="Dron.png" alt="DJI Mini 5 Pro" loading="lazy" id="dronImg">
+      <!-- 3D model se samodejno aktivira, ko je dron.glb naložen v koren repozitorija -->
+      <div id="dron3d" style="display:none">
+        <model-viewer src="dron.glb" alt="DJI Mini 5 Pro — 3D model"
+          camera-controls auto-rotate rotation-per-second="18deg"
+          shadow-intensity="0.8" exposure="1.05" interaction-prompt="none"></model-viewer>
+        <span class="gear-3d-hint mono">3D MODEL · POVLECI ZA VRTENJE</span>
+      </div>
     </div>
     <div>
       <p class="eyebrow mono" data-reveal>Oprema in varnost</p>
@@ -1111,9 +1132,21 @@ var lbTitle = document.getElementById("lbTitle");
 var lbCat = document.getElementById("lbCat");
 var items = Array.prototype.slice.call(document.querySelectorAll(".folio-item"));
 var lbIndex = 0;
+var lbVid = document.getElementById("lbVid");
 function openLB(i){
   lbIndex = (i + items.length) % items.length;
   var it = items[lbIndex], img = it.querySelector("img");
+  var vid = it.classList.contains("has-vid") ? it.querySelector(".folio-vid") : null;
+  if (vid && vid.src) {
+    lbVid.src = vid.src;
+    lbVid.style.display = "block";
+    lbImg.style.display = "none";
+    lbVid.play().catch(function(){});
+  } else {
+    lbVid.pause(); lbVid.removeAttribute("src");
+    lbVid.style.display = "none";
+    lbImg.style.display = "block";
+  }
   lbImg.src = img.getAttribute("src");
   lbImg.alt = img.alt;
   lbTitle.textContent = it.getAttribute("data-title") || "";
@@ -1121,7 +1154,7 @@ function openLB(i){
   lb.classList.add("open");
   if (lenis) lenis.stop();
 }
-function closeLB(){ lb.classList.remove("open"); if (lenis) lenis.start(); }
+function closeLB(){ lb.classList.remove("open"); if (lbVid) { lbVid.pause(); } if (lenis) lenis.start(); }
 items.forEach(function(it, i){ it.addEventListener("click", function(){ openLB(i); }); });
 document.getElementById("lbClose").addEventListener("click", closeLB);
 document.getElementById("lbPrev").addEventListener("click", function(e){ e.stopPropagation(); openLB(lbIndex - 1); });
@@ -1159,6 +1192,45 @@ if (bookingForm) {
 
 /* ---------- LETO V NOGI ---------- */
 document.getElementById("year").textContent = new Date().getFullYear();
+
+/* ---------- PORTFOLIO HOVER-VIDEO PREDOGLEDI ----------
+   Samodejno aktivni, ko so preview-*.mp4 datoteke v repozitoriju.
+   Če datoteke ni (404), element tiho odstranimo — brez napak. */
+document.querySelectorAll(".folio-vid").forEach(function(v){
+  var item = v.closest(".folio-item");
+  var src = v.getAttribute("data-src");
+  fetch(src, { method: "HEAD" }).then(function(r){
+    if (!r.ok) { v.remove(); return; }
+    v.src = src;
+    item.classList.add("has-vid");
+    item.addEventListener("mouseenter", function(){
+      v.play().catch(function(){});
+    });
+    item.addEventListener("mouseleave", function(){
+      v.pause(); v.currentTime = 0;
+    });
+  }).catch(function(){ v.remove(); });
+});
+
+/* ---------- 3D MODEL DRONA ----------
+   Samodejno aktiven, ko je dron.glb v repozitoriju.
+   Knjižnico model-viewer naložimo šele, ko vemo, da model obstaja. */
+(function(){
+  var wrap = document.getElementById("dron3d");
+  var img = document.getElementById("dronImg");
+  if (!wrap) return;
+  fetch("dron.glb", { method: "HEAD" }).then(function(r){
+    if (!r.ok) return;
+    var s = document.createElement("script");
+    s.type = "module";
+    s.src = "https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js";
+    s.onload = function(){
+      if (img) img.style.display = "none";
+      wrap.style.display = "block";
+    };
+    document.head.appendChild(s);
+  }).catch(function(){});
+})();
 
   /* ===== SKY ENGINE: video scrub čez CELO stran =====
      Scroll napredek strani (0–1) vodi video:
