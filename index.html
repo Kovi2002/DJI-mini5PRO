@@ -619,9 +619,6 @@ model-viewer{width:100%;height:440px;--poster-color:transparent;background:trans
   <video id="skyB" muted playsinline preload="none">
     <source src="sky-b.mp4" type="video/mp4">
   </video>
-  <video id="skyLoop" style="display:none" autoplay muted loop playsinline preload="metadata" poster="hero-poster.jpg">
-    <source src="hero-loop.mp4" type="video/mp4">
-  </video>
   <div class="sky-dip" id="skyDip"></div>
   <div class="sky-veil"></div>
 </div>
@@ -1242,7 +1239,6 @@ document.querySelectorAll(".folio-vid").forEach(function(v){
   var isTouch = window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 900;
   var skyA = document.getElementById("skyA");
   var skyB = document.getElementById("skyB");
-  var skyLoop = document.getElementById("skyLoop");
   var heroHint = document.getElementById("heroHint");
   var SPLIT = 0.52, FADE = 0.07;  /* prehodno okno: SPLIT ± FADE (14% strani) */
   var durA = 15.0, durB = 7.0;   /* varovalki; prepiše metadata */
@@ -1251,18 +1247,11 @@ document.querySelectorAll(".folio-vid").forEach(function(v){
   /* smoothstep — mehak S-easing za crossfade */
   function smooth(x){ x = Math.min(Math.max(x, 0), 1); return x * x * (3 - 2 * x); }
 
-  if (reduceMotion) {
-    /* Zmanjšano gibanje: statični poster, brez scruba */
+  if (reduceMotion || isTouch) {
+    /* Zmanjšano gibanje ali mobilne naprave: statični poster, brez scruba */
     if (skyA) skyA.remove();
     if (skyB) skyB.remove();
-    if (skyLoop) skyLoop.remove();
-  } else if (isTouch) {
-    /* MOBILE: scrub seek je požrešen do baterije — fiksna zanka namesto tega */
-    if (skyA) skyA.remove();
-    if (skyB) skyB.remove();
-    if (skyLoop) skyLoop.style.display = "block";
   } else {
-    if (skyLoop) skyLoop.remove();
     skyA.addEventListener("loadedmetadata", function(){ durA = skyA.duration || durA; }, { once: true });
     skyB.addEventListener("loadedmetadata", function(){ durB = skyB.duration || durB; }, { once: true });
 
