@@ -1255,8 +1255,11 @@ document.querySelectorAll(".folio-vid").forEach(function(v){
     skyA.addEventListener("loadedmetadata", function(){ durA = skyA.duration || durA; }, { once: true });
     skyB.addEventListener("loadedmetadata", function(){ durB = skyB.duration || durB; }, { once: true });
 
-    /* Cilji za rAF seek zanko */
-    var tA = 0, tB = 0, fB = 0, fDip = 0;
+    /* Cilji za rAF seek zanko.
+       fBT = CILJNA vrednost crossfada iz scrolla; fB = ZGLAJENA (prikazana).
+       Časovno glajenje: tudi če scroll v hipu preskoči prehodno okno
+       (hiter flick, klik na sidro v meniju), prehod vizualno traja ~0,7 s. */
+    var tA = 0, tB = 0, fBT = 0, fB = 0;
     function computeSky(){
       var doc = document.documentElement;
       var max = doc.scrollHeight - window.innerHeight;
@@ -1268,16 +1271,14 @@ document.querySelectorAll(".folio-vid").forEach(function(v){
          B teče čez [SPLIT-FADE … 1] → se že premika, ko se začne prikazovati */
       tA = Math.min(p / (SPLIT + FADE), 1) * durA;
       tB = Math.min(Math.max((p - (SPLIT - FADE)) / (1 - (SPLIT - FADE)), 0), 1) * durB;
-      /* crossfade z mehkim S-easingom čez okno SPLIT ± FADE */
-      fB = smooth((p - (SPLIT - FADE)) / (FADE * 2));
-      /* kinematografski dip: kratka zatemnitev z vrhom na sredini prehoda,
-         ki zamaskira razliko med kadroma */
-      fDip = smooth(1 - Math.abs(p - SPLIT) / FADE) * 0.6;
+      /* ciljni crossfade z mehkim S-easingom čez okno SPLIT ± FADE */
+      fBT = smooth((p - (SPLIT - FADE)) / (FADE * 2));
       /* skrij namig po prvih 4% */
       document.querySelector(".hero").classList.toggle("hint-hidden", p > 0.02);
     }
     window.addEventListener("scroll", computeSky, { passive: true });
     computeSky();
+    fB = fBT; /* ob nalaganju brez animacije na začetno stanje */
 
     (function seekLoop(){
       if (skyA.readyState >= 2 && Math.abs(skyA.currentTime - tA) > 0.02) {
@@ -1286,8 +1287,13 @@ document.querySelectorAll(".folio-vid").forEach(function(v){
       if (bLoaded && skyB.readyState >= 2 && Math.abs(skyB.currentTime - tB) > 0.02) {
         try { skyB.currentTime = tB; } catch(e){}
       }
+      /* časovno glajenje proti cilju (~0,7 s do izravnave) */
+      fB += (fBT - fB) * 0.075;
+      if (Math.abs(fBT - fB) < 0.002) fB = fBT;
       skyB.style.opacity = fB;
-      if (skyDip) skyDip.style.opacity = fDip;
+      /* dip sledi ZGLAJENEMU fadeu → vrh vedno na sredini prehoda,
+         ne glede na hitrost scrolla; zamaskira razliko med kadroma */
+      if (skyDip) skyDip.style.opacity = smooth(1 - Math.abs(2 * fB - 1)) * 0.6;
       requestAnimationFrame(seekLoop);
     })();
   }
