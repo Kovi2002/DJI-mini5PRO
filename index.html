@@ -187,6 +187,7 @@ body.menu-open .burger i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 .sky{position:fixed;inset:0;z-index:0;pointer-events:none;background:var(--ink);overflow:hidden}
 .sky video,.sky img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 #skyB{opacity:0}
+.sky-dip{position:absolute;inset:0;background:#04070d;opacity:0;will-change:opacity}
 .sky-veil{
   position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(4,7,13,.55) 0%,rgba(4,7,13,.22) 32%,rgba(4,7,13,.4) 100%);
@@ -621,6 +622,7 @@ model-viewer{width:100%;height:440px;--poster-color:transparent;background:trans
   <video id="skyLoop" style="display:none" autoplay muted loop playsinline preload="metadata" poster="hero-poster.jpg">
     <source src="hero-loop.mp4" type="video/mp4">
   </video>
+  <div class="sky-dip" id="skyDip"></div>
   <div class="sky-veil"></div>
 </div>
 
@@ -1242,9 +1244,12 @@ document.querySelectorAll(".folio-vid").forEach(function(v){
   var skyB = document.getElementById("skyB");
   var skyLoop = document.getElementById("skyLoop");
   var heroHint = document.getElementById("heroHint");
-  var SPLIT = 0.52, FADE = 0.05;
+  var SPLIT = 0.52, FADE = 0.07;  /* prehodno okno: SPLIT ± FADE (14% strani) */
   var durA = 15.0, durB = 7.0;   /* varovalki; prepiše metadata */
   var bLoaded = false;
+  var skyDip = document.getElementById("skyDip");
+  /* smoothstep — mehak S-easing za crossfade */
+  function smooth(x){ x = Math.min(Math.max(x, 0), 1); return x * x * (3 - 2 * x); }
 
   if (reduceMotion) {
     /* Zmanjšano gibanje: statični poster, brez scruba */
@@ -1262,17 +1267,23 @@ document.querySelectorAll(".folio-vid").forEach(function(v){
     skyB.addEventListener("loadedmetadata", function(){ durB = skyB.duration || durB; }, { once: true });
 
     /* Cilji za rAF seek zanko */
-    var tA = 0, tB = 0, fB = 0;
+    var tA = 0, tB = 0, fB = 0, fDip = 0;
     function computeSky(){
       var doc = document.documentElement;
       var max = doc.scrollHeight - window.innerHeight;
       var p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
-      /* Lazy-load drugega videa, ko se približaš prehodu */
-      if (!bLoaded && p > 0.25) { bLoaded = true; skyB.preload = "auto"; skyB.load(); }
-      if (p < SPLIT) { tA = (p / SPLIT) * durA; }
-      else { tB = ((p - SPLIT) / (1 - SPLIT)) * durB; }
-      /* crossfade okno okoli SPLIT */
-      fB = Math.min(Math.max((p - (SPLIT - FADE)) / (FADE * 2), 0), 1);
+      /* Lazy-load drugega videa dovolj zgodaj pred prehodom */
+      if (!bLoaded && p > 0.12) { bLoaded = true; skyB.preload = "auto"; skyB.load(); }
+      /* PREKRIVAJOČI SE ČASOVNICI:
+         A teče čez [0 … SPLIT+FADE] → nikoli ne zamrzne, dokler je še viden
+         B teče čez [SPLIT-FADE … 1] → se že premika, ko se začne prikazovati */
+      tA = Math.min(p / (SPLIT + FADE), 1) * durA;
+      tB = Math.min(Math.max((p - (SPLIT - FADE)) / (1 - (SPLIT - FADE)), 0), 1) * durB;
+      /* crossfade z mehkim S-easingom čez okno SPLIT ± FADE */
+      fB = smooth((p - (SPLIT - FADE)) / (FADE * 2));
+      /* kinematografski dip: kratka zatemnitev z vrhom na sredini prehoda,
+         ki zamaskira razliko med kadroma */
+      fDip = smooth(1 - Math.abs(p - SPLIT) / FADE) * 0.6;
       /* skrij namig po prvih 4% */
       document.querySelector(".hero").classList.toggle("hint-hidden", p > 0.02);
     }
@@ -1287,6 +1298,7 @@ document.querySelectorAll(".folio-vid").forEach(function(v){
         try { skyB.currentTime = tB; } catch(e){}
       }
       skyB.style.opacity = fB;
+      if (skyDip) skyDip.style.opacity = fDip;
       requestAnimationFrame(seekLoop);
     })();
   }
