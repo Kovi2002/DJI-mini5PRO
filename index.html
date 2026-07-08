@@ -1231,61 +1231,65 @@ document.querySelectorAll(".folio-vid").forEach(function(v){
   }).catch(function(){});
 })();
 
-  /* ===== SKY ENGINE: videa se ves čas PREDVAJATA v ozadju =====
-     Ni več scroll-scruba — sky-a in sky-b tečeta v zanki,
-     scroll pa krmili samo crossfade + kinematografski dip pri prehodu (~52%). */
+  /* ===== SKY ENGINE: video scrub čez CELO stran =====
+     Scroll napredek strani (0–1) vodi video:
+       0.00–0.52 → sky-a (vzlet, 15 s)
+       0.52–1.00 → sky-b (7 s), s crossfade prehodom pri 0.52
+     Vsebina teče čez video; besedilo se premika skupaj s scrollom (scrub reveali spodaj). */
+  var isTouch = window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 900;
   var skyA = document.getElementById("skyA");
   var skyB = document.getElementById("skyB");
   var heroHint = document.getElementById("heroHint");
   var SPLIT = 0.52, FADE = 0.07;  /* prehodno okno: SPLIT ± FADE (14% strani) */
-  var bLoaded = false, bPlaying = false;
+  var durA = 15.0, durB = 7.0;   /* varovalki; prepiše metadata */
+  var bLoaded = false;
   var skyDip = document.getElementById("skyDip");
   /* smoothstep — mehak S-easing za crossfade */
   function smooth(x){ x = Math.min(Math.max(x, 0), 1); return x * x * (3 - 2 * x); }
 
-  if (reduceMotion) {
-    /* Zmanjšano gibanje: statični poster */
+  if (reduceMotion || isTouch) {
+    /* Zmanjšano gibanje ali mobilne naprave: statični poster, brez scruba */
     if (skyA) skyA.remove();
     if (skyB) skyB.remove();
   } else {
-    /* Video A takoj v zanko */
-    skyA.loop = true;
-    skyA.play().catch(function(){
-      /* če autoplay blokiran, poskusi ob prvi interakciji */
-      var kick = function(){ skyA.play().catch(function(){}); skyB.play().catch(function(){});
-        window.removeEventListener("pointerdown", kick); window.removeEventListener("keydown", kick); };
-      window.addEventListener("pointerdown", kick); window.addEventListener("keydown", kick);
-    });
+    skyA.addEventListener("loadedmetadata", function(){ durA = skyA.duration || durA; }, { once: true });
+    skyB.addEventListener("loadedmetadata", function(){ durB = skyB.duration || durB; }, { once: true });
 
-    var fB = 0, fDip = 0;
+    /* Cilji za rAF seek zanko */
+    var tA = 0, tB = 0, fB = 0, fDip = 0;
     function computeSky(){
       var doc = document.documentElement;
       var max = doc.scrollHeight - window.innerHeight;
       var p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
       /* Lazy-load drugega videa dovolj zgodaj pred prehodom */
-      if (!bLoaded && p > 0.12) { bLoaded = true; skyB.preload = "auto"; skyB.loop = true; skyB.load(); }
-      /* B naj že teče, preden postane viden */
-      if (bLoaded && !bPlaying && p > SPLIT - FADE * 2) {
-        bPlaying = true; skyB.play().catch(function(){ bPlaying = false; });
-      }
-      /* varčevanje: pavziraj video, ki je popolnoma neviden */
-      if (bPlaying) {
-        if (p > SPLIT + FADE) { if (!skyA.paused) skyA.pause(); }
-        else if (skyA.paused) { skyA.play().catch(function(){}); }
-        if (p < SPLIT - FADE * 2) { if (!skyB.paused) skyB.pause(); bPlaying = false; }
-      }
+      if (!bLoaded && p > 0.12) { bLoaded = true; skyB.preload = "auto"; skyB.load(); }
+      /* PREKRIVAJOČI SE ČASOVNICI:
+         A teče čez [0 … SPLIT+FADE] → nikoli ne zamrzne, dokler je še viden
+         B teče čez [SPLIT-FADE … 1] → se že premika, ko se začne prikazovati */
+      tA = Math.min(p / (SPLIT + FADE), 1) * durA;
+      tB = Math.min(Math.max((p - (SPLIT - FADE)) / (1 - (SPLIT - FADE)), 0), 1) * durB;
       /* crossfade z mehkim S-easingom čez okno SPLIT ± FADE */
       fB = smooth((p - (SPLIT - FADE)) / (FADE * 2));
       /* kinematografski dip: kratka zatemnitev z vrhom na sredini prehoda,
          ki zamaskira razliko med kadroma */
       fDip = smooth(1 - Math.abs(p - SPLIT) / FADE) * 0.6;
-      skyB.style.opacity = fB;
-      if (skyDip) skyDip.style.opacity = fDip;
       /* skrij namig po prvih 4% */
       document.querySelector(".hero").classList.toggle("hint-hidden", p > 0.02);
     }
     window.addEventListener("scroll", computeSky, { passive: true });
     computeSky();
+
+    (function seekLoop(){
+      if (skyA.readyState >= 2 && Math.abs(skyA.currentTime - tA) > 0.02) {
+        try { skyA.currentTime = tA; } catch(e){}
+      }
+      if (bLoaded && skyB.readyState >= 2 && Math.abs(skyB.currentTime - tB) > 0.02) {
+        try { skyB.currentTime = tB; } catch(e){}
+      }
+      skyB.style.opacity = fB;
+      if (skyDip) skyDip.style.opacity = fDip;
+      requestAnimationFrame(seekLoop);
+    })();
   }
 
 
