@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[[KoviFly — Snemanje z dronom v Sloveniji | 4K video||KoviFly — Drone Videography in Slovenia | 4K Aerial]]</title>
+<meta name="description" content="[[Snemanje z dronom v Sloveniji: cinematični 4K posnetki in fotografije iz zraka za nepremičnine, dogodke in blagovne znamke. DJI Mini 5 Pro, baza Ljubljana.||Drone videography in Slovenia: cinematic 4K aerial video and photography for real estate, events and brands. DJI Mini 5 Pro, based in Ljubljana.]]">
+{{>head}}
+<meta property="og:site_name" content="KoviFly">
+<meta property="og:title" content="[[KoviFly — Snemanje z dronom v Sloveniji | 4K video||KoviFly — Drone Videography in Slovenia | 4K Aerial]]">
+<meta property="og:description" content="[[Nebo je moj studio. 4K video in fotografija iz zraka za nepremičnine, dogodke in blagovne znamke po vsej Sloveniji.||The sky is my studio. 4K aerial video and photography for real estate, events and brands across Slovenia.]]">
+<meta property="og:image" content="https://kovifly.si/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="{{URL}}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="[[sl_SI||en_GB]]">
+<meta property="og:locale:alternate" content="[[en_GB||sl_SI]]">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "ProfessionalService"],
+  "@id": "https://kovifly.si/#business",
+  "name": "KoviFly",
+  "description": "[[Snemanje in fotografiranje z dronom v Sloveniji — nepremičnine, dogodki, promocijski videi, pokrajina.||Drone videography and aerial photography in Slovenia — real estate, events, promotional video, landscape.]]",
+  "url": "{{URL}}",
+  "image": "https://kovifly.si/img/og.jpg",
+  "telephone": "+38651652747",
+  "email": "Kovacic.luka34@gmail.com",
+  "founder": { "@type": "Person", "name": "Luka Kovačič" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Ljubljana", "addressCountry": "SI" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 46.05, "longitude": 14.51 },
+  "areaServed": { "@type": "Country", "name": "[[Slovenija||Slovenia]]" },
+  "sameAs": ["https://instagram.com/KOVI_FLY"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "[[Storitve snemanja z dronom||Drone filming services]]",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "[[Aerialni video||Aerial video]]", "provider": { "@id": "https://kovifly.si/#business" } } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "[[Aerialna fotografija||Aerial photography]]", "provider": { "@id": "https://kovifly.si/#business" } } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "[[Nepremičninski posnetki z dronom||Real estate drone footage]]", "provider": { "@id": "https://kovifly.si/#business" } } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "[[Snemanje dogodkov z dronom||Event drone coverage]]", "provider": { "@id": "https://kovifly.si/#business" } } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "[[Promocijski video z dronom||Promotional drone video]]", "provider": { "@id": "https://kovifly.si/#business" } } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "[[Pokrajina in potovanja||Landscape and travel]]", "provider": { "@id": "https://kovifly.si/#business" } } }
+    ]
+  }
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#story">[[Preskoči na vsebino||Skip to content]]</a>
+
+<!-- ====== PRELOADER ====== -->
+<div id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <span class="loader-brand">KOVI<em style="font-style:normal;color:var(--ember)">FLY</em></span>
+    <span class="loader-alt mono">[[VZPON||CLIMB]] · ALT <b id="loaderAlt">000</b> M</span>
+    <div class="loader-bar"><i id="loaderBar"></i></div>
+  </div>
+</div>
+
+<!-- ====== CURSOR ====== -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span>[[OGLEJ||VIEW]]</span></div>
+
+<!-- ====== ALTIMETER (podpis) ====== -->
+<aside class="altimeter mono" aria-hidden="true">
+  <div class="alt-sec" id="altSec">[[VZLET||TAKEOFF]]</div>
+  <div class="alt-tape"><i class="alt-marker" id="altMarker"></i></div>
+  <div class="alt-read"><b id="altVal">000</b><span>M</span></div>
+</aside>
+
+<!-- ====== NAV ====== -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero" aria-label="KoviFly — [[na vrh||to top]]">KOVI<em>FLY</em></a>
+    <nav aria-label="[[Glavna navigacija||Main navigation]]">
+      <ul class="nav-links">
+        <li><a href="#services">[[Storitve||Services]]</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#process">[[Kako poteka||Process]]</a></li>
+        <li><a href="#plans">[[Paketi||Packages]]</a></li>
+        <li><a href="#about">[[O meni||About]]</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="nav-tools">
+      <div class="lang" role="group" aria-label="[[Jezik||Language]]">
+        <a href="{{PATH_SL}}" lang="sl" hreflang="sl" [[aria-current="true"||]]>SL</a><span aria-hidden="true">/</span><a href="{{PATH_EN}}" lang="en" hreflang="en" [[||aria-current="true"]]>EN</a>
+      </div>
+      <a class="nav-cta" href="#booking">[[Rezerviraj snemanje||Book a shoot]]</a>
+      <button class="burger" id="burger" aria-label="[[Odpri meni||Open menu]]" aria-expanded="false" aria-controls="mobileMenu">
+        <i></i><i></i><i></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services">[[Storitve||Services]]</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#process">[[Kako poteka||Process]]</a>
+  <a href="#plans">[[Paketi||Packages]]</a>
+  <a href="#about">[[O meni||About]]</a>
+  <a href="#booking"><em>[[Rezerviraj snemanje||Book a shoot]]</em></a>
+  <div class="lang">
+    <a href="{{PATH_SL}}" lang="sl" hreflang="sl" [[aria-current="true"||]]>Slovenščina</a><span aria-hidden="true">/</span><a href="{{PATH_EN}}" lang="en" hreflang="en" [[||aria-current="true"]]>English</a>
+  </div>
+</div>
+
+<!-- ====== SKY — fiksni video za celo stranjo (scrub na scroll) ======
+     Video se naloži šele z JS in samo na namizju; mobilni in reduced-motion ostanejo pri sliki. -->
+<div class="sky" aria-hidden="true">
+  {{pic hero-poster ;; 100vw ;; ;; fetchpriority="high"}}
+  <video id="skyA" muted playsinline preload="none" data-src="/video/hero-scroll.mp4"></video>
+  <video id="skyB" muted playsinline preload="none" data-src="/video/sky-b.mp4"></video>
+  <div class="sky-dip" id="skyDip"></div>
+  <div class="sky-veil"></div>
+</div>
+
+<main>
+<!-- ====== HERO ====== -->
+<section class="hero" id="hero" data-phase="[[VZLET||TAKEOFF]]">
+  <div class="hero-shade"></div>
+  <div class="hero-cloud c1"></div>
+  <div class="hero-cloud c2"></div>
+
+  <div class="hero-content">
+    <h1>
+      <span class="hero-eyebrow">[[Snemanje z dronom · Slovenija||Drone videography · Slovenia]]</span>
+      <span class="hero-line"><span>[[Nebo je||The sky is]]</span></span>
+      <span class="hero-line"><span>[[moj <em>studio.</em>||my <em>studio.</em>]]</span></span>
+    </h1>
+    <p class="hero-sub">[[Cinematični posnetki z dronom, ki tvojo nepremičnino, dogodek ali blagovno znamko pokažejo iz perspektive, ki je s tal ni mogoče ujeti.||Cinematic drone footage that shows your property, event or brand from a perspective you simply can't get from the ground.]]</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#booking">[[Rezerviraj snemanje||Book a shoot]] <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href="#portfolio">[[Oglej si dela||See the work]] <span class="arr">↓</span></a>
+    </div>
+  </div>
+
+  <div class="hero-hint mono" id="heroHint" aria-hidden="true">
+    <span>[[DRSI ZA VZLET||SCROLL TO TAKE OFF]]</span><i></i>
+  </div>
+
+  <div class="hero-hud mono" aria-hidden="true">
+    <div class="wrap">
+      <div class="hud-item hud-rec">REC <b>4K/60</b></div>
+      <div class="hud-item">ALT <b id="hudAlt">124 m</b></div>
+      <div class="hud-item">GPS <b>46.05°N 14.51°E</b></div>
+      <div class="hud-item">WIND <b id="hudWind">3.2 m/s</b></div>
+      <div class="hud-item">BAT <b id="hudBat">94%</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== STATS ====== (končna številka je že v HTML — nikoli ne pokaže 0) -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><b><span class="count" data-target="25">25</span><i>+</i></b><span>[[zaključenih projektov||completed projects]]</span></div>
+    <div class="stat"><b><span class="count" data-target="120">120</span><i>+</i></b><span>[[ur letenja||flight hours]]</span></div>
+    <div class="stat"><b><span class="count" data-target="40">40</span><i>+</i></b><span>[[video snemanj||video shoots]]</span></div>
+    <div class="stat"><b><span class="count" data-target="3">3</span></b><span>[[države||countries]]</span></div>
+  </div>
+</div>
+
+<!-- ====== STORY ====== -->
+<section class="story sec" id="story" data-phase="[[VZPON||CLIMB]]">
+  <div class="wrap">
+    <p class="story-line js-scrub">[[Vsak kader se začne sto metrov <em>nad tlemi.</em>||Every shot begins a hundred metres <em>above the ground.</em>]]</p>
+    <p class="story-line js-scrub">[[Perspektiva ni tehnika. <em>Je čustvo.</em>||Perspective isn't a technique. <em>It's a feeling.</em>]]</p>
+    <p class="story-line js-scrub">[[Od zgoraj tvoja zgodba dobi merilo, ki ga tla <em>ne poznajo.</em>||From above, your story gains a scale the ground <em>never shows.</em>]]</p>
+  </div>
+</section>
+
+<!-- ====== SERVICES ====== -->
+<section class="services sec" id="services" data-phase="[[MISIJA||MISSION]]">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono" data-reveal>[[Storitve||Services]]</p>
+      <h2 data-reveal>[[Kaj posnamem <em>zate</em>||What I film <em>for you</em>]]</h2>
+      <p class="lead" data-reveal>[[Klikni storitev za podrobnosti — vsaka se konča z enim korakom: rezerviranim terminom.||Open a service for details — each one ends with a single step: a booked date.]]</p>
+    </div>
+
+    <div class="svc-list">
+      <div class="svc">
+        <button class="svc-head" aria-expanded="false" aria-controls="svc1"><span class="svc-idx">A/01</span><h3>[[Aerialni video||Aerial video]]</h3><span class="svc-x" aria-hidden="true">+</span></button>
+        <div class="svc-body" id="svc1"><div class="svc-grid">
+          <p>[[Gladek, stabiliziran 4K posnetek z dronom DJI Mini 5 Pro. Od širokih pokrajinskih kadrov do detajlnih nizko-višinskih prehodov — material, pripravljen za montažo ali končni film.||Smooth, stabilised 4K footage shot on the DJI Mini 5 Pro. From wide landscape shots to detailed low-altitude passes — material ready for editing or a finished film.]]</p>
+          <a class="svc-cta" href="#booking" data-service="Aerialni video">[[Preveri razpoložljivost||Check availability]] <span class="arr">→</span></a>
+        </div></div>
+      </div>
+
+      <div class="svc">
+        <button class="svc-head" aria-expanded="false" aria-controls="svc2"><span class="svc-idx">A/02</span><h3>[[Aerialna fotografija||Aerial photography]]</h3><span class="svc-x" aria-hidden="true">+</span></button>
+        <div class="svc-body" id="svc2"><div class="svc-grid">
+          <p>[[Visokoločljivostne fotografije iz višine. Idealno za publikacije, tisk in objave na družbenih omrežjih — kompozicije, ki jih s tal ni mogoče ujeti.||High-resolution photographs from altitude. Ideal for publications, print and social media — compositions you can't capture from the ground.]]</p>
+          <a class="svc-cta" href="#booking" data-service="Aerialna fotografija">[[Preveri razpoložljivost||Check availability]] <span class="arr">→</span></a>
+        </div></div>
+      </div>
+
+      <div class="svc">
+        <button class="svc-head" aria-expanded="false" aria-controls="svc3"><span class="svc-idx">A/03</span><h3>[[Nepremičninski posnetki||Real estate footage]]</h3><span class="svc-x" aria-hidden="true">+</span></button>
+        <div class="svc-body" id="svc3"><div class="svc-grid">
+          <p>[[Pogledi od zgoraj, orbitalni posnetki in gladki preleti, ki nepremičnino umestijo v okolico in kupcu prodajo občutek — ne le kvadraturo.||Top-down views, orbit shots and smooth fly-overs that place a property in its surroundings and sell the buyer a feeling — not just square metres.]]</p>
+          <a class="svc-cta" href="#booking" data-service="Nepremičnine">[[Preveri razpoložljivost||Check availability]] <span class="arr">→</span></a>
+        </div></div>
+      </div>
+
+      <div class="svc">
+        <button class="svc-head" aria-expanded="false" aria-controls="svc4"><span class="svc-idx">A/04</span><h3>[[Pokrivanje dogodkov||Event coverage]]</h3><span class="svc-x" aria-hidden="true">+</span></button>
+        <div class="svc-body" id="svc4"><div class="svc-grid">
+          <p>[[Poroke, festivali, poslovni dogodki — posneti iz perspektive, ki je nihče v množici ne vidi. Diskretno, varno in načrtovano vnaprej.||Weddings, festivals, corporate events — filmed from a perspective nobody in the crowd gets to see. Discreet, safe and planned in advance.]]</p>
+          <a class="svc-cta" href="#booking" data-service="Pokrivanje dogodkov">[[Preveri razpoložljivost||Check availability]] <span class="arr">→</span></a>
+        </div></div>
+      </div>
+
+      <div class="svc">
+        <button class="svc-head" aria-expanded="false" aria-controls="svc5"><span class="svc-idx">A/05</span><h3>[[Promocijski videi||Promotional video]]</h3><span class="svc-x" aria-hidden="true">+</span></button>
+        <div class="svc-body" id="svc5"><div class="svc-grid">
+          <p>[[Aerialna vsebina za podjetja, turistične organizacije in startupe. Cinematično pripovedovanje z neba, izvoženo v formatih za splet, oglase in družbena omrežja.||Aerial content for companies, tourism organisations and startups. Cinematic storytelling from the sky, exported in formats for web, ads and social media.]]</p>
+          <a class="svc-cta" href="#booking" data-service="Promocijski video">[[Preveri razpoložljivost||Check availability]] <span class="arr">→</span></a>
+        </div></div>
+      </div>
+
+      <div class="svc">
+        <button class="svc-head" aria-expanded="false" aria-controls="svc6"><span class="svc-idx">A/06</span><h3>[[Pokrajina in potovanja||Landscape and travel]]</h3><span class="svc-x" aria-hidden="true">+</span></button>
+        <div class="svc-body" id="svc6"><div class="svc-grid">
+          <p>[[Narava, gore, obale, mesta — uredniška aerialna vsebina za potovalne blagovne znamke in osebne projekte. Slovenija in sosednje države.||Nature, mountains, coasts, cities — editorial aerial content for travel brands and personal projects. Slovenia and neighbouring countries.]]</p>
+          <a class="svc-cta" href="#booking" data-service="Pokrajina / Potovanja">[[Preveri razpoložljivost||Check availability]] <span class="arr">→</span></a>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PORTFOLIO ====== -->
+<section class="sec" id="portfolio" data-phase="PANORAMA">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono" data-reveal>Portfolio</p>
+      <h2 data-reveal>[[Izbrana <em>dela</em>||Selected <em>work</em>]]</h2>
+      <p class="lead" data-reveal>[[Klikni kader za ogled v celozaslonskem načinu.||Select a shot to view it full screen.]]</p>
+    </div>
+
+    <div class="folio-grid">
+      <figure class="folio-item wide" tabindex="0" role="button" data-cursor="view" data-reveal data-title="[[Traktor na polju||Tractor in the field]]" data-cat="[[Pokrajina / Kmetijstvo||Landscape / Agriculture]]">
+        {{pic traktor ;; (max-width:760px) 92vw, 800px ;; [[Posnetek z dronom — traktor na polju||Drone shot — tractor in a field]]}}
+        <video class="folio-vid" muted loop playsinline preload="none" data-src="/video/preview-traktor.mp4"></video>
+        <figcaption class="folio-meta"><h3>[[Traktor na polju||Tractor in the field]]</h3><span class="mono">[[Pokrajina||Landscape]]</span></figcaption>
+      </figure>
+      <figure class="folio-item slim" tabindex="0" role="button" data-cursor="view" data-reveal data-title="[[Gozd||Forest]]" data-cat="[[Narava||Nature]]">
+        {{pic gozd ;; (max-width:760px) 92vw, 400px ;; [[Posnetek z dronom — gozd iz zraka||Drone shot — forest from above]]}}
+        <figcaption class="folio-meta"><h3>[[Gozd||Forest]]</h3><span class="mono">[[Narava||Nature]]</span></figcaption>
+      </figure>
+      <figure class="folio-item slim" tabindex="0" role="button" data-cursor="view" data-reveal data-title="[[Njiva||Farmland]]" data-cat="[[Pokrajina||Landscape]]">
+        {{pic njiva ;; (max-width:760px) 92vw, 400px ;; [[Posnetek z dronom — njiva iz zraka||Drone shot — farmland from above]]}}
+        <video class="folio-vid" muted loop playsinline preload="none" data-src="/video/preview-njiva.mp4"></video>
+        <figcaption class="folio-meta"><h3>[[Njiva||Farmland]]</h3><span class="mono">[[Pokrajina||Landscape]]</span></figcaption>
+      </figure>
+      <figure class="folio-item wide" tabindex="0" role="button" data-cursor="view" data-reveal data-title="[[Nakupovalni center||Shopping centre]]" data-cat="[[Urbano||Urban]]">
+        {{pic center ;; (max-width:760px) 92vw, 800px ;; [[Posnetek z dronom — nakupovalni center||Drone shot — shopping centre]]}}
+        <figcaption class="folio-meta"><h3>[[Nakupovalni center||Shopping centre]]</h3><span class="mono">[[Urbano||Urban]]</span></figcaption>
+      </figure>
+      <figure class="folio-item full" tabindex="0" role="button" data-cursor="view" data-reveal data-title="[[Hiša||House]]" data-cat="[[Nepremičnine||Real estate]]">
+        {{pic hisa ;; (max-width:760px) 92vw, 1240px ;; [[Posnetek z dronom — hiša iz zraka||Drone shot — house from above]]}}
+        <video class="folio-vid" muted loop playsinline preload="none" data-src="/video/preview-hisa.mp4"></video>
+        <figcaption class="folio-meta"><h3>[[Hiša||House]]</h3><span class="mono">[[Nepremičnine||Real estate]]</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="[[Galerija||Gallery]]" aria-hidden="true">
+  <button class="lb-close mono" id="lbClose">[[Zapri||Close]] ×</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="[[Prejšnji kader||Previous shot]]">‹</button>
+  <img id="lbImg" alt="">
+  <video id="lbVid" style="display:none;max-width:88vw;max-height:78vh;border-radius:4px" muted loop playsinline></video>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="[[Naslednji kader||Next shot]]">›</button>
+  <div class="lb-cap mono" aria-live="polite"><b id="lbTitle"></b><span id="lbCat"></span></div>
+</div>
+
+<!-- ====== PROCESS ====== -->
+<section class="process sec" id="process" data-phase="[[PLAN LETA||FLIGHT PLAN]]">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono" data-reveal>[[Kako poteka||Process]]</p>
+      <h2 data-reveal>[[Od povpraševanja do <em>posnetka</em>||From enquiry to <em>final footage</em>]]</h2>
+      <p class="lead" data-reveal>[[Vsak projekt gre skozi isti preverjen plan leta — brez presenečenj.||Every project follows the same proven flight plan — no surprises.]]</p>
+    </div>
+    <div class="steps">
+      <div class="step" data-reveal><span class="step-no">[[FAZA||STAGE]] 01</span><h3>[[Povpraševanje||Enquiry]]</h3><p>[[Pošlješ lokacijo, želeni termin in cilj posnetkov. Odgovorim v 24 urah.||You send the location, preferred date and the goal of the footage. I reply within 24 hours.]]</p></div>
+      <div class="step" data-reveal><span class="step-no">[[FAZA||STAGE]] 02</span><h3>[[Načrt leta||Flight plan]]</h3><p>[[Preverim zračni prostor, vremensko napoved in svetlobo ter pripravim natančen plan kadrov.||I check the airspace, the weather forecast and the light, then prepare a precise shot list.]]</p></div>
+      <div class="step" data-reveal><span class="step-no">[[FAZA||STAGE]] 03</span><h3>[[Snemanje||Shoot]]</h3><p>[[Na terenu posnamem 4K material s stabiliziranim gimbalom — po dogovorjenem planu.||On location I shoot 4K material with a stabilised gimbal — following the agreed plan.]]</p></div>
+      <div class="step" data-reveal><span class="step-no">[[FAZA||STAGE]] 04</span><h3>[[Obdelava||Post-production]]</h3><p>[[Barvna korekcija, montaža in izvoz v formatih za splet, oglase in družbena omrežja.||Colour grading, editing and export in formats for web, ads and social media.]]</p></div>
+      <div class="step" data-reveal><span class="step-no">[[FAZA||STAGE]] 05</span><h3>[[Oddaja||Delivery]]</h3><p>[[Končne datoteke prejmeš prek povezave za prenos — običajno v 3 do 5 dneh po snemanju.||You receive the final files via a download link — usually 3 to 5 days after the shoot.]]</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PAKETI ====== (cene: js/config.js → prices; dokler so null, piše "Cena po dogovoru") -->
+<section class="plans sec" id="plans" data-phase="[[PAKETI||PACKAGES]]">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono" data-reveal>[[Paketi||Packages]]</p>
+      <h2 data-reveal>[[Izberi svoj <em>plan leta</em>||Choose your <em>flight plan</em>]]</h2>
+      <p class="lead" data-reveal>[[Trije izhodiščni paketi. Vsak projekt je drugačen, zato končno ponudbo pripravim po kratkem pogovoru.||Three starting packages. Every project is different, so I prepare the final quote after a short conversation.]]</p>
+    </div>
+    <div class="plan-grid">
+      <article class="plan" data-reveal>
+        <span class="plan-tag mono">P/01</span>
+        <h3>Foto</h3>
+        <p class="plan-price" data-price="foto">[[Cena po dogovoru||Price on request]]</p>
+        <ul>
+          <li>[[Fotografije iz zraka ene lokacije||Aerial photographs of one location]]</li>
+          <li>[[Barvna obdelava izbranih fotografij||Colour-graded selection of photos]]</li>
+          <li>[[Datoteke za splet in tisk||Files for web and print]]</li>
+        </ul>
+        <a class="btn btn-ghost" href="#booking" data-service="Aerialna fotografija" data-prefill="[[Paket: Foto||Package: Photo]]">[[Izberi Foto||Choose Photo]] <span class="arr">→</span></a>
+      </article>
+      <article class="plan is-featured" data-reveal>
+        <span class="plan-tag mono">P/02</span>
+        <h3>Video</h3>
+        <p class="plan-price" data-price="video">[[Cena po dogovoru||Price on request]]</p>
+        <ul>
+          <li>[[4K posnetki ene lokacije||4K footage of one location]]</li>
+          <li>[[Zmontiran in barvno korigiran video||Edited and colour-graded video]]</li>
+          <li>[[Izvoz za splet in družbena omrežja||Export for web and social media]]</li>
+        </ul>
+        <a class="btn btn-primary" href="#booking" data-service="Aerialni video" data-prefill="[[Paket: Video||Package: Video]]">[[Izberi Video||Choose Video]] <span class="arr">→</span></a>
+      </article>
+      <article class="plan" data-reveal>
+        <span class="plan-tag mono">P/03</span>
+        <h3>[[Celota||Complete]]</h3>
+        <p class="plan-price" data-price="celota">[[Cena po dogovoru||Price on request]]</p>
+        <ul>
+          <li>[[Video in fotografije iste lokacije||Video and photos of the same location]]</li>
+          <li>[[Kratek navpični video za družbena omrežja||Short vertical video for social media]]</li>
+          <li>[[Montaža, barvna korekcija in vsi izvozi||Editing, colour grading and all exports]]</li>
+        </ul>
+        <a class="btn btn-ghost" href="#booking" data-service="Promocijski video" data-prefill="[[Paket: Celota||Package: Complete]]">[[Izberi Celoto||Choose Complete]] <span class="arr">→</span></a>
+      </article>
+    </div>
+    <p class="plans-note" data-reveal>[[Potrebuješ kaj drugega? Opiši projekt v obrazcu in pripravim ponudbo po meri.||Need something else? Describe your project in the form and I'll prepare a custom quote.]]</p>
+  </div>
+</section>
+
+<!-- ====== GEAR / TRUST ====== -->
+<section class="gear sec" id="gear" data-phase="[[OPREMA||GEAR]]">
+  <div class="wrap">
+    <div class="gear-figure" data-reveal>
+      <div id="dronImg">{{pic dron ;; (max-width:880px) 80vw, 520px ;; DJI Mini 5 Pro}}</div>
+      <!-- 3D model se naloži šele, ko sekcija pride v pogled -->
+      <div id="dron3d" hidden>
+        <model-viewer data-src="/models/dron.glb" alt="[[DJI Mini 5 Pro — 3D model, ki ga lahko vrtiš||DJI Mini 5 Pro — 3D model you can rotate]]"
+          camera-controls auto-rotate rotation-per-second="18deg"
+          shadow-intensity="0.8" exposure="1.05" interaction-prompt="none"></model-viewer>
+        <span class="gear-3d-hint mono">[[3D MODEL · POVLECI ZA VRTENJE||3D MODEL · DRAG TO ROTATE]]</span>
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow mono" data-reveal>[[Oprema in varnost||Gear and safety]]</p>
+      <h2 data-reveal>[[Zgrajeno za <em>natančnost</em>||Built for <em>precision</em>]]</h2>
+      <p class="lead" data-reveal>[[DJI Mini 5 Pro — kompakten, zmogljiv in ustvarjen za cinematične posnetke na prostem.||DJI Mini 5 Pro — compact, capable and made for cinematic outdoor footage.]]</p>
+      <ul class="gear-list">
+        <li data-reveal><span class="gear-ic">◈</span><div><b>[[Pod 249 g||Under 249 g]]</b><span>[[Najlažji razred dronov po pravilih EU — manj omejitev pri izbiri lokacije.||The lightest drone class under EU rules — fewer restrictions when choosing a location.]]</span></div></li>
+        <li data-reveal><span class="gear-ic">◈</span><div><b>[[4K posnetki||4K footage]]</b><span>[[Napredna obdelava slike za ostre, detajlne kadre.||Advanced image processing for sharp, detailed shots.]]</span></div></li>
+        <li data-reveal><span class="gear-ic">◈</span><div><b>[[3-osna stabilizacija||3-axis stabilisation]]</b><span>[[Mehanski gimbal odpravlja vibracije za gladek video.||A mechanical gimbal removes vibration for smooth video.]]</span></div></li>
+        <li data-reveal><span class="gear-ic">◈</span><div><b>[[Načrtovan vsak let||Every flight planned]]</b><span>[[Pred vsakim snemanjem preverim zračni prostor, vreme in varnostne omejitve lokacije.||Before every shoot I check the airspace, the weather and the safety restrictions of the location.]]</span></div></li>
+      </ul>
+      <!-- Prikaže se samo, ko so podatki vpisani v js/config.js → uas -->
+      <ul class="trust">
+        <li data-cfg="uas.operatorId" hidden>[[Registriran operater UAS||Registered UAS operator]]: <b data-cfg-text></b></li>
+        <li data-cfg="uas.pilotCert" hidden>[[Spričevalo pilota na daljavo||Remote pilot certificate]]: <b data-cfg-text></b></li>
+        <li data-cfg="uas.insurance" hidden>[[Zavarovanje odgovornosti||Liability insurance]]: <b data-cfg-text></b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ABOUT ====== -->
+<section class="about sec" id="about" data-phase="PILOT">
+  <div class="wrap">
+    <div class="about-figure" data-reveal>
+      {{pic luka ;; (max-width:880px) 92vw, 520px ;; [[Luka Kovačič — pilot drona in videograf||Luka Kovačič — drone pilot and videographer]]}}
+      <span class="about-tag mono">LUKA · LJUBLJANA, SI</span>
+    </div>
+    <div>
+      <p class="eyebrow mono" data-reveal>[[O meni||About]]</p>
+      <h2 data-reveal>[[Pripovedovanje iz zraka, <em>inženirsko natančno</em>||Storytelling from the air, <em>with an engineer's precision</em>]]</h2>
+      <p data-reveal>[[Sem Luka Kovačič, magistrski študent robotike na UL FE, ki svet vidi skozi objektive in algoritme. Vsak prelet načrtujem z inženirsko metodo in zaključim s filmsko vizijo — od arhitekturnih detajlov do dinamičnih posnetkov nepremičnin.||I'm Luka Kovačič, a master's student of robotics at the University of Ljubljana (Faculty of Electrical Engineering) who sees the world through lenses and algorithms. I plan every flight with an engineer's method and finish it with a filmmaker's eye — from architectural details to dynamic property footage.]]</p>
+      <p data-reveal>[[Moje glavno orodje je <b>DJI Mini 5 Pro</b>: kompakten, zmogljiv in ustvarjen za cinematične posnetke na prostem.||My main tool is the <b>DJI Mini 5 Pro</b>: compact, capable and made for cinematic outdoor footage.]]</p>
+      <a class="btn btn-ghost" href="#booking" data-reveal>[[Sodeluj z mano||Work with me]] <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section class="faq sec" id="faq" data-phase="BRIEFING">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono" data-reveal>[[Pogosta vprašanja||FAQ]]</p>
+      <h2 data-reveal>[[Preden <em>vzletiva</em>||Before we <em>take off</em>]]</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3><button class="faq-q" aria-expanded="false" aria-controls="faq1">[[Koliko stane snemanje z dronom?||How much does a drone shoot cost?]]<span class="svc-x" aria-hidden="true">+</span></button></h3>
+        <div class="faq-a" id="faq1"><p>[[Cena je odvisna od lokacije, trajanja snemanja in obsega montaže. Pošlji povpraševanje z nekaj podatki o projektu in v 24 urah prejmeš okvirno ponudbo — brez obveznosti.||The price depends on the location, the length of the shoot and how much editing is needed. Send an enquiry with a few details about your project and you'll get an estimate within 24 hours — no obligation.]]</p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" aria-expanded="false" aria-controls="faq2">[[Kaj, če je na dan snemanja slabo vreme?||What if the weather is bad on the day?]]<span class="svc-x" aria-hidden="true">+</span></button></h3>
+        <div class="faq-a" id="faq2"><p>[[Dron ne leti v dežju in močnem vetru. Napoved spremljam nekaj dni vnaprej; če razmere niso varne ali svetloba ni primerna, se dogovoriva za nov termin.||The drone doesn't fly in rain or strong wind. I follow the forecast a few days ahead; if conditions aren't safe or the light isn't right, we agree on a new date.]]</p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" aria-expanded="false" aria-controls="faq3">[[Ali je na moji lokaciji dovoljeno leteti?||Is flying allowed at my location?]]<span class="svc-x" aria-hidden="true">+</span></button></h3>
+        <div class="faq-a" id="faq3"><p>[[To preverim jaz. Pred vsakim snemanjem pregledam zračni prostor in omejitve lokacije ter ti sporočim, ali je let mogoč in pod kakšnimi pogoji.||I check that for you. Before every shoot I review the airspace and the restrictions of the location and let you know whether the flight is possible and under what conditions.]]</p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" aria-expanded="false" aria-controls="faq4">[[Kako hitro dobim posnetke?||How soon do I get the footage?]]<span class="svc-x" aria-hidden="true">+</span></button></h3>
+        <div class="faq-a" id="faq4"><p>[[Končne datoteke običajno prejmeš v 3 do 5 dneh po snemanju, prek povezave za prenos.||You usually receive the final files 3 to 5 days after the shoot, via a download link.]]</p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" aria-expanded="false" aria-controls="faq5">[[V kakšnem formatu so posnetki?||What format is the footage in?]]<span class="svc-x" aria-hidden="true">+</span></button></h3>
+        <div class="faq-a" id="faq5"><p>[[Video v 4K ločljivosti, izvožen v formatih za splet, oglase in družbena omrežja (tudi navpično). Fotografije v visoki ločljivosti za splet in tisk.||Video in 4K resolution, exported in formats for web, ads and social media (vertical included). Photos in high resolution for web and print.]]</p></div>
+      </div>
+      <div class="faq-item">
+        <h3><button class="faq-q" aria-expanded="false" aria-controls="faq6">[[Kje vse snemaš?||Where do you film?]]<span class="svc-x" aria-hidden="true">+</span></button></h3>
+        <div class="faq-a" id="faq6"><p>[[Baza je v Ljubljani, snemam pa po vsej Sloveniji in v sosednjih državah.||I'm based in Ljubljana and film across Slovenia and in neighbouring countries.]]</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== BOOKING ====== -->
+<section class="booking sec" id="booking" data-phase="[[PRISTANEK||LANDING]]">
+  <div class="wrap">
+    <div class="booking-copy">
+      <p class="eyebrow mono" data-reveal>[[Rezervacija||Booking]]</p>
+      <h2 data-reveal>[[Rezerviraj svoj <em>prelet</em>||Book your <em>flight</em>]]</h2>
+      <p data-reveal>[[Izberi datum in vrsto projekta — razpoložljivost potrdim v 24 urah. Termini za zlato uro (sončni vzhod in zahod) so omejeni, zato rezerviraj zgodaj.||Choose a date and project type — I confirm availability within 24 hours. Golden-hour slots (sunrise and sunset) are limited, so book early.]]</p>
+      <ul class="booking-perks">
+        <li data-reveal>[[Odgovor v 24 urah — brez obveznosti||Reply within 24 hours — no obligation]]</li>
+        <li data-reveal>[[Načrt leta in preverjen zračni prostor pred vsakim snemanjem||Flight plan and airspace check before every shoot]]</li>
+        <li data-reveal>[[Končni material v 3–5 dneh po snemanju||Final material 3–5 days after the shoot]]</li>
+      </ul>
+    </div>
+
+    <div class="form-card" id="bookingCard" data-reveal>
+      <form id="bookingForm" action="https://formspree.io/f/mqewokoo" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="Nova rezervacija — kovifly.si">
+        <input type="hidden" name="jezik" value="{{LANG}}">
+        <label class="hp" aria-hidden="true">Website <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+        <div class="field-row">
+          <div class="field">
+            <label for="bk-name">[[Ime in priimek||Full name]]</label>
+            <input id="bk-name" name="ime" type="text" autocomplete="name" required aria-describedby="bk-name-err">
+            <span class="field-err" id="bk-name-err" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="bk-email">[[E-pošta||Email]]</label>
+            <input id="bk-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="bk-email-err">
+            <span class="field-err" id="bk-email-err" role="alert"></span>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="bk-phone">[[Telefon||Phone]] <span class="opt">([[neobvezno||optional]])</span></label>
+            <input id="bk-phone" name="telefon" type="tel" autocomplete="tel" inputmode="tel" pattern="[0-9+ ()\/\-]{6,20}" aria-describedby="bk-phone-err">
+            <span class="field-err" id="bk-phone-err" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="bk-date">[[Želeni datum||Preferred date]]</label>
+            <input id="bk-date" name="datum" type="date" required aria-describedby="bk-date-err">
+            <span class="field-err" id="bk-date-err" role="alert"></span>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="bk-service">[[Vrsta projekta||Project type]]</label>
+            <select id="bk-service" name="storitev" required aria-describedby="bk-service-err">
+              <option value="" disabled selected>[[Izberi storitev||Choose a service]]</option>
+              <option value="Aerialni video">[[Aerialni video||Aerial video]]</option>
+              <option value="Aerialna fotografija">[[Aerialna fotografija||Aerial photography]]</option>
+              <option value="Nepremičnine">[[Nepremičnine||Real estate]]</option>
+              <option value="Pokrivanje dogodkov">[[Pokrivanje dogodkov||Event coverage]]</option>
+              <option value="Promocijski video">[[Promocijski video||Promotional video]]</option>
+              <option value="Pokrajina / Potovanja">[[Pokrajina / Potovanja||Landscape / Travel]]</option>
+              <option value="Drugo">[[Drugo||Other]]</option>
+            </select>
+            <span class="field-err" id="bk-service-err" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="bk-budget">[[Okvirni proračun||Approximate budget]] <span class="opt">([[neobvezno||optional]])</span></label>
+            <select id="bk-budget" name="proracun">
+              <option value="" selected>[[Še ne vem||Not sure yet]]</option>
+              <option value="do 200 €">[[do 200 €||up to €200]]</option>
+              <option value="200–500 €">[[200–500 €||€200–500]]</option>
+              <option value="500–1000 €">[[500–1000 €||€500–1,000]]</option>
+              <option value="nad 1000 €">[[nad 1000 €||over €1,000]]</option>
+            </select>
+            <span class="field-err"></span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="bk-notes">[[Lokacija in opombe||Location and notes]] <span class="opt">([[neobvezno||optional]])</span></label>
+          <textarea id="bk-notes" name="sporocilo" placeholder="[[Kje bi snemali in kaj je cilj posnetkov?||Where would we film and what is the footage for?]]"></textarea>
+        </div>
+        <div class="field">
+          <label class="consent" for="bk-consent">
+            <input id="bk-consent" name="soglasje" type="checkbox" value="da" required aria-describedby="bk-consent-err">
+            <span>[[Strinjam se, da KoviFly moje podatke obdela za odgovor na to povpraševanje. Več v <a href="/zasebnost.html" target="_blank" rel="noopener">politiki zasebnosti</a>.||I agree that KoviFly may process my details to answer this enquiry. See the <a href="/en/privacy.html" target="_blank" rel="noopener">privacy policy</a>.]]</span>
+          </label>
+          <span class="field-err" id="bk-consent-err" role="alert"></span>
+        </div>
+        <button class="btn btn-primary" type="submit">[[Preveri razpoložljivost||Check availability]] <span class="arr">→</span></button>
+        <p class="form-status" id="formStatus" role="alert"></p>
+      </form>
+      <div class="form-ok" role="status" tabindex="-1">
+        <svg class="ok-ring" viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="42"/><circle class="ok-arc" cx="46" cy="46" r="42"/><path d="M30 47l11 11 22-24"/></svg>
+        <span class="mono">[[PRISTANEK POTRJEN||LANDING CONFIRMED]]</span>
+        <h3>[[Povpraševanje poslano!||Enquiry sent!]]</h3>
+        <p>[[Razpoložljivost potrdim v 24 urah na tvojo e-pošto.||I'll confirm availability within 24 hours by email.]]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CONTACT ====== -->
+<section class="contact sec" id="contact" data-phase="[[BAZA||BASE]]">
+  <div class="wrap">
+    <div data-reveal>
+      <h3>[[Vzpostavi kontakt||Get in touch]]</h3>
+      <ul>
+        <li><a href="mailto:Kovacic.luka34@gmail.com">Kovacic.luka34@gmail.com</a></li>
+        <li><a href="tel:+38651652747">+386 51 652 747</a></li>
+        <li><a href="https://instagram.com/KOVI_FLY" target="_blank" rel="noopener">Instagram · @KOVI_FLY</a></li>
+      </ul>
+    </div>
+    <div data-reveal>
+      <h3>[[Odzivni čas||Response time]]</h3>
+      <p>[[Običajno odgovorim v <b>24 urah</b>. Za nujne projekte me pokliči ali piši na WhatsApp.||I usually reply within <b>24 hours</b>. For urgent projects, call me or message me on WhatsApp.]]</p>
+    </div>
+    <div data-reveal>
+      <h3>[[Lokacija||Location]]</h3>
+      <p>[[Baza v <b>Ljubljani, Slovenija</b>. Na voljo za snemanja po vsej Sloveniji in v sosednjih državah.||Based in <b>Ljubljana, Slovenia</b>. Available for shoots across Slovenia and in neighbouring countries.]]</p>
+    </div>
+  </div>
+</section>
+</main>
+
+{{>footer}}
+
+<a class="wa-float" href="https://wa.me/38651652747" target="_blank" rel="noopener" aria-label="[[Piši na WhatsApp||Message on WhatsApp]]"><i></i>WhatsApp</a>
+
+<script src="/js/config.js" defer></script>
+<script src="/js/vendor/gsap.min.js" defer></script>
+<script src="/js/vendor/ScrollTrigger.min.js" defer></script>
+<script src="/js/vendor/lenis.min.js" defer></script>
+<script src="/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://kovifly.si/</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://kovifly.si/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovifly.si/en/"/>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://kovifly.si/en/</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://kovifly.si/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovifly.si/en/"/>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://kovifly.si/zasebnost.html</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://kovifly.si/zasebnost.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovifly.si/en/privacy.html"/>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://kovifly.si/en/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://kovifly.si/zasebnost.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovifly.si/en/privacy.html"/>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://kovifly.si/pravno-obvestilo.html</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://kovifly.si/pravno-obvestilo.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovifly.si/en/legal.html"/>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://kovifly.si/en/legal.html</loc>
+    <xhtml:link rel="alternate" hreflang="sl" href="https://kovifly.si/pravno-obvestilo.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovifly.si/en/legal.html"/>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+</urlset>
