@@ -688,8 +688,7 @@ model-viewer{width:100%;height:440px;--poster-color:transparent;background:trans
 }
 @keyframes rvIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
 
-/* ============================================================
-   F2 — KONCEPT LETA: pre-flight, zemljevid, telemetrija, pristanek
+/* =====================================================   F2 — KONCEPT LETA: pre-flight, zemljevid, telemetrija, pristanek
 ============================================================ */
 .no-loader #loader{display:none}
 #loader{cursor:pointer;animation-delay:2.4s}
@@ -782,3 +781,8 @@ body.landed .hud-rec::before{animation:none;opacity:.3}
 @media(max-width:1100px){.landing{display:none}}
 body.landed .fmap-label,body.landed .fbar span:first-of-type{color:#9be8b6}
 @media(min-width:1101px){.footer-bar{padding-right:176px}}
+=======
+/* slike imajo atributa width/height (proti preskakovanju postavitve) → višina mora slediti širini */
+img{height:auto}
+/* višinomer samo, kjer je ob robu dovolj prostora (prej je na ~1100–1400 px segal čez besedilo) */
+@media(max-width:1400px){.altimeter{display:none}}
