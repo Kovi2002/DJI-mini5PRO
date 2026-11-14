@@ -786,3 +786,16 @@ body.landed .fmap-label,body.landed .fbar span:first-of-type{color:#9be8b6}
 img{height:auto}
 /* višinomer samo, kjer je ob robu dovolj prostora (prej je na ~1100–1400 px segal čez besedilo) */
 @media(max-width:1400px){.altimeter{display:none}}
+
+/* ---- večje besedilo po celi strani (+12,5 %): vse velikosti so v rem, zato zadošča koren ---- */
+html{font-size:112.5%}
+body{font-size:1rem}
+/* navigacija: pri ožjih namiznih širinah naj povezave ostanejo v eni vrsti */
+@media(max-width:1240px){.nav-links{gap:1.3rem}}
+@media(max-width:1040px){.nav-links,.nav .nav-cta,.nav .lang{display:none}.burger{display:flex}}
+/* hero: vsebina se nikoli ne zrine pod navigacijo (pri večjem besedilu na nizkih zaslonih hero zraste) */
+.hero{padding-top:calc(var(--nav-h) + 2.2rem)}
+/* mobilno: WhatsApp ostane označen gumb; v hero telemetriji zato ostane samo REC */
+@media(max-width:700px){
+  .hud-item:nth-child(n+2){display:none}
+}
