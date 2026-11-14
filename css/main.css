@@ -687,3 +687,7 @@ model-viewer{width:100%;height:440px;--poster-color:transparent;background:trans
   [data-reveal].in{animation:rvIn .9s var(--ease) backwards}
 }
 @keyframes rvIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+/* slike imajo atributa width/height (proti preskakovanju postavitve) → višina mora slediti širini */
+img{height:auto}
+/* višinomer samo, kjer je ob robu dovolj prostora (prej je na ~1100–1400 px segal čez besedilo) */
+@media(max-width:1400px){.altimeter{display:none}}
