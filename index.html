@@ -13,7 +13,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/bodoni-moda-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<script>document.documentElement.classList.add("js")</script>
+<script>(function(d){d.classList.add("js");try{if(localStorage.getItem("kf_preflight"))d.classList.add("no-loader")}catch(e){}})(document.documentElement)</script>
 <link rel="stylesheet" href="/css/main.css">
 
 <meta property="og:site_name" content="KoviFly">
@@ -61,12 +61,18 @@
 <body>
 <a class="skip" href="#story">Preskoči na vsebino</a>
 
-<!-- ====== PRELOADER ====== -->
+<!-- ====== PRELOADER: pre-flight checklist (samo ob prvem obisku, preskočljiv) ====== -->
 <div id="loader" aria-hidden="true">
   <div class="loader-inner">
-    <span class="loader-brand">KOVI<em style="font-style:normal;color:var(--ember)">FLY</em></span>
-    <span class="loader-alt mono">VZPON · ALT <b id="loaderAlt">000</b> M</span>
+    <span class="loader-brand">KOVI<em>FLY</em></span>
+    <span class="loader-title mono">PRE-FLIGHT CHECK</span>
+    <ul class="loader-list mono">
+      <li><span>GPS LOCK</span><b>14 SAT</b><i>✓</i></li>
+      <li><span>KOMPAS</span><b>KALIBRIRAN</b><i>✓</i></li>
+      <li><span>BATERIJA</span><b>100 %</b><i>✓</i></li>
+    </ul>
     <div class="loader-bar"><i id="loaderBar"></i></div>
+    <span class="loader-skip mono">KLIKNI ZA PRESKOK</span>
   </div>
 </div>
 
@@ -120,18 +126,17 @@
 </div>
 
 <!-- ====== SKY — fiksni video za celo stranjo (scrub na scroll) ======
-     Video se naloži šele z JS in samo na namizju; mobilni in reduced-motion ostanejo pri sliki. -->
+     Video se naloži šele z JS: namizje 1600 px, mobilno lahka pokončna različica.
+     Reduced-motion in varčevanje s podatki ostaneta pri sliki (prvi kader videa). -->
 <div class="sky" aria-hidden="true">
   <picture><source type="image/avif" srcset="/img/hero-poster-800.avif 800w, /img/hero-poster-1600.avif 1600w" sizes="100vw"><source type="image/webp" srcset="/img/hero-poster-800.webp 800w, /img/hero-poster-1600.webp 1600w" sizes="100vw"><img src="/img/hero-poster-800.webp" alt="" width="800" height="450" decoding="async" fetchpriority="high"></picture>
-  <video id="skyA" muted playsinline preload="none" data-src="/video/hero-scroll.mp4"></video>
-  <video id="skyB" muted playsinline preload="none" data-src="/video/sky-b.mp4"></video>
-  <div class="sky-dip" id="skyDip"></div>
+  <video id="skyA" muted playsinline preload="none" data-src="/video/hero-scroll.mp4" data-src-m="/video/hero-scroll-m.mp4"></video>
   <div class="sky-veil"></div>
 </div>
 
 <main>
 <!-- ====== HERO ====== -->
-<section class="hero" id="hero" data-phase="VZLET">
+<section class="hero" id="hero" data-wp="Vzlet" data-phase="VZLET">
   <div class="hero-shade"></div>
   <div class="hero-cloud c1"></div>
   <div class="hero-cloud c2"></div>
@@ -156,10 +161,10 @@
   <div class="hero-hud mono" aria-hidden="true">
     <div class="wrap">
       <div class="hud-item hud-rec">REC <b>4K/60</b></div>
-      <div class="hud-item">ALT <b id="hudAlt">124 m</b></div>
-      <div class="hud-item">GPS <b>46.05°N 14.51°E</b></div>
-      <div class="hud-item">WIND <b id="hudWind">3.2 m/s</b></div>
-      <div class="hud-item">BAT <b id="hudBat">94%</b></div>
+      <div class="hud-item">ALT <b id="hudAlt">0 m</b></div>
+      <div class="hud-item">SPD <b id="hudSpd">0.0 m/s</b></div>
+      <div class="hud-item">DST <b id="hudDst">0.00 km</b></div>
+      <div class="hud-item">BAT <b id="hudBat">100%</b></div>
     </div>
   </div>
 </section>
@@ -175,7 +180,7 @@
 </div>
 
 <!-- ====== STORY ====== -->
-<section class="story sec" id="story" data-phase="VZPON">
+<section class="story sec" id="story" data-wp="Zgodba" data-phase="VZPON">
   <div class="wrap">
     <p class="story-line js-scrub">Vsak kader se začne sto metrov <em>nad tlemi.</em></p>
     <p class="story-line js-scrub">Perspektiva ni tehnika. <em>Je čustvo.</em></p>
@@ -184,7 +189,7 @@
 </section>
 
 <!-- ====== SERVICES ====== -->
-<section class="services sec" id="services" data-phase="MISIJA">
+<section class="services sec" id="services" data-wp="Storitve" data-phase="MISIJA">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow mono" data-reveal>Storitve</p>
@@ -245,7 +250,7 @@
 </section>
 
 <!-- ====== PORTFOLIO ====== -->
-<section class="sec" id="portfolio" data-phase="PANORAMA">
+<section class="sec" id="portfolio" data-wp="Portfolio" data-phase="PANORAMA">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow mono" data-reveal>Portfolio</p>
@@ -292,7 +297,7 @@
 </div>
 
 <!-- ====== PROCESS ====== -->
-<section class="process sec" id="process" data-phase="PLAN LETA">
+<section class="process sec" id="process" data-wp="Kako poteka" data-phase="PLAN LETA">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow mono" data-reveal>Kako poteka</p>
@@ -310,7 +315,7 @@
 </section>
 
 <!-- ====== PAKETI ====== (cene: js/config.js → prices; dokler so null, piše "Cena po dogovoru") -->
-<section class="plans sec" id="plans" data-phase="PAKETI">
+<section class="plans sec" id="plans" data-wp="Paketi" data-phase="PAKETI">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow mono" data-reveal>Paketi</p>
@@ -357,7 +362,7 @@
 </section>
 
 <!-- ====== GEAR / TRUST ====== -->
-<section class="gear sec" id="gear" data-phase="OPREMA">
+<section class="gear sec" id="gear" data-wp="Oprema" data-phase="OPREMA">
   <div class="wrap">
     <div class="gear-figure" data-reveal>
       <div id="dronImg"><picture><source type="image/avif" srcset="/img/dron-800.avif 800w, /img/dron-1600.avif 1409w" sizes="(max-width:880px) 80vw, 520px"><source type="image/webp" srcset="/img/dron-800.webp 800w, /img/dron-1600.webp 1409w" sizes="(max-width:880px) 80vw, 520px"><img src="/img/dron-800.webp" alt="DJI Mini 5 Pro" width="800" height="452" decoding="async" loading="lazy"></picture></div>
@@ -390,7 +395,7 @@
 </section>
 
 <!-- ====== ABOUT ====== -->
-<section class="about sec" id="about" data-phase="PILOT">
+<section class="about sec" id="about" data-wp="O meni" data-phase="PILOT">
   <div class="wrap">
     <div class="about-figure" data-reveal>
       <picture><source type="image/avif" srcset="/img/luka-800.avif 800w, /img/luka-1600.avif 1122w" sizes="(max-width:880px) 92vw, 520px"><source type="image/webp" srcset="/img/luka-800.webp 800w, /img/luka-1600.webp 1122w" sizes="(max-width:880px) 92vw, 520px"><img src="/img/luka-800.webp" alt="Luka Kovačič — pilot drona in videograf" width="800" height="1000" decoding="async" loading="lazy"></picture>
@@ -407,7 +412,7 @@
 </section>
 
 <!-- ====== FAQ ====== -->
-<section class="faq sec" id="faq" data-phase="BRIEFING">
+<section class="faq sec" id="faq" data-wp="FAQ" data-phase="BRIEFING">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow mono" data-reveal>Pogosta vprašanja</p>
@@ -443,7 +448,7 @@
 </section>
 
 <!-- ====== BOOKING ====== -->
-<section class="booking sec" id="booking" data-phase="PRISTANEK">
+<section class="booking sec" id="booking" data-wp="Rezervacija" data-phase="PRISTANEK">
   <div class="wrap">
     <div class="booking-copy">
       <p class="eyebrow mono" data-reveal>Rezervacija</p>
@@ -558,6 +563,37 @@
   </div>
 </section>
 </main>
+
+<!-- ====== MINI ZEMLJEVID LETA (namizje) — waypointe doda JS iz sekcij [data-wp] ====== -->
+<nav class="fmap" id="fmap" aria-label="Zemljevid leta — skok na sekcijo">
+  <div class="fmap-head mono"><span>PLAN LETA</span><b id="fmapWp">WP0</b></div>
+  <svg viewBox="0 0 160 150" aria-hidden="false">
+    <g class="fmap-topo" aria-hidden="true">
+      <path d="M-6 44C22 30 48 52 74 40s52-22 92-6"/><path d="M-6 62C26 50 50 70 78 58s50-18 88-4"/>
+      <path d="M-6 84C24 74 54 92 84 80s46-14 82-2"/><path d="M-6 108C30 98 58 114 90 104s44-10 76 0"/>
+      <ellipse cx="112" cy="96" rx="20" ry="11"/><ellipse cx="112" cy="96" rx="11" ry="5.5"/>
+      <ellipse cx="38" cy="26" rx="17" ry="9"/>
+    </g>
+    <path class="fmap-base" id="fmapBase" d="M20 134C26 104 62 124 72 96S34 66 60 44s66 8 80-26"/>
+    <path class="fmap-trail" id="fmapTrail" d="M20 134C26 104 62 124 72 96S34 66 60 44s66 8 80-26"/>
+    <g id="fmapWps"></g>
+    <g class="fmap-drone" id="fmapDrone" aria-hidden="true"><circle r="7"/><path d="M0-5 3.6 4 0 2.2-3.6 4Z"/></g>
+  </svg>
+  <div class="fmap-label mono" id="fmapLabel" aria-hidden="true">VZLET</div>
+  <div class="fmap-tele mono" aria-hidden="true">
+    <span>ALT<b id="tAlt">000</b></span><span>SPD<b id="tSpd">0.0</b></span><span>DST<b id="tDst">0.00</b></span>
+  </div>
+</nav>
+
+<!-- mobilno: tanka vrstica napredka leta -->
+<div class="fbar mono" id="fbar" aria-hidden="true">
+  <i id="fbarFill"></i>
+  <span id="fbarWp">WP0 · VZLET</span>
+  <span>ALT <b id="fbarAlt">000</b> M</span>
+</div>
+
+<!-- pristanek na koncu strani -->
+<div class="landing mono" id="landing" aria-hidden="true"><i></i><span id="landingTxt">LANDING</span></div>
 
 <footer class="footer">
   <div class="footer-mark" aria-hidden="true">KOVIFLY</div>
